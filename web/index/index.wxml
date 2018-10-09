@@ -2,7 +2,7 @@
 <component-banner bannerData="{{bannerData}}"></component-banner>
 <view class="introduce-1">
   <view class="introduce-1-item">央企自营1</view>
-  <view class="introduce-1-item">正品保障</view>
+  <view class="introduce-1-item">正品保障1</view>
   <view class="introduce-1-item">全球直采</view>
   <view class="introduce-1-item">售后无忧</view>
 </view>
