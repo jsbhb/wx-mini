@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "component-header": "/components/base/header/header",
+    "component-banner": "/components/base/banner/banner",
+    "component-navInlet-1": "/components/base/navInlet-1/navInlet-1",
+    "component-navInlet-2": "/components/base/navInlet-2/navInlet-2",
+    "component-floor-1": "/components/base/floor-1/floor-1",
+    "component-footer": "/components/base/footer/footer"
+  }
+}

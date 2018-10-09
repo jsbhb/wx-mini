@@ -1,0 +1,22 @@
+page{
+  background: #eee;
+  padding-bottom: 98rpx;
+}
+.introduce-1{
+  overflow: hidden;
+  padding: 0 20rpx;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #efefef;
+  background: #fff;
+}
+.introduce-1-item{
+  height: 58rpx;
+  float: left;
+  font-family: PingFangSC-Regular,PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 22rpx;
+  line-height: 60rpx;
+  font-weight: 400;
+  color: #333333;
+}

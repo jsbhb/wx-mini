@@ -1,0 +1,17 @@
+<view class="login-logo">
+  <image src='/images/login/logo_01.jpg'></image>
+</view>
+<view class="login-content">
+  <view class="userPhone-content">
+    <image src='/images/login/userPhone_icon_01.png' class="icon_userPhone"></image>
+    <input class="userPhone" type="number" placeholder='请输入手机号码' value='{{phone}}' bindinput ="userPhoneInput" bindblur='userPhoneBlur' maxlength='11'></input>
+  </view>
+  <view class="userPwd-content">
+    <image src='/images/login/userPwd_icon_01.png' class="icon_userPwd"></image>
+    <input class="userPwd" type='password' placeholder='请输入6-18位密码'  value='{{pwd}}' bindinput="userPwdInput" maxlength='16' bindblur='userPwdBlur'></input>
+  </view>
+  <button wx:if="{{isClick}}" class="userSubmit" bindtap='userSubmit'>登录</button>
+  <button wx:if="{{!isClick}}" class="userSubmit noClick">登录</button>
+  <navigator class="forgetPwd" hover-class="none" open-type="redirect" url=''>忘记密码?</navigator>
+</view> 
+<component-alertDeafult alertMsg="{{alertMsg}}"></component-alertDeafult>

@@ -1,0 +1,60 @@
+.login-logo{
+  text-align: center;
+  margin-top: 210rpx;
+}
+.login-logo image{
+  width: 300rpx;
+  height: 230rpx;
+}
+.login-content{
+  margin-top: 80rpx;
+}
+.login-content input{
+  width: 406rpx;
+  height: 66rpx;
+  line-height: 66rpx;
+  border: 1px solid #009944;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+  margin:0 auto;
+  padding-left: 70rpx;
+}
+.login-content input.userPwd{
+  margin-top: 24rpx;
+}
+.login-content image{
+  width: 28rpx;
+  height: 32rpx;
+  position: absolute;
+  left: calc((100% - 430rpx)/2);
+  top: 18rpx;
+}
+.userPhone-content,.userPwd-content{
+  position: relative;
+}
+.login-content .userSubmit{
+  width: 480rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-top: 56rpx;
+  font-size: 24rpx;
+  border-radius: 16rpx;
+  outline: none;
+  background: -webkit-linear-gradient(#60cc91, #009944); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#60cc91, #009944); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#60cc91, #009944); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#60cc91, #009944); /* 标准的语法 */
+  color: #fff;
+}
+.login-content .userSubmit::after{
+  border: none;
+}
+.login-content .noClick{
+  background: #eaeaea;
+}
+.login-content .forgetPwd{
+  font-size: 20rpx;
+  color: #999899;
+  text-align: center;
+  margin-top: 14rpx;
+}

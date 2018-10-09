@@ -1,0 +1,11 @@
+{
+  "pages":[
+    "web/index/index"
+  ],
+  "window":{
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#009944",
+    "navigationBarTitleText": "中国供销海外购",
+    "navigationBarTextStyle": "white"
+  }
+}

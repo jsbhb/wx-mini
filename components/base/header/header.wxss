@@ -1,0 +1,87 @@
+.header-1-content{
+  width: 750rpx;
+  height: 88rpx;
+  display: block;
+  background-color: #ffffff;
+  border-bottom: solid 1rpx #e7e7e7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.header-left{
+  height: 88rpx;
+  color: #ffffff;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 6rpx;
+}
+.header-left > view{
+  width: 64rpx;
+  height: 64rpx;
+  color: #333;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 32rpx;
+  line-height: 63rpx;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+}
+.header-left > view > image{
+  width: 80rpx;
+  height: 88rpx;
+}
+.header-input{
+  width: 580rpx;
+  height: 60rpx;
+  display: block;
+  background-color: #ededed;
+  margin: 14rpx 0 0 86rpx;
+  position: relative;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.header-input image.i_search{
+  width: 32rpx;
+  height: 30rpx;
+  margin: 16rpx 0 0 15rpx;
+}
+.header-input input{
+  width: calc(100% - 60rpx);
+  height: 60rpx;
+  color: #333;
+  font-size: 27rpx;
+  position: absolute;
+  top: 0;
+  left: 60rpx;
+}
+.header-input .i_clear{
+  width: 28rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 14rpx;
+  left: auto;
+  right: 15rpx;
+  display: none;
+}
+.header-right{
+  height: 88rpx;
+  color: #ffffff;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 3rpx;
+}
+.header-right image{
+  width: 80rpx;
+  height: 88rpx;
+  color: #333;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 32rpx;
+  line-height: 63rpx;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+}
