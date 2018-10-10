@@ -1,11 +1,8 @@
-.floor-1{
+.floor-1-content{
   width: 750rpx;
   display: block;
   position: relative;
   background-color: #ffffff;
-}
-.floor-1-content{
-  width: 100%;
 }
 .floor-1-content .mainImg{
   height: 325rpx;

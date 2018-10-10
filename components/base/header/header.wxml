@@ -1,15 +1,15 @@
 <view class="header-1-content">
   <view class="header-left">
     <view class="icon_scan">
-      <image src='/images/header/scan.png'></image>
+      <image src='/images/platform/header/scan.png'></image>
     </view>
   </view>
   <view class="header-input">
-    <image src='/images/header/i_search.png' class="i_search"></image>
+    <image src='/images/platform/header/i_search.png' class="i_search"></image>
     <input type='search' placeholder='Swisse'></input>
-    <image src='/images/header/i_clear.png' class="i_clear"></image>
+    <image src='/images/platform/header/i_clear.png' class="i_clear"></image>
   </view>
   <view class="header-right">
-    <image src='/images/header/news.png'></image>
+    <image src='/images/platform/header/news.png'></image>
   </view>
 </view>

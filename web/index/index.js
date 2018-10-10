@@ -13,7 +13,8 @@ Page({
       duration: 500, //滑动动画时长
       circular: true //	是否采用衔接滑动
     },
-    floorData:{},
+    goodsListData_1:[],
+    goodsListData_2:[],
     footerData:{
       active: 1
     }
@@ -25,25 +26,40 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: app.globalData.host + '/goodscenter/auth/1.0/goods/modulardata/2/index/1',
-      method: 'POST',
+      url: app.globalData.host + '/goodscenter/auth/1.0/applet/index/4',
+      method: 'GET',
       data:{},
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: function(options){
-        var data = options.data.obj;
+        var data = options.data.module;
+        var goodsListData_1 = [];
+        var goodsListData_2 = [];
         for (var i = 0; i < data.length; i++){
-          if (data[i].code == "module_00003"){
+          if (data[i].code == "banner-1"){
             that.setData({
-              ['bannerData.imgs'] : data[i].moduleDataList
+              ['bannerData.imgs']: data[i].cont
             });
           }
-          // if (data[i].code == "module_00009"){
-            
-          // }
+          if (data[i].code == "goodsList-2"){
+            goodsListData_1.push(data[i]);
+          }
+          if (data[i].code == "goodsList-3") {
+            goodsListData_2.push(data[i]);
+          }
         }
-        // console.log(data);
+        for (var i = 0; i < goodsListData_2.length; i++){
+          for (var j = 0; j < goodsListData_2[i].cont.length; j++){
+            if (goodsListData_2[i].cont[j].tagPath){
+              goodsListData_2[i].cont[j].tagPath = goodsListData_2[i].cont[j].tagPath.split(',');
+            }
+          }
+        }
+        that.setData({
+          goodsListData_1: goodsListData_1,
+          goodsListData_2: goodsListData_2,
+        });
       }
     })
   },
