@@ -15,6 +15,9 @@ Page({
     },
     goodsListData_1:[],
     goodsListData_2:[],
+    headerData: {
+      area: 'normal'
+    },
     footerData:{
       active: 1
     }
@@ -32,8 +35,8 @@ Page({
       header: {
         'content-type': 'application/json' // 默认值
       },
-      success: function(options){
-        var data = options.data.module;
+      success: function (response){
+        var data = response.data.module;
         var goodsListData_1 = [];
         var goodsListData_2 = [];
         for (var i = 0; i < data.length; i++){

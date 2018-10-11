@@ -1,7 +1,3 @@
-page{
-  background: #eee;
-  padding-bottom: 98rpx;
-}
 .introduce-1{
   overflow: hidden;
   padding: 0 20rpx;

@@ -1,6 +1,10 @@
 {
   "pages":[
-    "web/index/index"
+    "web/shoppingCart/shoppingCart",
+    "web/index/index",
+    "web/nav/nav",
+
+    "web/personal/personal"
   ],
   "window":{
     "backgroundTextStyle": "light",

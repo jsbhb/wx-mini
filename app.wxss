@@ -3,3 +3,8 @@
   height: 0;
   color: transparent;
 }
+page{
+  background: #eee;
+  padding-bottom: 98rpx;
+  padding-top: 90rpx;
+}

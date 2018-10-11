@@ -1,4 +1,4 @@
-<component-header></component-header>
+<component-header headerData="{{headerData}}"></component-header>
 <component-banner bannerData="{{bannerData}}"></component-banner>
 <view class="introduce-1">
   <view class="introduce-1-item">央企自营</view>
