@@ -6,8 +6,14 @@ Page({
    */
   data: {
     headerData: {
-      area: 'personal'
+      type: 'title',
+      title: '个人中心',
+      leftIcon: false,
+      rightIcon: false
     },
+    footerData: {
+      active: 4
+    }
   },
 
   /**

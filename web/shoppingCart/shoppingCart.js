@@ -6,7 +6,8 @@ Page({
    */
   data: {
     headerData:{
-      area: 'shoppingCart'
+      type: 'title',
+      title: '购物车'
     },
     footerData: {
       active: 3

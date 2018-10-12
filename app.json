@@ -3,7 +3,6 @@
     "web/shoppingCart/shoppingCart",
     "web/index/index",
     "web/nav/nav",
-
     "web/personal/personal"
   ],
   "window":{

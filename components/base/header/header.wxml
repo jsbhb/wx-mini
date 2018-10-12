@@ -1,18 +1,18 @@
 <view class="header-1-content">
   <view class="header-left">
-    <view class="icon_scan">
-      <image wx:if="{{headerData.area == 'normal'}}" src='/images/platform/header/scan.png'></image>
-      <image wx:if="{{headerData.area == 'shoppingCart'}}" src='/images/platform/header/back.png'></image>
+    <view class="icon_scan" wx:if="{{headerData.leftIcon != false}}">
+      <image wx:if="{{headerData.type == 'search'}}" src='/images/platform/header/scan.png'></image>
+      <image wx:if="{{headerData.type == 'title'}}" src='/images/platform/header/back.png'></image>
     </view>
   </view>
-  <view wx:if="{{headerData.area == 'normal'}}" class="header-input">
+  <view wx:if="{{headerData.type == 'search'}}" class="header-input">
     <image src='/images/platform/header/i_search.png' class="i_search"></image>
     <input type='search' placeholder='Swisse'></input>
     <image src='/images/platform/header/i_clear.png' class="i_clear"></image>
   </view>
-  <view wx:if="{{headerData.area == 'shoppingCart'}}" class="header-title">购物车</view>
-  <view class="header-right">
-    <image wx:if="{{headerData.area == 'normal'}}" src='/images/platform/header/news.png'></image>
-    <image wx:if="{{headerData.area == 'shoppingCart'}}" src='/images/platform/header/edit.png'></image>
+  <view wx:if="{{headerData.type == 'title'}}" class="header-title">{{headerData.title}}</view>
+  <view class="header-right" wx:if="{{headerData.rightIcon != false}}">
+    <image wx:if="{{headerData.type == 'search'}}" src='/images/platform/header/news.png'></image>
+    <image wx:if="{{headerData.type == 'title'}}" src='/images/platform/header/edit.png'></image>
   </view>
 </view>

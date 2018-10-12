@@ -10,7 +10,7 @@ Page({
     navRightData: {},
     firstActive: '',
     headerData: {
-      area: 'normal'
+      type: 'search'
     },
     footerData: {
       active: 2

@@ -16,7 +16,7 @@ Page({
     goodsListData_1:[],
     goodsListData_2:[],
     headerData: {
-      area: 'normal'
+      type: 'search'
     },
     footerData:{
       active: 1
