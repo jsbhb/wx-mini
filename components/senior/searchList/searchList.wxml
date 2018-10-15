@@ -1,0 +1,57 @@
+<view class="searchProduct-1">
+  <view class="searchProduct-1-content">
+    <view class="searchProduct-header">
+      <view class="header-content">
+        <view class="header-items choose_general active">综合</view>
+        <view class="header-items choose_new ">最新</view>
+        <view class="header-items choose_price">
+          价格
+          <image src="/images/platform/product/none.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="searchProduct-body">
+      <view class="searchProduct-body-item" wx:if="{{searchListData.length > 0}}">
+        <block wx:for="{{searchListData}}" wx:key="">
+          <view class="item-content">
+            <navigator url="/goodsDetail/goodsDetail?goodsId={{item.goodsSpecsList[0].goodsId}}" open-type="navigate" hover-class="none">
+              <view class="imgBox">
+              <view>
+                <image wx:if="{{item.goodsFileList != null}}" src="{{item.goodsFileList[0].path}}"></image>
+                <image wx:else src="/images/platform/account/default_img.jpg"></image>
+                <image class="corner_mark" src="/images/platform/tag/icon_cross.png"></image>
+              </view>
+              </view>
+              <view class="description">
+                <text>中国供销海外购</text>
+                <view class="tagBox">
+                  <block wx:for="{{item.tagListArr}}" wx:key="">
+                    <image wx:if="{{item == '必选'}}" src="/images/platform/tag/icon_tag1.png"></image>
+                    <image wx:if="{{item == '爆款'}}" src="/images/platform/tag/icon_tag2.png"></image>
+                    <image wx:if="{{item == '热销'}}" src="/images/platform/tag/icon_tag3.png"></image>
+                    <image wx:if="{{item == '优选'}}" src="/images/platform/tag/icon_tag4.png"></image>
+                  </block>
+                </view>
+              </view>
+            </navigator>
+            <view class="textGroup">
+              <view class="name">
+                <text>{{item.customGoodsName}}</text>
+              </view>
+              <view>
+                <view class="price">￥{{item.realPrice}}</view>
+                <view class="imgBox">
+                  <image src="/images/platform/product/icon_shoppingCart.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="empty_search" wx:else>
+        <image src="/images/platform/product/search.png"></image>
+        <view class="text">您寻找的商品还未上架！</view>
+      </view>
+    </view>
+  </view>
+</view>

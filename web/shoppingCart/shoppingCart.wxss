@@ -1,1 +1,322 @@
-/* web/shoppingCart/shoppingCart.wxss */
+.shoppingCart-content{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.shoppingCart-ordersDetails{
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+  min-height: 1068rpx;
+}
+.shoppingCart-ordersDetails .goodsList{
+  width: 100%;
+  height: 240rpx;
+  margin-top: 1rpx;
+  overflow: hidden;
+  border-bottom: dashed 2rpx #b4282d;
+  background-color: #ffffff;
+  position: relative;
+}
+.shoppingCart-ordersDetails .goodsList .goodsList-body{
+  width: 100%;
+  height: 240rpx;
+  padding-top: 12rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate3d(0,0,0);
+  box-sizing: border-box;
+}
+.goodsList-body .itemList{
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+.goodsList-body .itemList .commodity-group{
+  width: 100%;
+  height: 200rpx;
+  padding-right: 25rpx;
+  overflow: hidden;
+  background-color: #ffffff;
+  position: relative;
+}
+.commodity-group .commodity-select{
+  width: 90rpx;
+  height: 100%;
+  padding-left: 30rpx;
+  overflow: hidden;
+  float: left;
+  box-sizing: border-box;
+}
+.commodity-group .commodity-select image{
+  width: 36rpx;
+  height: 36rpx;
+  margin-top: 90rpx;
+}
+.commodity-group .commodity-select .select-icon{
+  width: 36rpx;
+  height: 36rpx;
+  margin-top: 90rpx;
+  background: #dfdfdf;
+}
+.commodity-group .commodity-img{
+  width: 184rpx;
+  height: 184rpx;
+  float: left;
+  overflow: hidden;
+  margin-top: 12rpx;
+  margin-right: 15rpx;
+  position: relative;
+  text-align: center;
+  border: solid 1rpx #c3c3c3;
+}
+.commodity-group .commodity-img image{
+  max-width: 96%;
+  max-height: 96%;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.commodity-group .commodity-img image.corner_mark{
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  width: 60rpx;
+  height: 60rpx;
+}
+.commodity-group .commodity-info{
+  width: calc(100% - 300rpx);
+  height: 185rpx;
+  float: left;
+  margin-top: 12rpx;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+}
+.commodity-group .commodity-info .commodity-name{
+  width: 100%;
+  max-height: 84rpx;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 28rpx;
+  line-height: 42rpx;
+  color: #333333;
+  overflow: hidden;
+  display: inline-block;
+}
+.commodity-group .commodity-info .commodity-name navigator{
+  width: 100%;
+  max-height: 84rpx;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 28rpx;
+  line-height: 42rpx;
+  color: #333333;
+  overflow: hidden;
+  display: block;
+}
+.commodity-group .commodity-info .commodity-name navigator text{
+  white-space: normal;
+  display: inline-block;
+}
+.commodity-group .commodity-info .commodity-itemId{
+  width: 100%;
+  height: 42rpx;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 26rpx;
+  line-height: 42rpx;
+  color: #333333;
+  padding-left: 10rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+}
+.commodity-group .commodity-info .commodity-price{
+  width: 235rpx;
+  height: 48rpx;
+  padding-left: 5rpx;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 36rpx;
+  line-height: 48rpx;
+  color: #b4282d;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.commodity-quantity{
+  width: 220rpx;
+  height: 80rpx;
+  overflow: hidden;
+  padding-right: 10rpx;
+  background-color: transparent;
+  position: absolute;
+  bottom: 0;
+  right: 15rpx;
+}
+.commodity-quantity .inputGroup{
+  width: 260rpx;
+  height: 80rpx;
+  padding-top: 14rpx;
+  float: right;
+  display: inline-table;
+}
+.commodity-quantity .inputGroup .btn{
+  width: 48rpx;
+  height: 48rpx;
+  float: right;
+  border: solid 1rpx #cdcdcd;
+  position: relative;
+  display: table-cell;
+}
+.commodity-quantity .inputGroup .btn.btn_plus{
+  border-left: none;
+  background-color: #f6f6f6;
+}
+.commodity-quantity .inputGroup .btn.btn_plus::before{
+  content: "";
+  width: 14rpx;
+  height: 2rpx;
+  background-color: #999999;
+  position: absolute;
+  top: 23rpx;
+  left: 17rpx;
+}
+.commodity-quantity .inputGroup .btn.btn_plus::after{
+  content: "";
+  width: 2.4rpx;
+  height: 14rpx;
+  background-color: #999999;
+  position: absolute;
+  top: 17rpx;
+  left: 22.8rpx;
+}
+.commodity-quantity .inputGroup .btn.btn_input{
+  width: 70rpx;
+  height: 48rpx;
+  min-height: 48rpx;
+  padding: 0 15rpx;
+  margin: 0;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 28rpx;
+  color: #666666;
+  text-align: center;
+  float: right;
+  border: solid 1rpx #cdcdcd;
+  border-radius: 0;
+  display: table-cell;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.placeholder-btn_input{
+  font-size: 28rpx;
+  text-align: center;
+}
+.commodity-quantity .inputGroup .btn.btn_minus{
+  border-right: none;
+  background-color: #f6f6f6;
+}
+.commodity-quantity .inputGroup .btn.btn_minus::before{
+  content: "";
+  width: 14rpx;
+  height: 2rpx;
+  background-color: #999999;
+  position: absolute;
+  top: 23rpx;
+  left: 17rpx;
+}
+.shoppingCart-optionsGroup{
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+}
+.shoppingCart-optionsGroup .optionsGroup-content{
+  width: 750rpx;
+  height: 100rpx;
+  padding: 0 0 0 30rpx;
+  background-color: #ffffff;
+  border-top: solid 1.5rpx #f0f0f0;
+  border-bottom: solid 1rpx #eeeeee;
+  position: fixed;
+  bottom: 98rpx;
+  left: 0;
+}
+.optionsGroup-content .control{
+  width: 150rpx;
+  height: 100rpx;
+  float: left;
+  overflow: hidden;
+}
+.optionsGroup-content .control image{
+  width: 40rpx;
+  height: 40rpx;
+  float: left;
+  margin-top: 32rpx;
+  margin-right: 10rpx;
+  border-radius: 20rpx;
+  box-sizing: border-box;
+}
+.optionsGroup-content .control .select-icon{
+  width: 40rpx;
+  height: 40rpx;
+  float: left;
+  margin-top: 32rpx;
+  margin-right: 10rpx;
+  border-radius: 20rpx;
+  background-color: #dfdfdf;
+  box-sizing: border-box;
+}
+.optionsGroup-content .control text{
+  width: 100rpx;
+  height: 100%;
+  float: left;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 30rpx;
+  line-height: 100rpx;
+  color: #666666;
+}
+.optionsGroup-content .btnGroup{
+  width: calc(100% - 150rpx);
+  height: 100px;
+  float: right;
+  overflow: hidden;
+}
+.optionsGroup-content .btnGroup .btn_commitOrder{
+  width: 240rpx;
+  height: 100rpx;
+  text-align: center;
+  float: right;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 36rpx;
+  line-height: 100rpx;
+  color: #ffffff;
+  background-color: #b4282d;
+}
+.optionsGroup-content .btnGroup .text_price{
+  box-sizing: border-box;
+  width: calc(100% - 240rpx);
+  height: 100rpx;
+  float: right;
+  padding: 0 30rpx 0 10rpx;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  text-align: right;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  color: #b4282d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.optionsGroup-content .btnGroup .text_price view{
+  line-height: 40rpx;
+}
+.optionsGroup-content .btnGroup .text_price view:first-child{
+  margin-top: 11rpx;
+}

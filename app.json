@@ -1,14 +1,35 @@
 {
   "pages":[
-    "web/shoppingCart/shoppingCart",
     "web/index/index",
     "web/nav/nav",
-    "web/personal/personal"
+    "web/shoppingCart/shoppingCart",
+    "web/personal/personal",
+    "web/searchProduct/searchProduct"
   ],
   "window":{
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#009944",
     "navigationBarTitleText": "中国供销海外购",
     "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "web/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "web/nav/nav",
+        "text": "分类"
+      },
+      {
+        "pagePath": "web/shoppingCart/shoppingCart",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "web/personal/personal",
+        "text": "个人"
+      }
+    ]
   }
 }

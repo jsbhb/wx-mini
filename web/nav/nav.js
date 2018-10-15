@@ -15,7 +15,7 @@ Page({
     footerData: {
       active: 2
     },
-    scrollHeight: '1000rpx'
+    scrollHeight: ''
   },
 
   /**
@@ -24,7 +24,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.setData({
-      scrollHeight: wx.getSystemInfoSync().windowHeight*2 - 188 + 'rpx'
+      scrollHeight: wx.getSystemInfoSync().windowHeight - 45 + 'px'
     });
     wx.request({
       url: app.globalData.host + '/goodscenter/auth/1.0/goods/navigation?centerId=2',

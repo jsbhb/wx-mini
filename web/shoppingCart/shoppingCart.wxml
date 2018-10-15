@@ -1,3 +1,57 @@
 <component-header headerData="{{headerData}}"></component-header>
-
+<view class="shoppingCart-content">
+  <view class="shoppingCart-ordersDetails">
+    <view class="goodsList">
+      <view class="goodsList-body">
+        <view class="itemList">
+          <view class="commodity-group">
+            <view class="commodity-select" bindtap="goodsItemSelected">
+              <image src="/images/platform/commodity/selected.png"></image>
+              <view class="select-icon"></view>
+            </view>
+            <navigator url="" open-type="navigate" hover-class="none" class="commodity-img">
+              <image src="https://static.cncoopbuy.com:8080/images/batchUpload/HZKJ0439019999_1-201807199102141-200001.jpg"></image>
+              <image class="corner_mark" src="/images/platform/tag/icon_cross.png"></image>
+            </navigator>
+            <view class="commodity-info">
+              <navigator url="" open-type="navigate" hover-class="none" class="commodity-name">
+                <text>[广州仓gzc]澳大利亚 Ostelin/奥斯特林 儿童维生素D和钙咀嚼片90片</text>
+              </navigator>
+              <view class="commodity-itemId">
+                <text>规格： 1瓶装</text>
+              </view>
+              <view class="commodity-price">
+                <text>￥118.00</text>
+              </view>
+            </view>
+          </view>
+          <view class="commodity-quantity">
+            <view class="inputGroup">
+              <view class="btn btn_plus"></view>
+              <input type="number" value='1' placeholder-class="placeholder-btn_input" class="btn btn_input"></input>
+              <view class="btn btn_minus"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="shoppingCart-optionsGroup">
+    <view class="optionsGroup-content">
+      <view class="control">
+        <view class="select-icon" style="display:none;"></view>
+        <image src="/images/platform/commodity/selectAll.png"></image>
+        <text>已选(2)</text>
+      </view>
+      <view class="btnGroup">
+        <view class="btn_commitOrder">下单</view>
+        <view class="text_price">
+          <!-- <view>一般：￥187.00</view> -->
+          <!-- <view>跨境：￥207.00</view> -->
+          <text>跨境：￥207.00</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
 <component-footer footerData="{{footerData}}"></component-footer>
