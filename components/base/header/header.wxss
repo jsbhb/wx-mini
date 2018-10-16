@@ -18,8 +18,8 @@
   left: 6rpx;
 }
 .header-left > view{
-  width: 64rpx;
-  height: 64rpx;
+  width: 54rpx;
+  height: 54rpx;
   color: #333;
   font-family: PingFangSC-Light,helvetica,'Heiti SC';
   font-size: 32rpx;
@@ -30,7 +30,7 @@
   padding: 10rpx;
 }
 .header-left > view > image{
-  margin-top: 3rpx;
+  margin-top: 10rpx;
   width: 100%;
   height: 100%;
 }
@@ -78,8 +78,8 @@
   text-overflow: ellipsis;
 }
 .header-right{
-  width: 64rpx;
-  height: 64rpx;
+  width: 54rpx;
+  height: 54rpx;
   color: #ffffff;
   display: inline-block;
   position: absolute;
@@ -91,7 +91,7 @@
 .header-right image{
   width: 100%;
   height: 100%;
-  margin-top: 3rpx;
+  margin-top: 10rpx;
   color: #333;
   font-family: PingFangSC-Light,helvetica,'Heiti SC';
   font-size: 32rpx;

@@ -1,5 +1,6 @@
 // web/nav/nav.js
 const app = getApp();
+const ajaxFun = require('../../until/until.js').ajaxFun;
 Page({
 
   /**
@@ -10,12 +11,13 @@ Page({
     navRightData: {},
     firstActive: '',
     headerData: {
-      type: 'search'
+      type: 'search',
+      leftIcon: 'scan',
+      rightIcon: 'news'
     },
     footerData: {
       active: 2
-    },
-    scrollHeight: ''
+    }
   },
 
   /**
@@ -23,26 +25,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.setData({
-      scrollHeight: wx.getSystemInfoSync().windowHeight - 45 + 'px'
-    });
-    wx.request({
-      url: app.globalData.host + '/goodscenter/auth/1.0/goods/navigation?centerId=2',
-      method: 'GET',
-      data: {},
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function(response){
-        that.setData({
-          navTotalData : response.data.obj,
-          navRightData: response.data.obj[0].dictList,
-          firstActive: response.data.obj[0].id
-        });
-      }
-    })
+    var requestUrl = app.globalData.host + '/goodscenter/auth/1.0/goods/navigation?centerId=2';
+    ajaxFun.getNavData(that, requestUrl);
   },
-
   chooseItem: function(e){
     var that = this;
     var firstActive = e.currentTarget.id;
@@ -61,7 +46,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    wx.hideTabBar({});
   },
 
   /**

@@ -1,5 +1,6 @@
 // pages/index/index.js
 const app = getApp();
+const ajaxFun = require('../../until/until.js').ajaxFun;
 Page({
   /**
    * 页面的初始数据
@@ -13,10 +14,10 @@ Page({
       duration: 500, //滑动动画时长
       circular: true //	是否采用衔接滑动
     },
-    goodsListData_1:[],
-    goodsListData_2:[],
     headerData: {
-      type: 'search'
+      type: 'search',
+      leftIcon: 'scan',
+      rightIcon: 'news'
     },
     footerData:{
       active: 1
@@ -28,50 +29,15 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    wx.request({
-      url: app.globalData.host + '/goodscenter/auth/1.0/applet/index/4',
-      method: 'GET',
-      data:{},
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (response){
-        var data = response.data.module;
-        var goodsListData_1 = [];
-        var goodsListData_2 = [];
-        for (var i = 0; i < data.length; i++){
-          if (data[i].code == "banner-1"){
-            that.setData({
-              ['bannerData.imgs']: data[i].cont
-            });
-          }
-          if (data[i].code == "goodsList-2"){
-            goodsListData_1.push(data[i]);
-          }
-          if (data[i].code == "goodsList-3") {
-            goodsListData_2.push(data[i]);
-          }
-        }
-        for (var i = 0; i < goodsListData_2.length; i++){
-          for (var j = 0; j < goodsListData_2[i].cont.length; j++){
-            if (goodsListData_2[i].cont[j].tagPath){
-              goodsListData_2[i].cont[j].tagPath = goodsListData_2[i].cont[j].tagPath.split(',');
-            }
-          }
-        }
-        that.setData({
-          goodsListData_1: goodsListData_1,
-          goodsListData_2: goodsListData_2,
-        });
-      }
-    })
+    var requestUrl = app.globalData.host + '/goodscenter/auth/1.0/applet/index/4';
+    ajaxFun.getIndexData(that, requestUrl);
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    wx.hideTabBar({});
   },
 
   /**

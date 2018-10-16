@@ -3,7 +3,7 @@
   <view class="personal-header">
     <view class="shopImg">
       <view class="imgBox">
-        <image src="/images/platform/personal/icon_shop.jpg"></image>
+        <image src="{{imgHost}}/images/platform/personal/icon_shop.jpg"></image>
       </view>
     </view>
     <view class="userName">
@@ -12,47 +12,47 @@
     <view class="aboutus">
       <text>微店简介：本店铺提供丰富的海外商品，欢迎广大顾客光临购买！</text>
     </view>
-    <image class="personal-bgImg" src="/images/platform/personal/personalBgImg.png"></image>
+    <image class="personal-bgImg" src="{{imgHost}}/images/platform/personal/personalBgImg.png"></image>
   </view>
   <view class="personal-orders">
     <view class="orders-content">
       <navigator url="" open-type='navigate' hover-class='none'>
-        <image src="/images/platform/personal/order_all.png" class="order_all"></image>
+        <image src="{{imgHost}}/images/platform/personal/order_all.png" class="order_all"></image>
       </navigator>
       <navigator url="" open-type='navigate' hover-class='none'>
-        <image src="/images/platform/personal/order_needPay.png" class="order_needPay"></image>
+        <image src="{{imgHost}}/images/platform/personal/order_needPay.png" class="order_needPay"></image>
       </navigator>
       <navigator url="" open-type='navigate' hover-class='none'>
-        <image src="/images/platform/personal/order_needDeliver.png" class="order_needDeliver"></image>
+        <image src="{{imgHost}}/images/platform/personal/order_needDeliver.png" class="order_needDeliver"></image>
       </navigator>
       <navigator url="" open-type='navigate' hover-class='none'>
-        <image src="/images/platform/personal/order_needReceived.png" class="order_needReceived"></image>
+        <image src="{{imgHost}}/images/platform/personal/order_needReceived.png" class="order_needReceived"></image>
       </navigator>
       <navigator url="" open-type='navigate' hover-class='none'>
-        <image src="/images/platform/personal/order_finished.png" class="order_finished"></image>
+        <image src="{{imgHost}}/images/platform/personal/order_finished.png" class="order_finished"></image>
       </navigator>
     </view>
   </view>
   <view class="personal-function">
     <navigator url='' open-type='navigate' hover-class='none'>
-      <image src="/images/platform/personal/deliveryAddress.png"></image>
+      <image src="{{imgHost}}/images/platform/personal/deliveryAddress.png"></image>
       <text>收货地址</text>
-      <image src="/images/platform/personal/href_blod.png" class="icon_right"></image>
+      <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
     </navigator>
     <navigator url='' open-type='navigate' hover-class='none'>
-      <image src="/images/platform/personal/information.png"></image>
+      <image src="{{imgHost}}/images/platform/personal/information.png"></image>
       <text>个人信息</text>
-      <image src="/images/platform/personal/href_blod.png" class="icon_right"></image>
+      <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
     </navigator>
     <navigator url='' open-type='navigate' hover-class='none'>
-      <image src="/images/platform/personal/customerService.png"></image>
+      <image src="{{imgHost}}/images/platform/personal/customerService.png"></image>
       <text>客服信息</text>
-      <image src="/images/platform/personal/href_blod.png" class="icon_right"></image>
+      <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
     </navigator>
     <navigator url='' open-type='navigate' hover-class='none'>
-      <image src="/images/platform/personal/welfare.png"></image>
+      <image src="{{imgHost}}/images/platform/personal/welfare.png"></image>
       <text>福利网站</text>
-      <image src="/images/platform/personal/href_blod.png" class="icon_right"></image>
+      <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
     </navigator>
   </view>
   <view class="personal-btn">

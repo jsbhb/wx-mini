@@ -166,13 +166,12 @@
 }
 .searchProduct-body-item .item-content .textGroup .imgBox{
   width: 56rpx;
-  margin-top: 1rpx;
+  margin-top: -5rpx;
   float: right;
 }
 .searchProduct-body-item .item-content .textGroup .imgBox image{
   width: 34rpx;
   height: 34rpx;
-  margin-right: 12rpx;
 }
 .empty_search{
   width: 100%;

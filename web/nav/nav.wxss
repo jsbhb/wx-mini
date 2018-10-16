@@ -1,6 +1,6 @@
 .nav-1-content{
   width: 750rpx;
-  min-height: calc(100% - 188rpx);
+  height: calc(100% - 188rpx);
   display: block;
   position: fixed;
   top: 88rpx;
@@ -20,6 +20,7 @@
 }
 .nav-list .classify-list-left{
   width: 162rpx;
+  height: calc(100% - 188rpx);
 }
 .nav-list .classify-list-left view{
   font-size: 26rpx;
@@ -65,7 +66,7 @@
   width: 100%;
   display: inline-block;
 }
-.nav-list .classify-list-right .classify-list-right-item > view{
+.nav-list .classify-list-right .classify-list-right-item view{
   float: left;
   min-width: 135rpx;
   max-width: 245rpx;
@@ -73,7 +74,7 @@
   color: #333;
   height: 76rpx;
 }
-.nav-list .classify-list-right .classify-list-right-item > view > text{
+.nav-list .classify-list-right .classify-list-right-item view text{
   width: 98%;
   display: inline-block;
   height: 45rpx;

@@ -2,7 +2,7 @@
 <view class="nav-1">
   <view class="nav-1-content">
     <view class="nav-list">
-      <scroll-view scroll-y class="classify-list-left" style="height:{{scrollHeight}}">
+      <scroll-view scroll-y class="classify-list-left">
         <block wx:for="{{navTotalData}}" wx:key="">
           <view class="{{firstActive == item.id ? 'active' : ''}}" id="{{item.id}}" bindtap='chooseItem'>{{item.industryName}}</view>
         </block>
@@ -12,7 +12,9 @@
           <view class="classify-list-right-item">
             <text class="item-title">{{item.dictName}}</text>
             <block wx:for="{{item.entryList}}" wx:key="">
-              <view><text>{{item.entryName}}</text></view>
+              <navigator url="/web/searchProduct/searchProduct?thirdCategory={{item.id}}&goodsName={{item.entryName}}" open-type="navigate" hover-class="none">
+                <view><text>{{item.entryName}}</text></view>
+              </navigator>
             </block>
           </view>
         </block>

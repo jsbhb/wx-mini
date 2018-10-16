@@ -1,5 +1,4 @@
-// web/shoppingCart/shoppingCart.js
-const app = getApp();
+// web/goodsDetail/goodsDetail.js
 Page({
 
   /**
@@ -8,18 +7,12 @@ Page({
   data: {
     headerData:{
       type: 'title',
-      title: '购物车',
-      leftIcon: 'back',
-      rightIcon: 'edit'
-    },
-    footerData: {
-      active: 3
-    },
-    imgHost: app.globalData.imgHost
+      title: '商品详情',
+      leftIcon: 'home',
+      rightIcon: 'shopCart'
+    }
   },
-  goodsItemSelected: function(){
-    
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -31,7 +24,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wx.hideTabBar({});
+
   },
 
   /**

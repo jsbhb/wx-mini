@@ -6,12 +6,12 @@
         <view class="itemList">
           <view class="commodity-group">
             <view class="commodity-select" bindtap="goodsItemSelected">
-              <image src="/images/platform/commodity/selected.png"></image>
+              <image src="{{imgHost}}/images/platform/commodity/selected.png"></image>
               <view class="select-icon"></view>
             </view>
             <navigator url="" open-type="navigate" hover-class="none" class="commodity-img">
               <image src="https://static.cncoopbuy.com:8080/images/batchUpload/HZKJ0439019999_1-201807199102141-200001.jpg"></image>
-              <image class="corner_mark" src="/images/platform/tag/icon_cross.png"></image>
+              <image class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_cross.png"></image>
             </navigator>
             <view class="commodity-info">
               <navigator url="" open-type="navigate" hover-class="none" class="commodity-name">
@@ -40,7 +40,7 @@
     <view class="optionsGroup-content">
       <view class="control">
         <view class="select-icon" style="display:none;"></view>
-        <image src="/images/platform/commodity/selectAll.png"></image>
+        <image src="{{imgHost}}/images/platform/commodity/selectAll.png"></image>
         <text>已选(2)</text>
       </view>
       <view class="btnGroup">
