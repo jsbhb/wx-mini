@@ -24,7 +24,7 @@
       <view class="searchProduct-body-item" wx:if="{{searchListData.data.length > 0}}">
         <block wx:for="{{searchListData.data}}" wx:key="">
           <view class="item-content">
-            <navigator url="/goodsDetail/goodsDetail?goodsId={{item.goodsSpecsList[0].goodsId}}" open-type="navigate" hover-class="none">
+            <navigator url="/web/goodsDetail/goodsDetail?goodsId={{item.goodsSpecsList[0].goodsId}}" open-type="navigate" hover-class="none">
               <view class="imgBox">
               <view>
                 <image wx:if="{{item.goodsFileList != null}}" src="{{item.goodsFileList[0].path}}"></image>

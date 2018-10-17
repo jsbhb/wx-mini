@@ -1,11 +1,11 @@
 {
   "pages":[
-    "web/goodsDetail/goodsDetail",
     "web/index/index",
     "web/nav/nav",
     "web/shoppingCart/shoppingCart",
     "web/personal/personal",
-    "web/searchProduct/searchProduct"
+    "web/searchProduct/searchProduct",
+    "web/goodsDetail/goodsDetail"
   ],
   "window":{
     "backgroundTextStyle": "light",

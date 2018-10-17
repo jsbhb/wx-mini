@@ -23,24 +23,24 @@ Page({
     var centerId = app.globalData.centerId;
     var requestUrl = host + '/goodscenter/auth/1.0/goods/base' + '?centerId=' + centerId + '&numPerPage=' + 10 + '&currentPage=' + that.data.currentPage;
     var oldData = that.data.searchListData || [];
-    if (options.goodsName){
+    if (options && options.goodsName){
       that.setData({
         ['headerData.searchData']: options.goodsName
       });
     }
-    if (options.firstCategory) {
+    if (options && options.firstCategory) {
       requestUrl += '&firstCategory=' + options.firstCategory;
     }
-    if (options.secondCategory) {
+    if (options && options.secondCategory) {
       requestUrl += '&secondCategory=' + options.secondCategory;
     }
-    if (options.thirdCategory){
+    if (options && options.thirdCategory){
       requestUrl += '&thirdCategory=' + options.thirdCategory;
     }
-    if (options.upShelves){
+    if (options && options.upShelves){
       requestUrl += '&upShelves=' + options.upShelves;
     }
-    if (options.type){
+    if (options && options.type){
       requestUrl += '&type=' + options.type;
     }
     that.setData({

@@ -1,3 +1,35 @@
 <component-header headerData="{{headerData}}"></component-header>
-
-<component-footer></component-footer>
+<view class="goodsDetail-1-content">
+  <component-banner bannerData="{{bannerData}}"></component-banner>
+  <view class="goodsDetail-description">
+    <view class="text">
+      <image src="{{imgHost}}/images/platform/commodity/descript.png"></image>
+      <text>暂无商品相关描述</text>
+    </view>
+    <view class="tagBox">
+      <block wx:for="{{item.tagListArr}}" wx:key="">
+        <image wx:if="{{item == '必选'}}" src="{{imgHost}}/images/platform/tag/icon_tag1.png"></image>
+        <image wx:if="{{item == '爆款'}}" src="{{imgHost}}/images/platform/tag/icon_tag2.png"></image>
+        <image wx:if="{{item == '热销'}}" src="{{imgHost}}/images/platform/tag/icon_tag3.png"></image>
+        <image wx:if="{{item == '优选'}}" src="{{imgHost}}/images/platform/tag/icon_tag4.png"></image>
+      </block>
+    </view>
+  </view>
+  <view class="goodsDetail-goodsMsg">
+    <view class="goodsMsg-left">
+      <view>法国 Avene/雅漾 舒护活泉水喷雾 保湿水爽肤水大喷 300ml</view>
+      <view></view>
+      <view>
+        <view class="price">￥110.00</view>
+        <view class="real"></view>
+      </view>
+      <view>
+        <text>当前库存量：992</text>
+      </view>
+    </view>
+    <view class="btnGroup">
+      <image src="{{imgHost}}/images/platform/city/法国.png"></image>
+      <text>法国</text>
+    </view>
+  </view>
+</view>

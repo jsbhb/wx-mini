@@ -1,1 +1,134 @@
-/* web/goodsDetail/goodsDetail.wxss */
+.goodsDetail-1-content{
+  width: 100%;
+  height: 100%;
+  max-height: 99999rpx;
+  overflow: hidden;
+  position: relative;
+}
+.goodsDetail-1-content .goodsDetail-description{
+  width: 100%;
+  height: 60rpx;
+  background-color: #F1ECE2;
+}
+.goodsDetail-1-content .goodsDetail-description>.text{
+  width: calc(100% - 200rpx);
+  height: 60rpx;
+  float: left;
+  padding-left: 35rpx;
+  color: #9F8A60;
+  font-size: 26rpx;
+  font-weight: 400;
+  line-height: 60rpx;
+  letter-spacing: 5rpx;
+}
+.goodsDetail-1-content .goodsDetail-description>.text>image{
+  margin-right: 10rpx;    
+  float: left;
+  margin-top: 12rpx;
+  width: 36rpx;
+  height: 36rpx;
+}
+.goodsDetail-1-content .goodsDetail-description>.text>span{
+  width: calc(100% - 60rpx);
+  float: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+.goodsDetail-1-content .goodsDetail-description>.tagBox{
+  float: right;
+  width: 198rpx;
+  height: 30rpx;
+  padding-right: 35rpx;
+  margin-top: 15rpx;
+  overflow: hidden;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg{
+  width: 100%;
+  padding: 25rpx 0 25rpx 28rpx;
+  margin: 2rpx 0 20rpx 0;
+  background: #fff;
+  color: #999;
+  font-size: 22rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .goodsMsg-left{
+  width: calc(100% - 170rpx);
+  float: left;
+  position: relative;
+  border-right: solid 1rpx #ccc;
+  padding-right: 10rpx;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .goodsMsg-left view{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .goodsMsg-left view:first-child{
+  font-size: 28rpx;
+  margin-bottom: 5rpx;
+  color: #333;
+  font-weight: 500;
+  max-height: 75rpx;
+  text-overflow: unset;
+  overflow: hidden;
+  white-space: normal;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .goodsMsg-left view:nth-child(2){
+  margin-bottom: 5rpx;
+  font-size: 24rpx;
+  line-height: 35rpx;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .goodsMsg-left view:nth-child(3){
+  margin-bottom: 5rpx;
+  font-weight: 500;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .goodsMsg-left view:nth-child(3) .price{
+  font-size: 42rpx;
+  font-weight: 600;
+  color: #c81f52;
+  vertical-align: sub;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .goodsMsg-left view:nth-child(3) .real{
+  font-size: 29rpx;
+  color: #999;
+  font-weight: 500;
+  font-style: normal;
+  vertical-align: middle;
+  text-decoration: line-through;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .goodsMsg-left view:nth-child(4){
+  font-size: 22rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .goodsMsg-left view:nth-child(4) text{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 7rpx 0 0
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .btnGroup{
+  width: 140rpx;
+  height: 135rpx;
+  padding-top: 18rpx;
+  float: right;
+  text-align: center;
+  margin-top: 1.5rpx;
+  margin-right: 15rpx;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .btnGroup > image{
+  width: 70rpx;
+  height: 70rpx;
+  margin: auto;
+  display: block;
+}
+.goodsDetail-1-content .goodsDetail-goodsMsg .btnGroup > text{
+  height: 50rpx;
+  font-size: 26rpx;
+  line-height: 56rpx;
+  font-weight: 500;
+  color: #666666;
+  display: block;
+}
