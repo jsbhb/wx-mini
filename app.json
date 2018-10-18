@@ -5,7 +5,8 @@
     "web/shoppingCart/shoppingCart",
     "web/personal/personal",
     "web/searchProduct/searchProduct",
-    "web/goodsDetail/goodsDetail"
+    "web/goodsDetail/goodsDetail",
+    "web/personal-information/personal-information"
   ],
   "window":{
     "backgroundTextStyle": "light",

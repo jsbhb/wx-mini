@@ -33,7 +33,8 @@
               </view>
               </view>
               <view class="description">
-                <text>中国供销海外购</text>
+                <text wx:if="{{item.description}}">{{item.description}}</text>
+                <text wx:else>中国供销海外购</text>
                 <view class="tagBox">
                   <block wx:for="{{item.tagListArr}}" wx:key="">
                     <image wx:if="{{item == '必选'}}" src="{{imgHost}}/images/platform/tag/icon_tag1.png"></image>

@@ -4,10 +4,11 @@
   <view class="goodsDetail-description">
     <view class="text">
       <image src="{{imgHost}}/images/platform/commodity/descript.png"></image>
-      <text>暂无商品相关描述</text>
+      <text wx:if="{{goodsDetailData.description}}">{{goodsDetailData.description}}</text>
+      <text wx:else>暂无商品相关描述</text>
     </view>
     <view class="tagBox">
-      <block wx:for="{{item.tagListArr}}" wx:key="">
+      <block wx:for="{{goodsDetailData.tagListArr}}" wx:key="">
         <image wx:if="{{item == '必选'}}" src="{{imgHost}}/images/platform/tag/icon_tag1.png"></image>
         <image wx:if="{{item == '爆款'}}" src="{{imgHost}}/images/platform/tag/icon_tag2.png"></image>
         <image wx:if="{{item == '热销'}}" src="{{imgHost}}/images/platform/tag/icon_tag3.png"></image>
@@ -17,7 +18,7 @@
   </view>
   <view class="goodsDetail-goodsMsg">
     <view class="goodsMsg-left">
-      <view>法国 Avene/雅漾 舒护活泉水喷雾 保湿水爽肤水大喷 300ml</view>
+      <view>{{goodsDetailData.customGoodsName}}</view>
       <view></view>
       <view>
         <view class="price">￥110.00</view>
@@ -28,8 +29,85 @@
       </view>
     </view>
     <view class="btnGroup">
-      <image src="{{imgHost}}/images/platform/city/法国.png"></image>
-      <text>法国</text>
+      <image src="{{imgHost}}/images/platform/city/{{goodsDetailData.origin}}.png"></image>
+      <text>{{goodsDetailData.origin}}</text>
+    </view>
+  </view>
+  <view class="goodsDetail-moreMsg">
+    <view class="moreMsg-item">
+      发货仓库：
+      <text wx:if="{{goodsDetailData.supplierName == '天天仓'}}">保税TT仓</text>
+      <text wx:elif="{{goodsDetailData.supplierName == '粮油仓'}}">保税LY仓</text>
+      <text wx:elif="{{goodsDetailData.supplierName == '行云仓'}}">保税XY仓</text>
+      <text wx:elif="{{goodsDetailData.supplierName == '富邦仓'}}">富邦仓</text>
+      <text wx:else>{{goodsDetailData.supplierName}}</text>
+    </view>
+    <view class="moreMsg-item">
+      配送服务：
+      <text wx:if="{{goodsDetailData.type == 0}}">快递配送</text>
+      <text wx:if="{{goodsDetailData.type == 2}}">物流或快递</text>
+    </view>
+  </view>
+  <view class="goodsDetail-detailMsg">
+    <view class="goodsDetail-detailMsg-title">商品详情</view>
+    <view class="detailMsg">
+      <image src="{{imgHost}}/images/platform/goods/notice.jpg"></image>
+      <view class="detailMsgContent">
+        
+      </view>
+    </view>
+  </view>
+  <view class="goodsDetail-alert" style="display:none;">
+    <view class="goodsDetail-alert-body">
+      <view class="goodsDetail-alert-body-msg">
+        <view class="goodsDetail-alert-body-msg-left">
+          <view class="imgBox">
+            <image src="https://static.cncoopbuy.com:8080/grade/44bfa77d-049e-471a-ac99-d6ca519c423f.png"></image>
+            <image src="{{imgHost}}/images/platform/tag/icon_cross_big.png" class="corner_mark"></image>
+          </view>
+        </view>
+        <view class="goodsDetail-alert-body-msg-right">
+          <view class="goodsDetail-alert-body-msg-right-content">
+            <view class="name">澳洲Swisse铁元补血补铁口服液 500ml/瓶</view>
+            <view class="price">
+              <text>￥110.00</text>
+              <text></text>
+            </view>
+            <view>当前库存量：100</view>
+            <view>当前最小购买量：1</view>
+          </view>
+        </view>
+      </view>
+      <view class="goodsDetail-alert-body-list">
+        <view class="goodsDetail-alert-body-item">
+          <view class="goodsDetail-alert-body-item-title">套装</view>
+          <view class="goodsDetail-alert-body-item-content">
+            <view class="active">2瓶装</view>
+            <view>1瓶装</view>
+          </view>
+        </view>
+      </view>
+      <view class="goodsDetail-quantity-group">
+        <view class="goodsDetail-quantity">
+          <view class="text">购买数量</view>
+          <view class="inputGroup">
+            <view class="btn btn_plus"></view>
+            <input type="number" class="btn btn_input" value='1'></input>
+            <view class="btn btn_minus"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="goodsDetail-btns">
+    <view class="goodsDetail-btns-content">
+      <view class="btnBox">
+        <view class="btn icon_back small">
+          <image src="{{imgHost}}/images/platform/goods/back.png"></image>
+        </view>
+        <view class="btn text_toBuy large">立即购买</view>
+        <view class="btn text_addShopCart large">加入购物车</view>
+      </view>
     </view>
   </view>
 </view>

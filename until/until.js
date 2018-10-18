@@ -78,7 +78,6 @@ var ajaxFun = {
       success: function (res) {
         if (res.data.obj){
           var rSearchListData = res.data.obj.goodsList || [];
-          var searchListData = oldData.concat(rSearchListData);
           var tagListArr = [];
           if (rSearchListData && rSearchListData.length > 0) {
             for (var i = 0; i < rSearchListData.length; i++) {
@@ -97,6 +96,7 @@ var ajaxFun = {
               tagListArr = [];
             }
           }
+          var searchListData = oldData.concat(rSearchListData);
           that.setData({
             'searchListData.data': searchListData
           });
@@ -117,19 +117,33 @@ var ajaxFun = {
         'content-type': 'application/json' // 默认值
       },
       success: function(res) {
-        console.log(res);
         if (res.data.obj){
           var data = res.data.obj[0];
           var imgsArr = [];
+          var tagListArr = [];
           for (var i = 0; i < data.goodsFileList.length; i++){
             imgsArr.push({
               picPath : data.goodsFileList[i].path,
               href : ''
             });
           }
+          if (data.goodsSpecsList && data.goodsSpecsList.length > 0){
+            for (var j = 0; j < data.goodsSpecsList.length; j++) {
+              if (data.goodsSpecsList[j].tagList && data.goodsSpecsList[j].tagList.length > 0){
+                for (var k = 0; k < data.goodsSpecsList[j].tagList.length; k++){
+                  if (tagListArr.indexOf(data.goodsSpecsList[j].tagList[k].tagName) == -1) {
+                    tagListArr.push(data.goodsSpecsList[j].tagList[k].tagName);
+                  }
+                }
+              }
+            }
+            data.tagListArr = tagListArr;
+          }
           that.setData({
-            'bannerData.imgs': imgsArr
+            'bannerData.imgs': imgsArr,
+            'goodsDetailData': data
           });
+          console.log(that.data.goodsDetailData);
         }else{
           console.log('获取数据失败');
         }
