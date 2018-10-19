@@ -1,16 +1,34 @@
-const app = getApp();
+// web/customerService/customerService.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    headerData:{
+    headerData: {
       type: 'search',
       leftIcon: 'scan',
       rightIcon: 'news'
     },
-    imgHost: app.globalData.imgHost
+    customerData:{
+      companyName: '宁波鑫海通达跨境电子商务有限公司',
+      companyAddress: '浙江省宁波市北仑区保税区港东大道5号进口商品市场317室',
+      companyPhone: '010-59423991',
+      companyEmail: '1917761259@qq.com',
+      companyQQ: '1917761259'
+    }
+  },
+
+  phoneCall: function () {
+    wx.makePhoneCall({
+      phoneNumber: this.data.customerData.companyPhone, //此号码并非真实电话号码，仅用于测试
+      success: function () {
+        console.log("拨打电话成功！")
+      },
+      fail: function () {
+        console.log("拨打电话失败！")
+      }
+    })
   },
 
   /**

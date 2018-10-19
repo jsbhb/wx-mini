@@ -1,16 +1,16 @@
-const app = getApp();
+// web/address-manage/address-manage.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    headerData:{
-      type: 'search',
-      leftIcon: 'scan',
-      rightIcon: 'news'
-    },
-    imgHost: app.globalData.imgHost
+    headerData: {
+      type: 'title',
+      title: '管理收货地址',
+      leftIcon: 'back',
+      rightIcon: false
+    }
   },
 
   /**

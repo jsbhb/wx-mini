@@ -6,7 +6,9 @@
     "web/personal/personal",
     "web/searchProduct/searchProduct",
     "web/goodsDetail/goodsDetail",
-    "web/personal-information/personal-information"
+    "web/personal-information/personal-information",
+    "web/customerService/customerService",
+    "web/address-manage/address-manage"
   ],
   "window":{
     "backgroundTextStyle": "light",

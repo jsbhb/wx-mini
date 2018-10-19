@@ -34,26 +34,26 @@
     </view>
   </view>
   <view class="personal-function">
-    <navigator url='' open-type='navigate' hover-class='none'>
+    <navigator url="/web/address-manage/address-manage" open-type='navigate' hover-class='none'>
       <image src="{{imgHost}}/images/platform/personal/deliveryAddress.png"></image>
       <text>收货地址</text>
       <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
     </navigator>
-    <navigator url='' open-type='navigate' hover-class='none'>
+    <navigator url="/web/personal-information/personal-information" open-type='navigate' hover-class='none'>
       <image src="{{imgHost}}/images/platform/personal/information.png"></image>
       <text>个人信息</text>
       <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
     </navigator>
-    <navigator url='' open-type='navigate' hover-class='none'>
+    <navigator url="/web/customerService/customerService" open-type='navigate' hover-class='none'>
       <image src="{{imgHost}}/images/platform/personal/customerService.png"></image>
       <text>客服信息</text>
       <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
     </navigator>
-    <navigator url='' open-type='navigate' hover-class='none'>
+    <!-- <navigator url='' open-type='navigate' hover-class='none'>
       <image src="{{imgHost}}/images/platform/personal/welfare.png"></image>
       <text>福利网站</text>
       <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
-    </navigator>
+    </navigator> -->
   </view>
   <view class="personal-btn">
     <navigator url='' open-type='navigate' hover-class='none'>登陆</navigator>
