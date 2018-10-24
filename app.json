@@ -1,14 +1,15 @@
 {
   "pages":[
+    "web/shoppingCart/shoppingCart",
     "web/index/index",
     "web/nav/nav",
-    "web/shoppingCart/shoppingCart",
     "web/personal/personal",
     "web/searchProduct/searchProduct",
     "web/goodsDetail/goodsDetail",
     "web/personal-information/personal-information",
     "web/customerService/customerService",
-    "web/address-manage/address-manage"
+    "web/address-manage/address-manage",
+    "web/login/login"
   ],
   "window":{
     "backgroundTextStyle": "light",

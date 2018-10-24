@@ -1,6 +1,5 @@
 // pages/index/index.js
 const app = getApp();
-const ajaxFun = require('../../until/until.js').ajaxFun;
 Page({
   /**
    * 页面的初始数据
@@ -28,9 +27,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    var requestUrl = app.globalData.host + '/goodscenter/auth/1.0/applet/index/4';
-    ajaxFun.getIndexData(that, requestUrl);
+    
   },
 
   /**
@@ -44,7 +41,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    var data = {};
+    app.getIndexData(that, data);
   },
 
   /**

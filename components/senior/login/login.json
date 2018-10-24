@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "component-alertDeafult": "/components/base/alertDefault/alertDefault"
-  }
-}

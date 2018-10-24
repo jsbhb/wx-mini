@@ -1,5 +1,4 @@
 const app = getApp();
-const ajaxFun = require('../../until/until.js').ajaxFun;
 Page({
 
   /**
@@ -13,7 +12,6 @@ Page({
     },
     currentPage: 1
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -21,7 +19,10 @@ Page({
     var that = this;
     var host = app.globalData.host;
     var centerId = app.globalData.centerId;
-    var requestUrl = host + '/goodscenter/auth/1.0/goods/base' + '?centerId=' + centerId + '&numPerPage=' + 10 + '&currentPage=' + that.data.currentPage;
+    var data = {
+      currentPage: that.data.currentPage,
+      numPerPage: 10
+    };
     var oldData = that.data.searchListData || [];
     if (options && options.goodsName){
       that.setData({
@@ -29,27 +30,24 @@ Page({
       });
     }
     if (options && options.firstCategory) {
-      requestUrl += '&firstCategory=' + options.firstCategory;
+      data.firstCategory = options.firstCategory;
     }
     if (options && options.secondCategory) {
-      requestUrl += '&secondCategory=' + options.secondCategory;
+      data.secondCategory = options.secondCategory;
     }
-    if (options && options.thirdCategory){
-      requestUrl += '&thirdCategory=' + options.thirdCategory;
+    if (options && options.thirdCategory) {
+      data.thirdCategory = options.thirdCategory;
     }
-    if (options && options.upShelves){
-      requestUrl += '&upShelves=' + options.upShelves;
+    if (options && options.upShelves) {
+      data.upShelves = options.upShelves;
     }
-    if (options && options.type){
-      requestUrl += '&type=' + options.type;
+    if (options && options.type) {
+      data.type = options.type;
     }
+    app.getSearchListData(that, data, oldData);
     that.setData({
-      'searchListData.requestUrl_comprehensive': requestUrl,
-      'searchListData.requestUrl_new': requestUrl + '&sortList[0].sortField=create_time&sortList[0].sortRule=desc',
-      'searchListData.requestUrl_price_plus': requestUrl + '&sortList[0].sortField=price&sortList[0].sortRule=asc',
-      'searchListData.requestUrl_price_minus': requestUrl + '&sortList[0].sortField=price&sortList[0].sortRule=desc'
+      'searchListData.requestData': data
     });
-    var newData = ajaxFun.getSearchListData(that, oldData, that.data.searchListData.requestUrl_comprehensive);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -1,4 +1,4 @@
-<view class="searchProduct-1">
+<scroll-view class="searchProduct-1" scroll-y style="height:calc(100% - 186rpx);" bindscrolltolower="getMoreData" scroll-top="{{toHeight}}">
   <view class="searchProduct-1-content">
     <view class="searchProduct-header">
       <view class="header-content">
@@ -58,6 +58,10 @@
             </view>
           </view>
         </block>
+        <view class="isLoading">
+          <view class="load-text" wx:if="{{!isEnd}}">上拉加载更多。。。</view>
+          <view class="load-text" wx:else>已经到底啦。。。</view>
+        </view>
       </view>
       <view class="empty_search" wx:else>
         <image src="{{imgHost}}/images/platform/product/search.png"></image>
@@ -65,4 +69,4 @@
       </view>
     </view>
   </view>
-</view>
+</scroll-view>

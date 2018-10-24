@@ -29,10 +29,10 @@
   position: relative;
   padding: 10rpx;
 }
-.header-left > view > image{
-  margin-top: 10rpx;
-  width: 100%;
-  height: 100%;
+.header-left > view image{
+  margin-top: 8rpx;
+  width: 54rpx;
+  height: 54rpx;
 }
 .header-input{
   width: 580rpx;
@@ -89,9 +89,9 @@
   padding: 10rpx;
 }
 .header-right image{
-  width: 100%;
-  height: 100%;
-  margin-top: 10rpx;
+  width: 54rpx;
+  height: 54rpx;
+  margin-top: 8rpx;
   color: #333;
   font-family: PingFangSC-Light,helvetica,'Heiti SC';
   font-size: 32rpx;

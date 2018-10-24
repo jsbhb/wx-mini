@@ -15,7 +15,18 @@ Page({
     footerData: {
       active: 4
     },
-    imgHost: app.globalData.imgHost
+    imgHost: app.globalData.imgHost,
+  },
+
+  logout: function(){
+    var that = this;
+    that.setData({
+      isLogin: false
+    });
+    wx.removeStorageSync('authId');
+    wx.removeStorageSync('userId');
+    app.globalData.authentication = null;
+    app.globalData.isLogin = false;
   },
 
   /**
@@ -36,7 +47,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    var host = app.globalData.host;
+    var centerId = app.globalData.centerId;
+    var userId = wx.getStorageSync('userId');
+    var shopId = wx.getStorageSync('shopId') || 2;
+    if (userId){
+      that.setData({
+        isLogin: app.globalData.isLogin
+      });
+      var data1 = {
+        centerId: centerId,
+        userId: userId
+      }
+      var data2 = {
+        centerId: centerId,
+        shopId: shopId
+      }
+      app.userDetailQuery(that, data1);
+      app.shopDetailQuery(that, data2);
+    }
   },
 
   /**

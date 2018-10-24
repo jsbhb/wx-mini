@@ -1,6 +1,5 @@
 // web/goodsDetail/goodsDetail.js
 const app = getApp();
-const ajaxFun = require('../../until/until.js').ajaxFun;
 Page({
 
   /**
@@ -29,18 +28,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(options && (options.goodsId || options.itemId)){
+    if (options && (options.goodsId || options.itemId)) {
       var that = this;
-      var host = app.globalData.host;
-      var centerId = app.globalData.centerId;
-      var requestUrl = host + '/goodscenter/auth/1.0/' + centerId + '/goods?goodsId=' + options.goodsId || options.itemId;
-      ajaxFun.getGoodsDetailData(that, requestUrl);
-    }else{
+      var data = {
+        goodsId: options.goodsId || options.itemId
+      };
+      app.getGoodsDetailData(that, data);
+    } else {
       wx.navigateBack({
         delta: 1
       })
     }
-    
   },
 
   /**
@@ -54,7 +52,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

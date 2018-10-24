@@ -1,6 +1,5 @@
 // web/nav/nav.js
 const app = getApp();
-const ajaxFun = require('../../until/until.js').ajaxFun;
 Page({
 
   /**
@@ -25,8 +24,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var requestUrl = app.globalData.host + '/goodscenter/auth/1.0/goods/navigation?centerId=2';
-    ajaxFun.getNavData(that, requestUrl);
+    var data = {};
+    app.getNavData(that, data);
   },
   chooseItem: function(e){
     var that = this;

@@ -3,14 +3,17 @@
   <view class="personal-header">
     <view class="shopImg">
       <view class="imgBox">
-        <image src="{{imgHost}}/images/platform/personal/icon_shop.jpg"></image>
+        <image wx:if="{{isLogin}}" src="{{shopInfoData.headImg}}"></image>
+        <image wx:else src="{{imgHost}}/images/platform/personal/icon_shop.jpg"></image>
       </view>
     </view>
     <view class="userName">
-      <text>王胡龙（普通用户）</text>
+      <text wx:if="{{!isLogin}}">游客（未登录）</text>
+      <text wx:else>{{personalData.userDetail.name}}(普通用户)</text>
     </view>
     <view class="aboutus">
-      <text>微店简介：本店铺提供丰富的海外商品，欢迎广大顾客光临购买！</text>
+      <text wx:if="{{isLogin}}">微店简介：{{shopInfoData.aboutus}}</text>
+      <text wx:else>微店简介：中国供销海外购</text>
     </view>
     <image class="personal-bgImg" src="{{imgHost}}/images/platform/personal/personalBgImg.png"></image>
   </view>
@@ -55,8 +58,11 @@
       <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
     </navigator> -->
   </view>
-  <view class="personal-btn">
-    <navigator url='' open-type='navigate' hover-class='none'>登陆</navigator>
+  <view class="personal-btn" bindtap="logout" wx:if="{{isLogin}}">
+    <text>退出登录</text>
+  </view>
+  <view class="personal-btn" bindtap="logout" wx:else>
+    <navigator url="/web/login/login" open-type='navigate' hover-class='none'>登陆</navigator>
   </view>
 </view>
 <component-footer footerData="{{footerData}}"></component-footer>
