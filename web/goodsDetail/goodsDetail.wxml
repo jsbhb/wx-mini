@@ -21,15 +21,24 @@
       <view>{{goodsDetailData.customGoodsName}}</view>
       <view></view>
       <view>
-        <view class="price">￥110.00</view>
+        <view class="price" wx:if="{{chooseItemData && chooseItemData.priceList[0].price}}">￥{{chooseItemData.priceList[0].price}}</view>
+        <view class="price" wx:elif="{{goodsDetailData.priceRegion}}">￥{{goodsDetailData.priceRegion}}</view>
+        <view class="price" wx:else>￥{{goodsDetailData.goodsSpecsList[0].priceList[0].price}}</view>
         <view class="real"></view>
       </view>
-      <view>
-        <text>当前库存量：992</text>
-      </view>
+      <block wx:if="{{goodsDetailData.goodsSpecsList.length == 1}}">
+        <view>
+          <text>当前库存量：{{goodsDetailData.goodsSpecsList[0].stock}}</text>
+        </view>
+      </block>
+      <block wx:if="{{goodsDetailData.goodsSpecsList.length > 1}}">
+        <view wx:if="{{chooseItemData.stock != null}}">
+          <text>当前库存量：{{chooseItemData.stock}}</text>
+        </view>
+      </block>
     </view>
     <view class="btnGroup">
-      <image src="{{imgHost}}/images/platform/city/{{goodsDetailData.origin}}.png"></image>
+      <image wx:if="{{goodsDetailData.origin}}" src="{{imgHost}}/images/platform/city/{{goodsDetailData.origin}}.png"></image>
       <text>{{goodsDetailData.origin}}</text>
     </view>
   </view>
@@ -57,43 +66,56 @@
       </view>
     </view>
   </view>
-  <view class="goodsDetail-alert" style="display:none;">
+  <view class="goodsDetail-alert" wx:if="{{alertShow}}">
     <view class="goodsDetail-alert-body">
       <view class="goodsDetail-alert-body-msg">
         <view class="goodsDetail-alert-body-msg-left">
           <view class="imgBox">
-            <image src="https://static.cncoopbuy.com:8080/grade/44bfa77d-049e-471a-ac99-d6ca519c423f.png"></image>
+            <image src="{{goodsDetailData.goodsFileList[0].path}}"></image>
             <image src="{{imgHost}}/images/platform/tag/icon_cross_big.png" class="corner_mark"></image>
           </view>
         </view>
         <view class="goodsDetail-alert-body-msg-right">
           <view class="goodsDetail-alert-body-msg-right-content">
-            <view class="name">澳洲Swisse铁元补血补铁口服液 500ml/瓶</view>
+            <view class="name">{{goodsDetailData.customGoodsName}}</view>
             <view class="price">
-              <text>￥110.00</text>
+              <view class="price" wx:if="{{chooseItemData && chooseItemData.priceList[0].price}}">￥{{chooseItemData.priceList[0].price}}</view>
+              <view class="price" wx:elif="{{goodsDetailData.priceRegion}}">￥{{goodsDetailData.priceRegion}}</view>
+              <view class="price" wx:else>￥{{goodsDetailData.goodsSpecsList[0].priceList[0].price}}</view>
               <text></text>
             </view>
-            <view>当前库存量：100</view>
-            <view>当前最小购买量：1</view>
+            <block wx:if="{{goodsDetailData.goodsSpecsList.length == 1}}">
+              <view wx:if="{{goodsDetailData.goodsSpecsList[0].stock != null}}">当前库存量：{{goodsDetailData.goodsSpecsList[0].stock}}</view>
+              <view wx:if="{{goodsDetailData.goodsSpecsList[0].priceList[0].min != null && goodsDetailData.goodsSpecsList[0].priceList[0].min != 0}}">当前最小购买量：{{goodsDetailData.goodsSpecsList[0].priceList[0].min}}</view>
+              <view wx:if="{{goodsDetailData.goodsSpecsList[0].priceList[0].max != null && goodsDetailData.goodsSpecsList[0].priceList[0].max != 0}}">当前最大购买量：{{goodsDetailData.goodsSpecsList[0].priceList[0].max}}</view>
+            </block>
+            <block wx:elif="{{goodsDetailData.goodsSpecsList.length > 1}}">
+              <view wx:if="{{chooseItemData.stock != null}}">当前库存量：{{chooseItemData.stock}}</view>
+              <view wx:if="{{chooseItemData.priceList[0].min != null && chooseItemData.priceList[0].min != 0}}">当前最小购买量：{{chooseItemData.priceList[0].min}}</view>
+              <view wx:if="{{chooseItemData.priceList[0].max != null && chooseItemData.priceList[0].max != 0}}">当前最大购买量：{{chooseItemData.priceList[0].max}}</view>
+            </block>
           </view>
         </view>
       </view>
       <view class="goodsDetail-alert-body-list">
-        <view class="goodsDetail-alert-body-item">
-          <view class="goodsDetail-alert-body-item-title">套装</view>
-          <view class="goodsDetail-alert-body-item-content">
-            <view class="active">2瓶装</view>
-            <view>1瓶装</view>
-          </view>
+        <view class="goodsDetail-alert-body-item" wx:for="{{attrValueList}}" wx:for-item="attrValueObj" wx:for-index="attrIndex" wx:key="">
+            <view class="goodsDetail-alert-body-item-title">{{attrValueObj.attrKey}}</view>
+            <view class="goodsDetail-alert-body-item-content">
+              <view class="attr_value {{attrIndex==firstIndex || attrValueObj.attrValueStatus[valueIndex]?(value==attrValueObj.selectedValue?'attr_value_active':''):'attr_value_disabled'}}" bindtap="selectAttrValue" data-status="{{attrValueObj.attrValueStatus[valueIndex]}}"
+      data-value="{{value}}" data-key="{{attrValueObj.attrKey}}" data-index="{{attrIndex}}" data-selectedvalue="{{attrValueObj.selectedValue}}" wx:key="" wx:for="{{attrValueObj.attrValues}}" wx:for-item="value" wx:for-index="valueIndex">{{value}}</view>
+            </view>
         </view>
       </view>
       <view class="goodsDetail-quantity-group">
         <view class="goodsDetail-quantity">
           <view class="text">购买数量</view>
           <view class="inputGroup">
-            <view class="btn btn_plus"></view>
-            <input type="number" class="btn btn_input" value='1'></input>
-            <view class="btn btn_minus"></view>
+            <view class="btn btn_plus" wx:if="{{goodsDetailData.goodsSpecsList.length == 1}}" data-itemId="{{goodsDetailData.goodsSpecsList[0].itemId}}" data-max="{{goodsDetailData.goodsSpecsList[0].priceList[0].max}}" data-stock="{{goodsDetailData.goodsSpecsList[0].stock}}" bindtap="numAdd"></view>
+            <view class="btn btn_plus" wx:elif="{{goodsDetailData.goodsSpecsList.length > 1}}" data-itemId="{{chooseItemData.itemId}}" data-max="{{chooseItemData.priceList[0].max}}" data-stock="{{chooseItemData.stock}}" bindtap="numAdd"></view>
+            <input type="number" class="btn btn_input" value="{{quantity}}" wx:if="{{goodsDetailData.goodsSpecsList.length == 1}}" data-itemId="{{goodsDetailData.goodsSpecsList[0].itemId}}" data-max="{{goodsDetailData.goodsSpecsList[0].priceList[0].max}}" data-stock="{{goodsDetailData.goodsSpecsList[0].stock}}" data-min="{{goodsDetailData.goodsSpecsList[0].priceList[0].min}}" bindchange="numChange"></input>
+            <input type="number" class="btn btn_input" value="{{quantity}}" wx:elif="{{goodsDetailData.goodsSpecsList.length > 1}}" data-itemId="{{chooseItemData.itemId}}" data-max="{{chooseItemData.priceList[0].max}}" data-stock="{{chooseItemData.stock}}" data-min="{{chooseItemData.priceList[0].min}}" bindchange="numChange"></input>
+            <view class="btn btn_minus" wx:if="{{goodsDetailData.goodsSpecsList.length == 1}}" data-itemId="{{goodsDetailData.goodsSpecsList[0].itemId}}" data-min="{{goodsDetailData.goodsSpecsList[0].priceList[0].min}}" data-stock="{{goodsDetailData.goodsSpecsList[0].stock}}" bindtap="numMinus"></view>
+            <view class="btn btn_minus" wx:elif="{{goodsDetailData.goodsSpecsList.length > 1}}" data-itemId="{{chooseItemData.itemId}}" data-min="{{chooseItemData.priceList[0].min}}" data-stock="{{chooseItemData.stock}}" bindtap="numMinus"></view>
           </view>
         </view>
       </view>
@@ -102,11 +124,11 @@
   <view class="goodsDetail-btns">
     <view class="goodsDetail-btns-content">
       <view class="btnBox">
-        <view class="btn icon_back small">
+        <view class="btn icon_back small" bindtap="hideAlertContent">
           <image src="{{imgHost}}/images/platform/goods/back.png"></image>
         </view>
-        <view class="btn text_toBuy large">立即购买</view>
-        <view class="btn text_addShopCart large">加入购物车</view>
+        <view class="btn text_toBuy large" bindtap="goodsToBuy">立即购买</view>
+        <view class="btn text_addShopCart large" bindtap="goodsAddShopCart">加入购物车</view>
       </view>
     </view>
   </view>

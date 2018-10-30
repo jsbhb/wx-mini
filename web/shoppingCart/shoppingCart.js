@@ -97,11 +97,12 @@ Page({
     var that = this;
     var maxNum = e.currentTarget.dataset.max || 999999;
     var itemId = e.currentTarget.dataset.itemid;
+    var stock = e.currentTarget.dataset.stock;
     var itemIdReturn = that.getItemIdData(itemId);
     var itemIdData = itemIdReturn.data;
     var itemIdIndex = itemIdReturn.index;
     var allData = that.data.shopCartData;
-    if (itemIdData.quantity < maxNum){
+    if (itemIdData.quantity < maxNum && itemIdData.quantity < stock){
       itemIdData.quantity ++;
       allData[itemIdIndex] = itemIdData;
       that.setData({
@@ -130,6 +131,36 @@ Page({
     }else{
       console.log('已到达最小购买数量');
     }
+  },
+  numberChange: function(e){
+    var that = this;
+    var minNum = e.currentTarget.dataset.min || 1;
+    var maxNum = e.currentTarget.dataset.max || 999999;
+    var stock = e.currentTarget.dataset.stock;
+    var itemId = e.currentTarget.dataset.itemid;
+    var itemIdReturn = that.getItemIdData(itemId);
+    var itemIdIndex = itemIdReturn.index;
+    var allData = that.data.shopCartData;
+    var num = e.detail.value;
+    if (num < minNum){
+      console.log('数量不得低于最小购买量');
+      allData[itemIdIndex].quantity = minNum;
+    }
+    if (num > minNum && num < stock && num < maxNum){
+      allData[itemIdIndex].quantity = num;
+    }
+    if(num > stock){
+      if (stock > maxNum){
+        allData[itemIdIndex].quantity = maxNum;
+        console.log('数量不得超过最大购买量');
+      }else{
+        allData[itemIdIndex].quantity = stock;
+        console.log('数量不得超过最大库存量');
+      }
+    }
+    that.setData({
+      shopCartData: allData
+    });
   },
   getItemIdData:function(itemId){
     var that = this;

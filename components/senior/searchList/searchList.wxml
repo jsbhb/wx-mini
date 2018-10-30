@@ -51,7 +51,7 @@
               </view>
               <view>
                 <view class="price">￥{{item.realPrice}}</view>
-                <view class="imgBox">
+                <view class="imgBox" bindtap="addShopCart" data-goodId="{{item.goodsId}}">
                   <image src="{{imgHost}}/images/platform/product/icon_shoppingCart.png"></image>
                 </view>
               </view>

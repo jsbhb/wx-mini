@@ -195,16 +195,14 @@
 .goodsDetail-1-content .goodsDetail-alert{
   width: 750rpx;
   height: calc(100% - 186rpx);
-  padding-top: 8rpx;
-  position: absolute;
-  top: 1.5rpx;
+  position: fixed;
+  top: 90rpx;
   left: 0;
   z-index: 240;
   background: #fff;
 }
 .goodsDetail-1-content .goodsDetail-alert-body{
   height: auto;
-  overflow: scroll;
 }
 .goodsDetail-1-content .goodsDetail-alert-body-msg{
   overflow: hidden;
@@ -319,9 +317,13 @@
   white-space: nowrap;
   margin: 0 20rpx 25rpx 15rpx;
 }
-.goodsDetail-alert-body-item-content view.active{
+.goodsDetail-alert-body-item-content view.attr_value_active{
   color: #b4282d;
   border: solid 1rpx #b4282d;
+}
+.goodsDetail-alert-body-item-content view.attr_value_disabled{
+  border-color: #efefef;
+  background: #efefef;
 }
 .goodsDetail-1-content .goodsDetail-quantity-group{
   margin-top: 7rpx;
@@ -450,7 +452,7 @@
   color: #333333;
 }
 .goodsDetail-btns-content .btnBox .large{
-  width: calc(50% - 74rpx);
+  width: calc(50% - 75rpx);
 }
 .goodsDetail-btns-content .btnBox .icon_back image{
   width: 70rpx;

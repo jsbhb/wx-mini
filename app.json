@@ -1,11 +1,11 @@
 {
   "pages":[
-    "web/shoppingCart/shoppingCart",
     "web/index/index",
     "web/nav/nav",
     "web/personal/personal",
     "web/searchProduct/searchProduct",
     "web/goodsDetail/goodsDetail",
+    "web/shoppingCart/shoppingCart",
     "web/personal-information/personal-information",
     "web/customerService/customerService",
     "web/address-manage/address-manage",

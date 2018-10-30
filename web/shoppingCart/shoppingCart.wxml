@@ -26,7 +26,7 @@
                     <text wx:else>[{{item.supplierName}}]{{item.goodsName}}</text>
                   </navigator>
                   <view class="commodity-itemId">
-                    <text wx:if="{{item.goodsSpecs.tagList.length > 0}}">规格:{{item.goodsSpecs.tagListStr}}</text>
+                    <text wx:if="{{item.goodsSpecs.info}}">规格:{{item.goodsSpecs.infoStr}}</text>
                   </view>
                   <view class="commodity-price">
                     <text>￥{{item.goodsSpecs.priceList[0].price}}</text>
@@ -35,8 +35,8 @@
               </view>
               <view class="commodity-quantity">
                 <view class="inputGroup">
-                  <view class="btn btn_plus" data-max="{{item.goodsSpecs.priceList[0].max}}" bindtap="numberAdd" data-itemId="{{item.goodsSpecs.priceList[0].itemId}}"></view>
-                  <input type="number" value='{{item.quantity}}' placeholder-class="placeholder-btn_input" class="btn btn_input" data-min="{{item.goodsSpecs.priceList[0].min}}" data-max="{{item.goodsSpecs.priceList[0].max}}" data-itemId="{{item.goodsSpecs.priceList[0].itemId}}"></input>
+                  <view class="btn btn_plus" data-max="{{item.goodsSpecs.priceList[0].max}}" bindtap="numberAdd" data-itemId="{{item.goodsSpecs.priceList[0].itemId}}" data-stock="{{item.goodsSpecs.stock}}"></view>
+                  <input type="number" value='{{item.quantity}}' placeholder-class="placeholder-btn_input" class="btn btn_input" data-min="{{item.goodsSpecs.priceList[0].min}}" data-max="{{item.goodsSpecs.priceList[0].max}}" data-itemId="{{item.goodsSpecs.priceList[0].itemId}}" data-stock="{{item.goodsSpecs.stock}}" bindchange="numberChange"></input>
                   <view class="btn btn_minus" data-min="{{item.goodsSpecs.priceList[0].min}}" data-itemId="{{item.goodsSpecs.priceList[0].itemId}}" bindtap="numberMinus"></view>
                 </view>
               </view>

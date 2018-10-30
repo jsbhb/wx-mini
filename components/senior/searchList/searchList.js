@@ -75,6 +75,33 @@ Component({
           isEnd: true
         })
       }
+    },
+    addShopCart: function(e){
+      var that = this;
+      var allData = that.data.searchListData.data;
+      var goodsId = e.currentTarget.dataset.goodid;
+      var chooseItem = {};
+      var data = {};
+      allData.forEach(function(v1,i1){
+        if (v1.goodsId == goodsId){
+          chooseItem = v1;
+        }
+      });
+      if (chooseItem.goodsSpecsList.length == 1){
+        data.goodsImg = chooseItem.goodsFileList[0].path;
+        data.goodsName = chooseItem.customGoodsName;
+        data.itemId = chooseItem.goodsSpecsList[0].priceList[0].itemId;
+        data.quantity = chooseItem.goodsSpecsList[0].priceList[0].min || 1;
+        data.supplierId = chooseItem.supplierId;
+        data.supplierName = chooseItem.supplierName;
+        data.type = chooseItem.type;
+        app.addShopCart(that, data);
+      } else if (chooseItem.goodsSpecsList.length > 1){
+        console.log('多规格商品，正在跳往商品详情页');
+        wx.navigateTo({
+          url: '/web/goodsDetail/goodsDetail?goodsId=' + goodsId,
+        })
+      }
     }
   }
 });

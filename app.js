@@ -272,6 +272,8 @@ App({
           var data = res.data.obj[0];
           var imgsArr = [];
           var tagListArr = [];
+          var priceArr = [];
+          var commodityAttr = [];
           for (var i = 0; i < data.goodsFileList.length; i++) {
             imgsArr.push({
               picPath: data.goodsFileList[i].path,
@@ -280,6 +282,8 @@ App({
           }
           if (data.goodsSpecsList && data.goodsSpecsList.length > 0) {
             for (var j = 0; j < data.goodsSpecsList.length; j++) {
+              var commodityAttrItem = {};
+              commodityAttrItem.obj = data.goodsSpecsList[j];
               if (data.goodsSpecsList[j].tagList && data.goodsSpecsList[j].tagList.length > 0) {
                 for (var k = 0; k < data.goodsSpecsList[j].tagList.length; k++) {
                   if (tagListArr.indexOf(data.goodsSpecsList[j].tagList[k].tagName) == -1) {
@@ -287,14 +291,49 @@ App({
                   }
                 }
               }
+              if (data.goodsSpecsList[j].priceList && data.goodsSpecsList[j].priceList.length > 0){
+                data.goodsSpecsList[j].priceList.forEach(function(v,i){
+                  v.price = v.price.toFixed(2);
+                });
+              }
+              priceArr.push(data.goodsSpecsList[j].priceList[0].price);
+              priceArr.sort(function (a, b) {return a - b;});
+              if (data.goodsSpecsList[j].info){
+                var info = JSON.parse(data.goodsSpecsList[j].info);
+                var infoArr = [];
+                for (var key in info){
+                  var d = {
+                    attrKey: key,
+                    attrValue: info[key]
+                  };
+                  infoArr.push(d);
+                }
+                commodityAttrItem.attrValueList = infoArr;
+              }
+              commodityAttr.push(commodityAttrItem);
             }
             data.tagListArr = tagListArr;
+            if (priceArr.length > 1) {
+              data.priceRegion = priceArr[0] + '~' + priceArr[priceArr.length - 1];
+            }
           }
           obj.setData({
             'bannerData.imgs': imgsArr,
-            'goodsDetailData': data
+            'goodsDetailData': data,
+            'commodityAttr': commodityAttr,
+            'includeGroup': commodityAttr
           });
-          console.log(obj.data.goodsDetailData);
+          obj.distachAttrValue(commodityAttr);
+          if (obj.data.commodityAttr.length == 1) {
+            if (obj.data.commodityAttr[0].attrValueList){
+              for (var i = 0; i < obj.data.commodityAttr[0].attrValueList.length; i++) {
+                obj.data.attrValueList[i].selectedValue = obj.data.commodityAttr[0].attrValueList[i].attrValue;
+              }
+              obj.setData({
+                attrValueList: obj.data.attrValueList
+              });
+            }
+          }
         } else {
           console.log('获取数据失败');
         }
@@ -323,13 +362,21 @@ App({
         if(res.data && res.data.success && res.data.obj){
           var data = res.data.obj;
           var tagListStr = '';
+          var infoStr = '';
           for(var i = 0;i<data.length;i++){
             if (data[i].goodsSpecs.tagList && data[i].goodsSpecs.tagList.length > 0) {
               for (var j = 0; j<data[i].goodsSpecs.tagList.length; j++) {
                 tagListStr += (data[i].goodsSpecs.tagList[j] + '、');
               }
             }
+            if (data[i].goodsSpecs.info){
+              var info = JSON.parse(data[i].goodsSpecs.info);
+              for (var index in info){
+                infoStr += (info[index] + '、');
+              }
+            }
             data[i].goodsSpecs.tagListStr = tagListStr;
+            data[i].goodsSpecs.infoStr = infoStr;
             if(data[i].type == 0){
               allCrossPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
             } else if (data[i].type == 2) {
@@ -355,7 +402,7 @@ App({
   delShoppingCartData: function (obj, data) {
     var that = this;
     var host = that.globalData.host;
-    var gradeId = that.globalData.gradeId || that.globalData.centerId;
+    var gradeId = that.globalData.gradeId;
     var shopCartId = data.ids.join(',');
     var allData = obj.data.shopCartData;
     wx.request({
@@ -385,6 +432,41 @@ App({
             selectedNum: 0
           });
           obj.getAllPrice(allData);
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { }
+    })
+  },
+  addShopCart: function(obj, data){
+    var that = this;
+    var host = that.globalData.host;
+    var gradeId = that.globalData.gradeId;
+    var centerId = that.globalData.centerId;
+    wx.request({
+      url: host + '/ordercenter/1.0/order/shoping-cart',
+      method: 'POST',
+      data: {
+        centerId: centerId,
+        goodsImg: data.goodsImg,
+        goodsName: data.goodsName,
+        gradeId: gradeId,
+        itemId: data.itemId,
+        quantity: data.quantity,
+        supplierId: data.supplierId,
+        supplierName: data.supplierName,
+        type: data.type,
+        userId: wx.getStorageSync('userId')
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'authentication': that.globalData.authentication
+      },
+      success: function (res) {
+        if(res.data && res.data.success){
+          console.log('加入购物车成功');
+        }else{
+          console.log('加入购物车失败');
         }
       },
       fail: function (res) { },
