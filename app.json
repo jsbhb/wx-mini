@@ -8,8 +8,10 @@
     "web/shoppingCart/shoppingCart",
     "web/personal-information/personal-information",
     "web/customerService/customerService",
-    "web/address-manage/address-manage",
-    "web/login/login"
+    "web/addressManage/addressManage",
+    "web/addressEdit/addressEdit",
+    "web/login/login",
+    "web/orderSure/orderSure"
   ],
   "window":{
     "backgroundTextStyle": "light",

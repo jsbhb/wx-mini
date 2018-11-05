@@ -1,3 +1,4 @@
+const watch = require("/utils/watch.js");
 App({
   globalData: {
     host: 'https://testapi.cncoopbuy.com',
@@ -19,6 +20,9 @@ App({
   },
   onShow: function(){
     
+  },
+  setWatcher(page) {
+    watch.setWatcher(page);
   },
   userLogin: function (obj, data) {
     var that = this;
@@ -260,7 +264,7 @@ App({
     var that = this;
     var host = that.globalData.host;
     var centerId = that.globalData.centerId;
-    wx: wx.request({
+    wx.request({
       url: host + '/goodscenter/auth/1.0/' + centerId + '/goods?goodsId=' + data.goodsId,
       method: 'GET',
       data: {},
@@ -363,6 +367,7 @@ App({
           var data = res.data.obj;
           var tagListStr = '';
           var infoStr = '';
+          var statusNum = 0;
           for(var i = 0;i<data.length;i++){
             if (data[i].goodsSpecs.tagList && data[i].goodsSpecs.tagList.length > 0) {
               for (var j = 0; j<data[i].goodsSpecs.tagList.length; j++) {
@@ -377,22 +382,27 @@ App({
             }
             data[i].goodsSpecs.tagListStr = tagListStr;
             data[i].goodsSpecs.infoStr = infoStr;
+            infoStr = '';
             if(data[i].type == 0){
               allCrossPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
             } else if (data[i].type == 2) {
               allNormalPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
             }
             data[i].goodsSpecs.priceList[0].price = data[i].goodsSpecs.priceList[0].price.toFixed(2);
-            data[i].status = 'selected';
+            if (data[i].goodsSpecs.status == 1){
+              data[i].status = 'selected';
+              statusNum ++;
+            } else if (data[i].goodsSpecs.status == 0){
+              data[i].status = 'lose';
+            }
             data[i].isTouchMove = false;
           }
           obj.setData({
             shopCartData: res.data.obj,
-            selectedNum: data.length,
+            selectedNum: statusNum,
             allCrossPrice: allCrossPrice.toFixed(2),
             allNormalPrice: allNormalPrice.toFixed(2)
           });
-          console.log(res.data.obj);
         }
       },
       fail: function (res) { },
@@ -472,5 +482,160 @@ App({
       fail: function (res) { },
       complete: function (res) { }
     })
+  },
+  getAddressData: function(obj, data){
+    var that = this;
+    var userId = wx.getStorageSync('userId');
+    var host = that.globalData.host;
+    var centerId = that.globalData.centerId;
+    wx.request({
+      url: host + '/usercenter/1.0/user/address/' + userId + '?centerId=' + centerId + '&numPerPage=10&currentPage=1',
+      method: 'GET',
+      data: {},
+      header: {
+        'content-type': 'application/json', // 默认值
+        'authentication': that.globalData.authentication
+      },
+      success: function (res) {
+        if(res.data && res.data.success){
+          obj.setData({
+            addressListData: res.data.obj
+          })
+          res.data.obj.forEach(function(v,i){
+            if(v.setDefault == 1){
+              obj.setData({
+                addressId: v.id
+              });
+            }
+          });
+        }else{
+          console.log('获取收货地址列表失败');
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { }
+    })
+  },
+  createAddressMsg: function(obj, data){
+    var that = this;
+    var userId = wx.getStorageSync('userId');
+    var host = that.globalData.host;
+    var centerId = that.globalData.centerId;
+    wx.request({
+      url: host + '/usercenter/1.0/user/address',
+      method: 'POST',
+      data: {
+        userId: userId,
+        city: data.city,
+        area: data.area,
+        centerId: centerId,
+        address: data.address,
+        province: data.province,
+        setDefault: data.setDefault,
+        receiveName: data.receiveName,
+        receivePhone: data.receivePhone
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'authentication': that.globalData.authentication
+      },
+      success: function (res) {
+        if(res.data && res.data.success){
+          wx.navigateBack({
+            delta: 1
+          })
+        }else{
+          console.log('创建收货地址失败');
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { }
+    })
+  },
+  updateAddressMsg: function(obj, data){
+    var that = this;
+    var userId = wx.getStorageSync('userId');
+    var host = that.globalData.host;
+    var centerId = that.globalData.centerId;
+    wx.request({
+      url: host + '/usercenter/1.0/user/address',
+      method: 'PUT',
+      data: {
+        id: data.id,
+        userId: userId,
+        city: data.city,
+        centerId: centerId,
+        address: data.address,
+        province: data.province,
+        setDefault: data.setDefault,
+        receiveName: data.receiveName,
+        receivePhone: data.receivePhone
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'authentication': that.globalData.authentication
+      },
+      success: function (res) {
+        if(res.data && res.data.success){
+          that.getAddressData(obj,{});
+        }else{
+          console.log('设置默认地址失败');
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { }
+    })
+  },
+  deteleAddressMsg: function(obj, data){
+    var that = this;
+    var host = that.globalData.host;
+    var centerId = that.globalData.centerId;
+    var userId = wx.getStorageSync('userId');
+    wx.request({
+      url: host + '/usercenter/1.0/user/address/'+ userId +'/' + data.id,
+      method: 'DELETE',
+      data: {
+        centerId: centerId
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'authentication': that.globalData.authentication
+      },
+      success: function (res) {
+        if (res.data && res.data.success) {
+          that.getAddressData(obj, {});
+        } else {
+          console.log('删除收货地址失败');
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { }
+    })
+  },
+  getPostFee: function(obj, data){
+    var that = this;
+    var host = that.globalData.host;
+    var centerId = that.globalData.centerId;
+    data.forEach(function(v,i){
+      v.centerId = centerId;
+    })
+    wx.request({
+      url: host + '/ordercenter/1.0/order/postfee?data=' + encodeURI(JSON.stringify(data)),
+      method: 'POST',
+      data: {},
+      header: {
+        'content-type': 'application/json', // 默认值
+        'authentication': that.globalData.authentication
+      },
+      success: function (res) {
+        if (res.data && res.data.success){
+          obj.setData({
+            postFeeArr: res.data.obj
+          });
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { }
+    });
   }
 })

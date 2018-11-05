@@ -29,31 +29,37 @@ Page({
     var itemIdIndex = itemIdReturn.index;
     var allData = that.data.shopCartData;
     var selectedNum = 0;
-    if (itemIdData.type == 2){
-      if (itemIdData.status == 'selected') {
-        itemIdData.status = '';
-        that.setData({
-          allChooseStatus: ''
-        });
-      }else{
-        itemIdData.status = 'selected';
-      }
-    } else if (itemIdData.type == 0){
-      if (itemIdData.status == 'selected') {
-        itemIdData.status = '';
-        that.setData({
-          allChooseStatus: ''
-        });
-      } else {
-        itemIdData.status = 'selected';
+    var statusNum = 0;
+    if (itemIdData.status != 'lose') {
+      if (itemIdData.type == 2){
+        if (itemIdData.status == 'selected') {
+          itemIdData.status = '';
+          that.setData({
+            allChooseStatus: ''
+          });
+        } else {
+          itemIdData.status = 'selected';
+        }
+      } else if (itemIdData.type == 0){
+        if (itemIdData.status == 'selected') {
+          itemIdData.status = '';
+          that.setData({
+            allChooseStatus: ''
+          });
+        } else {
+          itemIdData.status = 'selected';
+        }
       }
     }
     for (var i = 0; i < allData.length; i++) {
       if (allData[i].status == 'selected') {
         selectedNum ++;
       }
+      if (allData[i].status != 'lose'){
+        statusNum ++;
+      }
     }
-    if (selectedNum == allData.length) {
+    if (selectedNum == statusNum) {
       that.setData({
         allChooseStatus: 'selected'
       });
@@ -71,6 +77,7 @@ Page({
     var itemStatus = '';
     var allData = that.data.shopCartData;
     var allChooseStatus = that.data.allChooseStatus;
+    var statusNum = 0;
     if (allChooseStatus == 'selected'){
       allStatus = '';
       itemStatus = '';
@@ -80,12 +87,19 @@ Page({
     } else {
       allStatus = 'selected';
       itemStatus = 'selected';
+      for (var i = 0; i < allData.length; i++){
+        if (allData[i].status != 'lose'){
+          statusNum ++;
+        }
+      }
       that.setData({
-        selectedNum: allData.length
+        selectedNum: statusNum
       });
     }
     for(var i = 0; i < allData.length; i++){
-      allData[i].status = itemStatus
+      if (allData[i].status != 'lose'){
+        allData[i].status = itemStatus
+      }
     }
     that.setData({
       shopCartData: allData,

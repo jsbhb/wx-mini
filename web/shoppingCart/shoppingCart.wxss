@@ -67,6 +67,23 @@ page{
   background: #dfdfdf;
   border-radius: 18rpx;
 }
+.commodity-group .commodity-select .text{
+  width: 60rpx;
+  height: 32rpx;
+  margin-top: 96rpx;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 18rpx;
+  line-height: 30rpx;
+  text-align: center;
+  display: inline-block;
+}
+.commodity-group .commodity-select .text.text_lose {
+  width: 75rpx;
+  color: #999;
+  border: 1px solid #999;
+  border-radius: 15rpx;
+  margin-left: -25rpx;
+}
 .commodity-group .commodity-img{
   width: 184rpx;
   height: 184rpx;

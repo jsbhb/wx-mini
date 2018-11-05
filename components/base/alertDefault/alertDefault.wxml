@@ -1,6 +1,0 @@
-<view class="alertdefault" style="display:{{alertMsg.isShow?'block':'none'}}">
-  <view class="alertdefault-content"> 
-    <view class="alertdefault-title">{{alertMsg.alertTitle}}</view>
-    <view class="alertdefault-msg">{{alertMsg.alertMsg}}</view>
-  </view>
-</view>

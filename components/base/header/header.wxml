@@ -10,7 +10,7 @@
   </view>
   <view wx:if="{{headerData.type == 'search'}}" class="header-input">
     <image src='{{imgHost}}/images/platform/header/i_search.png' class="i_search"></image>
-    <input type='search' placeholder='Swisse' value="{{headerData.searchData}}"></input>
+    <input type='search' placeholder='Swisse' value="{{headerData.searchData}}" bindblur='blurTest'></input>
     <image src='{{imgHost}}/images/platform/header/i_clear.png' class="i_clear"></image>
   </view>
   <view wx:if="{{headerData.type == 'title'}}" class="header-title">{{headerData.title}}</view>

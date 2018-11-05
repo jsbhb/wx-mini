@@ -37,7 +37,7 @@
     </view>
   </view>
   <view class="personal-function">
-    <navigator url="/web/address-manage/address-manage" open-type='navigate' hover-class='none'>
+    <navigator url="/web/addressManage/addressManage" open-type='navigate' hover-class='none'>
       <image src="{{imgHost}}/images/platform/personal/deliveryAddress.png"></image>
       <text>收货地址</text>
       <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>

@@ -75,6 +75,20 @@
   left: 3rpx;
   margin-top: -20rpx;
   display: inline-block;
+  box-sizing: border-box;
+}
+.address-manage-list .list-item .setting .btnBox_left image{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 20rpx;
+  position: absolute;
+  top: 50%;
+  left: 3rpx;
+  margin-top: -20rpx;
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: #b4282d;
+  border: solid 1px #b4282d;
 }
 .address-manage-list .list-item .setting .btnBox_left .text{
   height: 76rpx;

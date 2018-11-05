@@ -1,0 +1,84 @@
+<view class="orderSure-content">
+  <navigator url="/web/addressManage/addressManage" open-type="navigate" hover-class="none">
+    <view class="textGroup">
+      <view class="text delivery-name">
+        <view class="name" style="letter-spacing:9rpx;">收货人</view>
+        <view class="value">whl</view>
+      </view>
+      <view class="text delivery-iphone">
+        <view class="name">联系电话</view>
+        <view class="value">18405817534</view>
+      </view>
+      <view class="text delivery-address">
+        <view class="name">收货地址</view>
+        <view class="value">浙江省宁波市北仑区.....</view>
+      </view>
+    </view>
+    <image class="deliveryInfoBgImg" src="{{imgHost}}/images/platform/order/href.png"></image>
+  </navigator>
+  <view class="orderSure-orderDetails">
+    <view class="goodsList">
+      <view class="header">
+        <view class="circle"></view>
+        <view class="text">仓库：保税TT仓 -- 跨境</view>
+      </view>
+      <view class="body">
+        <view class="itemList">
+          <view class="commodity-info">
+            <view class="commodity-img">
+              <image src="https://teststatic.cncoopbuy.com:8080/images/batchUpload/HZKJ0439033637_1-201806158101437-100001.jpg"></image>
+              <image class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_cross.png"></image>
+            </view>
+            <view class="commodity-description">
+              <view class="commodity-name">
+                <view class="text">美国雅诗兰黛Estee Lauder花漾倾慕唇膏口红 单只装</view>
+              </view>
+              <view class="commodity-specifications">
+                <view class="name">规格</view>
+                <view class="value">320＃02欲望珊瑚、 2套装、 2瓶装、 </view>
+              </view>
+            </view>
+            <view class="commodity-number">
+              <view class="commodity-price">￥278.00</view>
+              <view class="commodity-quantity">X1</view>
+            </view>
+          </view>
+        </view>
+        <view class="commodity-priceInfo">
+          <view class="commodity-taxFee">
+            <view class="commodity-price">
+              <view class="money">￥0</view>
+              <view class="text">税费</view>
+            </view>
+          </view>
+          <view class="commodity-postFee">
+            <view class="commodity-price">
+              <view class="money">￥0</view>
+              <view class="text">运费</view>
+            </view>
+          </view>
+          <view class="commodity-totalPrice">
+            <view class="commodity-price">
+              <view class="money">￥278.00</view>
+              <view class="text">商品总价</view>
+            </view>
+          </view>
+        </view>
+        <view class="commodity-remark">
+          <input type="text" placeholder="买家留言：选填，填写内容已和客服确认"></input>
+        </view>
+        <view class="commodity-payInfo">
+          <view class="commodity-actualPrice">
+              <view class="commodity-price">
+                <view class="money">￥278.00</view>
+                <view class="text">实际价格</view>
+              </view>
+          </view>
+          <view class="commodity-payBtn">
+            <view class="btn btn_commit">提交订单</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,4 +1,4 @@
-// web/address-manage/address-manage.js
+const app = getApp();
 Page({
 
   /**
@@ -10,9 +10,22 @@ Page({
       title: '管理收货地址',
       leftIcon: 'back',
       rightIcon: false
-    }
+    },
+    imgHost: app.globalData.imgHost
   },
-
+  setDefaultAddress: function(e){
+    var that = this;
+    var data = {};
+    var id = e.currentTarget.dataset.id;
+    var addressListData = that.data.addressListData;
+    addressListData.forEach(function(v,i){
+      if(v.id == id){
+        v.setDefault = 1;
+        data = v;
+      }
+    });
+    app.updateAddressMsg(that, data);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -31,7 +44,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    app.getAddressData(that,{});
   },
 
   /**

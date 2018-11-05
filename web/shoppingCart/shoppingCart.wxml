@@ -8,8 +8,13 @@
             <view class="itemList">
               <view class="commodity-group">
                 <view class="commodity-select" bindtap="goodsItemSelected" data-itemId="{{item.goodsSpecs.priceList[0].itemId}}">
-                  <image wx:if="{{item.status == 'selected'}}" src="{{imgHost}}/images/platform/commodity/selected.png"></image>
-                  <view wx:else class="select-icon"></view>
+                  <block wx:if="{{item.goodsSpecs.status == 1}}">
+                    <image wx:if="{{item.status == 'selected'}}" src="{{imgHost}}/images/platform/commodity/selected.png"></image>
+                    <view wx:else class="select-icon"></view>
+                  </block>
+                  <block wx:elif="{{item.goodsSpecs.status == 0}}">
+                    <view class="text text_lose">已下架</view>
+                  </block>
                 </view>
                 <navigator url="/web/searchProduct/searchProduct?goodsId={{item.goodsSpecs.goodsId}}" open-type="navigate" hover-class="none" class="commodity-img">
                   <image wx:if="{{item.picPath}}" src="{{item.picPath}}"></image>

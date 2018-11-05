@@ -96,9 +96,48 @@ Page({
   },
   goodsToBuy: function(){
     var that = this;
-    that.setData({
-      alertShow: true
-    });
+    var data = {};
+    if (that.data.alertShow == false) {
+      that.setData({
+        alertShow: true
+      });
+    } else if (that.data.alertShow) {
+      var chooseItemData = that.data.chooseItemData;
+      var goodsDetailData = that.data.goodsDetailData;
+      if (goodsDetailData.goodsSpecsList.length == 1) {
+        chooseItemData = goodsDetailData.goodsSpecsList[0];
+      }
+      if (chooseItemData) {
+        console.log(goodsDetailData);
+        console.log(chooseItemData);
+        data[goodsDetailData.type] = {};
+        data[goodsDetailData.type][goodsDetailData.supplierId] = {};
+        data[goodsDetailData.type][goodsDetailData.supplierId].type = goodsDetailData.type;
+        if (goodsDetailData.type == 0){
+          data[goodsDetailData.type][goodsDetailData.supplierId].typeName = "跨境";
+        } else if (goodsDetailData.type == 2){
+          data[goodsDetailData.type][goodsDetailData.supplierId].typeName = "一般贸易";
+        }
+        data[goodsDetailData.type][goodsDetailData.supplierId].supplierId = goodsDetailData.supplierId;
+        data[goodsDetailData.type][goodsDetailData.supplierId].supplierName = goodsDetailData.supplierName;
+        data[goodsDetailData.type][goodsDetailData.supplierId].supplierPrice = that.data.quantity * chooseItemData.priceList[0].price;
+        data[goodsDetailData.type][goodsDetailData.supplierId].supplierWeight = that.data.quantity * chooseItemData.weight;
+        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj = {};
+        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId] = chooseItemData;
+        data[goodsDetailData.type][goodsDetailData.supplierId].taxFee = 0
+        data[goodsDetailData.type][goodsDetailData.supplierId].exciseTaxFee = 0;
+        data[goodsDetailData.type][goodsDetailData.supplierId].incrementTaxFee = 0;
+        console.log(data);
+        wx.setStorageSync('ordersInfo', data);
+        // wx.navigateTo({
+        //   url: '/web/orderSure/orderSure',
+        // })
+        
+      } else {
+        console.log('请选择规格');
+        return;
+      }
+    }
   },
   goodsAddShopCart: function(){
     var that = this;
@@ -111,7 +150,7 @@ Page({
       var goodsDetailData = that.data.goodsDetailData;
       var chooseItemData = that.data.chooseItemData;
       if (goodsDetailData.goodsSpecsList.length == 1){
-        var chooseItemData = goodsDetailData.goodsSpecsList[0];
+        chooseItemData = goodsDetailData.goodsSpecsList[0];
       }
       if (chooseItemData){
         data.goodsImg = goodsDetailData.goodsFileList[0].path;

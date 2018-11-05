@@ -1,0 +1,35 @@
+<component-header headerData="{{headerData}}"></component-header>
+<view class="address-manage-content">
+  <view class="address-manage-list">
+    <block wx:for="{{addressListData}}" wx:key="">
+      <view class="list-item">
+        <view class="info">
+          <view class="name">{{item.receiveName}}</view>
+          <view class="mobilePhone">{{item.receivePhone}}</view>
+          <view class="address">{{item.province}}{{item.city}}{{item.area}}{{item.address}}</view>
+        </view>
+        <view class="setting">
+          <view class="btnBox_left" bindtap="setDefaultAddress" data-id="{{item.id}}">
+            <block wx:if="{{item.setDefault == 0}}">
+              <view class="icon btn"></view>
+              <view class="text">设为默认</view>
+            </block>
+            <block wx:elif="{{item.setDefault == 1}}">
+              <image src="{{imgHost}}//images/platform/address/defaultAddress.png"></image>
+              <view class="text">默认地址</view>
+            </block>
+          </view>
+          <view class="btnBox_right">
+            <view class="btn btn_remove" bindtap="addressDelete">删除</view>
+            <view class="btn btn_edit" bindtap="addressChange">编辑</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="address-manage-create">
+    <view class="box">
+      <text class="btn content">添加新地址</text>
+    </view>
+  </view>
+</view>
