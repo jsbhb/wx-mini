@@ -21,6 +21,87 @@ Page({
     allChooseStatus: 'selected',
     shopCartStatus: 'normal'
   },
+  shopCartBuy: function(){
+    var that = this;
+    var allData = that.data.shopCartData;
+    var selectedData = that.getSelectedData(allData);
+    var orderCount = 0;
+    var orders = {}
+    selectedData.forEach(function (o1, n1) {
+      if (o1.goodsSpecs) {
+        var type = o1.type;
+        var itemId = o1.itemId;
+        var status = o1.goodsSpecs.status;
+        var supplierId = o1.supplierId;
+        var supplierName = o1.supplierName;
+        var typeName = type === 0 ? "跨境" : type === 2 ? "一般" : type === 1 ? "大贸" : "";
+        orders[type] = orders[type] || {};
+        orders[type][supplierId] = orders[type][supplierId] || {};
+        orders[type][supplierId].type = type;
+        orders[type][supplierId].typeName = typeName;
+        orders[type][supplierId].supplierId = supplierId;
+        orders[type][supplierId].supplierName = supplierName;
+        orders[type][supplierId].itemObj = orders[type][supplierId].itemObj || {};
+        orders[type][supplierId].itemObj[itemId] = {};
+        orders[type][supplierId].itemObj[itemId].ids = o1.id;
+        orders[type][supplierId].itemObj[itemId].status = status;
+        orders[type][supplierId].itemObj[itemId].selected = o1.goodsSpecs.stock > 0 && status !== 0;
+        orders[type][supplierId].itemObj[itemId].goodsId = o1.goodsSpecs.goodsId;
+        orders[type][supplierId].itemObj[itemId].firstCategory = o1.goodsSpecs.firstCategory;
+        orders[type][supplierId].itemObj[itemId].secondCategory = o1.goodsSpecs.secondCategory;
+        orders[type][supplierId].itemObj[itemId].thirdCategory = o1.goodsSpecs.thirdCategory;
+        orders[type][supplierId].itemObj[itemId].type = type;
+        orders[type][supplierId].itemObj[itemId].href = o1.href;
+        orders[type][supplierId].itemObj[itemId].itemId = o1.itemId;
+        orders[type][supplierId].itemObj[itemId].freePost = o1.freePost;
+        orders[type][supplierId].itemObj[itemId].freeTax = o1.freeTax;
+        orders[type][supplierId].itemObj[itemId].itemImg = o1.picPath;
+        if (o1.goodsSpecs.infoStr){
+          orders[type][supplierId].itemObj[itemId].infoStr = o1.goodsSpecs.infoStr;
+        }
+        orders[type][supplierId].itemObj[itemId].quantity = o1.quantity;
+        orders[type][supplierId].itemObj[itemId].itemName = o1.goodsName;
+        orders[type][supplierId].itemObj[itemId].goodsName = o1.goodsName;
+        orders[type][supplierId].itemObj[itemId].itemSpecs = o1.goodsSpecs;
+        orders[type][supplierId].itemObj[itemId].itemCode = o1.goodsSpecs.itemCode;
+        orders[type][supplierId].itemObj[itemId].stock = o1.goodsSpecs.stock > 0 ? o1.goodsSpecs.stock : 0;
+        orders[type][supplierId].itemObj[itemId].weight = o1.goodsSpecs.weight;
+        orders[type][supplierId].itemObj[itemId].exciseTax = o1.goodsSpecs.exciseTax;
+        orders[type][supplierId].itemObj[itemId].incrementTax = o1.goodsSpecs.incrementTax;
+        orders[type][supplierId].itemObj[itemId].priceList = o1.goodsSpecs.priceList;
+        orders[type][supplierId].itemObj[itemId].carton = o1.goodsSpecs.carton;
+        orders[type][supplierId].itemObj[itemId].tagList = [];
+        o1.goodsSpecs.tagList.forEach(function (o, i) {
+          if (o.tagName === '预售') {
+            orders[type][supplierId].itemObj[itemId].tagFunId = o.tagFunId;
+            orders[type][supplierId].itemObj[itemId].preSaleName = o.tagName;
+            orders[type][supplierId].itemObj[itemId].preSaleDesc = o.description;
+          }
+          orders[type][supplierId].itemObj[itemId].tagList.push(o);
+        });
+      }
+    });
+    for (let k1 in orders){
+      for (let k2 in orders[k1]) {
+        orders[k1][k2].taxFee = 0;
+        orders[k1][k2].postFee = 0;
+        orders[k1][k2].exciseTaxFee = 0;
+        orders[k1][k2].incrementTaxFee = 0;
+        orders[k1][k2].supplierPrice = 0;
+        orders[k1][k2].supplierWeight = 0;
+        for (let k3 in orders[k1][k2].itemObj){
+          orders[k1][k2].supplierPrice += orders[k1][k2].itemObj[k3].quantity * orders[k1][k2].itemObj[k3].priceList[0].price;
+          orders[k1][k2].supplierWeight += orders[k1][k2].itemObj[k3].quantity * orders[k1][k2].itemObj[k3].weight;
+        }
+        orders[k1][k2].supplierPrice = orders[k1][k2].supplierPrice;
+        orders[k1][k2].supplierWeight = orders[k1][k2].supplierWeight;
+      }
+    }
+    wx.setStorageSync('ordersInfo', orders);
+    wx.navigateTo({
+      url: '/web/orderSure/orderSure',
+    })
+  },
   goodsItemSelected: function(e){
     var that = this;
     var itemId = e.currentTarget.dataset.itemid;

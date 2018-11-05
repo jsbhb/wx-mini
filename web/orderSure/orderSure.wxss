@@ -113,6 +113,9 @@ page{
   display: block;
   position: relative;
 }
+.orderSure-orderDetails .goodsList .body .itemList:not(:first-child) .commodity-info{
+  border-top: dashed 1px #f3f3f3;
+}
 .orderSure-orderDetails .goodsList .body .itemList .commodity-info .commodity-img{
   width: 160rpx;
   height: 160rpx;

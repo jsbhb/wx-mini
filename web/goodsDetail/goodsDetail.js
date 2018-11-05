@@ -108,8 +108,6 @@ Page({
         chooseItemData = goodsDetailData.goodsSpecsList[0];
       }
       if (chooseItemData) {
-        console.log(goodsDetailData);
-        console.log(chooseItemData);
         data[goodsDetailData.type] = {};
         data[goodsDetailData.type][goodsDetailData.supplierId] = {};
         data[goodsDetailData.type][goodsDetailData.supplierId].type = goodsDetailData.type;
@@ -124,15 +122,28 @@ Page({
         data[goodsDetailData.type][goodsDetailData.supplierId].supplierWeight = that.data.quantity * chooseItemData.weight;
         data[goodsDetailData.type][goodsDetailData.supplierId].itemObj = {};
         data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId] = chooseItemData;
-        data[goodsDetailData.type][goodsDetailData.supplierId].taxFee = 0
+        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].freePost = goodsDetailData.freePost;
+        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].freeTax = goodsDetailData.freeTax;
+        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].incrementTax = 0.16;
+        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].quantity = that.data.quantity;
+        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].itemImg = goodsDetailData.goodsFileList[0].path;
+        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].itemName = goodsDetailData.customGoodsName;
+        if (chooseItemData.info){
+          var info = '';
+          var d = JSON.parse(chooseItemData.info);
+          for (let k in d){
+            info += (d[k] + '、');
+          }
+          data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].infoStr = info;
+        }
+        data[goodsDetailData.type][goodsDetailData.supplierId].taxFee = 0;
+        data[goodsDetailData.type][goodsDetailData.supplierId].postFee = 0;
         data[goodsDetailData.type][goodsDetailData.supplierId].exciseTaxFee = 0;
         data[goodsDetailData.type][goodsDetailData.supplierId].incrementTaxFee = 0;
-        console.log(data);
         wx.setStorageSync('ordersInfo', data);
-        // wx.navigateTo({
-        //   url: '/web/orderSure/orderSure',
-        // })
-        
+        wx.navigateTo({
+          url: '/web/orderSure/orderSure',
+        })
       } else {
         console.log('请选择规格');
         return;

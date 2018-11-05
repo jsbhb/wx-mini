@@ -16,14 +16,14 @@
                     <view class="text text_lose">已下架</view>
                   </block>
                 </view>
-                <navigator url="/web/searchProduct/searchProduct?goodsId={{item.goodsSpecs.goodsId}}" open-type="navigate" hover-class="none" class="commodity-img">
+                <navigator url="/web/goodsDetail/goodsDetail?goodsId={{item.goodsSpecs.goodsId}}" open-type="navigate" hover-class="none" class="commodity-img">
                   <image wx:if="{{item.picPath}}" src="{{item.picPath}}"></image>
                   <image wx:else src="{{imgHost}}/images/platform/config/default_img.jpg"></image>
                   <image wx:if="{{item.type == 0}}" class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_cross.png"></image>
                   <image wx:if="{{item.type == 2}}" class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_normal.png"></image>
                 </navigator>
                 <view class="commodity-info">
-                  <navigator url="/web/searchProduct/searchProduct?goodsId={{item.goodsSpecs.goodsId}}" open-type="navigate" hover-class="none" class="commodity-name">
+                  <navigator url="/web/goodsDetail/goodsDetail?goodsId={{item.goodsSpecs.goodsId}}" open-type="navigate" hover-class="none" class="commodity-name">
                     <text wx:if="{{item.supplierName == '天天仓'}}">[保税TT仓]{{item.goodsName}}</text>
                     <text wx:elif="{{item.supplierName == '粮油仓'}}">[保税LY仓]{{item.goodsName}}</text>
                     <text wx:elif="{{item.supplierName == '行云仓'}}">[保税XY仓]{{item.goodsName}}</text>
@@ -59,7 +59,7 @@
           <text>已选({{selectedNum}})</text>
         </view>
         <view class="btnGroup">
-          <view class="btn_commitOrder" wx:if="{{shopCartStatus == 'normal'}}">下单</view>
+          <view class="btn_commitOrder" wx:if="{{shopCartStatus == 'normal'}}" bindtap="shopCartBuy">下单</view>
           <view class="btn_commitOrder" bindtap="allShopCartDelete" wx:if="{{shopCartStatus == 'delete'}}">删除</view>
           <view class="text_price" wx:if="{{shopCartStatus == 'normal'}}">
             <block wx:if="{{allCrossPrice != 0 && allNormalPrice != 0}}">

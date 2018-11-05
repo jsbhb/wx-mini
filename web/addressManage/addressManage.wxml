@@ -2,11 +2,12 @@
 <view class="address-manage-content">
   <view class="address-manage-list">
     <block wx:for="{{addressListData}}" wx:key="">
-      <view class="list-item">
+      <view class="list-item" bindtap="{{btnHide ? 'chooseItem' : ''}}" data-id="{{item.id}}">
         <view class="info">
           <view class="name">{{item.receiveName}}</view>
           <view class="mobilePhone">{{item.receivePhone}}</view>
-          <view class="address">{{item.province}}{{item.city}}{{item.area}}{{item.address}}</view>
+          <view wx:if="{{item.area}}" class="address">{{item.province}}{{item.city}}{{item.area}}{{item.address}}</view>
+          <view wx:else class="address">{{item.province}}{{item.city}}{{item.address}}</view>
         </view>
         <view class="setting">
           <view class="btnBox_left" bindtap="setDefaultAddress" data-id="{{item.id}}">
@@ -19,9 +20,9 @@
               <view class="text">默认地址</view>
             </block>
           </view>
-          <view class="btnBox_right">
-            <view class="btn btn_remove" bindtap="addressDelete">删除</view>
-            <view class="btn btn_edit" bindtap="addressChange">编辑</view>
+          <view class="btnBox_right" wx:if="{{!btnHide}}">
+            <view class="btn btn_remove" bindtap="addressDelete" data-id="{{item.id}}">删除</view>
+            <view class="btn btn_edit" data-id="{{item.id}}" bindtap="addressChange">编辑</view>
           </view>
         </view>
       </view>
@@ -29,7 +30,7 @@
   </view>
   <view class="address-manage-create">
     <view class="box">
-      <text class="btn content">添加新地址</text>
+      <text class="btn content" bindtap="addNewAddress">添加新地址</text>
     </view>
   </view>
 </view>

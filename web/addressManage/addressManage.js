@@ -26,11 +26,46 @@ Page({
     });
     app.updateAddressMsg(that, data);
   },
+  addressDelete: function(e){
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    var data = {
+      id: id
+    }
+    app.deteleAddressMsg(that, data);
+  },
+  addNewAddress: function(){
+    wx.navigateTo({
+      url: '/web/addressEdit/addressEdit',
+    })
+  },
+  addressChange: function(e){
+    wx.navigateTo({
+      url: '/web/addressEdit/addressEdit?id=' + e.currentTarget.dataset.id,
+    })
+  },
+  chooseItem: function(e){
+    var id = e.currentTarget.dataset.id;
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];
+    prevPage.setData({
+      addressId: id
+    })
+    wx.navigateBack({
+      delta: 1,
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function (e) {
+    var that = this;
+    var btnHide = e.btnHide;
+    if (btnHide){
+      that.setData({
+        btnHide: btnHide
+      })
+    }
   },
 
   /**
