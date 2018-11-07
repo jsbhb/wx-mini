@@ -27,6 +27,8 @@ Page({
     var selectedData = that.getSelectedData(allData);
     var orderCount = 0;
     var orders = {}
+    var isCrossOK = true;
+    var isNormalOk = true;
     selectedData.forEach(function (o1, n1) {
       if (o1.goodsSpecs) {
         var type = o1.type;
@@ -97,10 +99,47 @@ Page({
         orders[k1][k2].supplierWeight = orders[k1][k2].supplierWeight;
       }
     }
-    wx.setStorageSync('ordersInfo', orders);
-    wx.navigateTo({
-      url: '/web/orderSure/orderSure',
-    })
+    if (that.data.allCrossPrice > 2000){
+      if (that.data.allCrossCount == 1){
+        isCrossOK = true;
+      }else{
+        isCrossOK = false;
+      }
+    }else{
+      isCrossOK = true;
+    }
+    if(that.data.allNormalPrice > 500){
+      isNormalOk = true;
+    }else{
+      isNormalOk = false;
+    }
+    if (!isCrossOK && !isNormalOk){
+      wx.showToast({
+        title: '跨境商品订单不得超过2000元,一般贸易商品订单不得低于500元',
+        icon: 'none',
+        duration: 1500
+      })
+    }
+    if (isCrossOK && !isNormalOk){
+      wx.showToast({
+        title: '一般贸易商品订单不得低于500元',
+        icon: 'none',
+        duration: 1500
+      })
+    }
+    if (!isCrossOK && isNormalOk) {
+      wx.showToast({
+        title: '跨境商品订单不得超过2000元',
+        icon: 'none',
+        duration: 1500
+      })
+    }
+    if (isCrossOK && isNormalOk) {
+      wx.setStorageSync('ordersInfo', orders);
+      wx.navigateTo({
+        url: '/web/orderSure/orderSure',
+      })
+    }
   },
   goodsItemSelected: function(e){
     var that = this;
@@ -205,7 +244,11 @@ Page({
       });
        that.getAllPrice(allData);
     }else{
-      console.log('已超过最大购买数量');
+      wx.showToast({
+        title: '已超过最大购买数量',
+        icon: 'none',
+        duration: 1500
+      })
     }
   },
   numberMinus: function(e){
@@ -224,7 +267,11 @@ Page({
       });
       that.getAllPrice(allData);
     }else{
-      console.log('已到达最小购买数量');
+      wx.showToast({
+        title: '已到达最小购买数量',
+        icon: 'none',
+        duration: 1500
+      })
     }
   },
   numberChange: function(e){
@@ -238,7 +285,11 @@ Page({
     var allData = that.data.shopCartData;
     var num = e.detail.value;
     if (num < minNum){
-      console.log('数量不得低于最小购买量');
+      wx.showToast({
+        title: '购买数量不得低于最小购买量',
+        icon: 'none',
+        duration: 1500
+      })
       allData[itemIdIndex].quantity = minNum;
     }
     if (num > minNum && num < stock && num < maxNum){
@@ -247,14 +298,24 @@ Page({
     if(num > stock){
       if (stock > maxNum){
         allData[itemIdIndex].quantity = maxNum;
-        console.log('数量不得超过最大购买量');
+        wx.showToast({
+          title: '购买数量不得超过最大购买量',
+          icon: 'none',
+          duration: 1500
+        })
       }else{
         allData[itemIdIndex].quantity = stock;
-        console.log('数量不得超过最大库存量');
+        wx.showToast({
+          title: '购买数量不得超过最大库存量',
+          icon: 'none',
+          duration: 1500
+        })
       }
     }
     that.setData({
       shopCartData: allData
+    },function(){
+      that.getAllPrice(allData);
     });
   },
   getItemIdData:function(itemId){
@@ -275,16 +336,22 @@ Page({
     var that = this;
     var allCrossPrice = 0;
     var allNormalPrice = 0;
+    var allCrossCount = 0;
+    var allNormalCount = 0;
     for (var i = 0; i < data.length; i++){
       if (data[i].type == 0 && data[i].status == 'selected') {
         allCrossPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
+        allCrossCount += data[i].quantity;
       } else if (data[i].type == 2 && data[i].status == 'selected') {
         allNormalPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
+        allNormalCount += data[i].quantity;
       }
     }
     that.setData({
       allCrossPrice: allCrossPrice.toFixed(2),
-      allNormalPrice: allNormalPrice.toFixed(2)
+      allNormalPrice: allNormalPrice.toFixed(2),
+      allCrossCount: allCrossCount,
+      allNormalCount: allNormalCount
     });
   },
   getSelectedData: function(data){
@@ -306,7 +373,15 @@ Page({
       userId: wx.getStorageSync('userId'),
       ids: ids
     };
-    app.delShoppingCartData(that, data);
+    wx.showModal({
+      title: '温馨提示',
+      content: '是否确认删除该商品',
+      success: function (res) {
+        if (res.confirm) {
+          app.delShoppingCartData(that, data);
+        }
+      }
+    })  
   },
   allShopCartDelete: function (e) {
     var ids = [];
@@ -320,7 +395,15 @@ Page({
       userId: wx.getStorageSync('userId'),
       ids: ids
     };
-    app.delShoppingCartData(that, data);
+    wx.showModal({
+      title: '温馨提示',
+      content: '是否确认删除所选商品',
+      success: function (res) {
+        if (res.confirm) {
+          app.delShoppingCartData(that, data);
+        }
+      }
+    })
   },
   touchstart: function (e) {
     var that = this;

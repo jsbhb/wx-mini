@@ -71,7 +71,8 @@
       <view class="goodsDetail-alert-body-msg">
         <view class="goodsDetail-alert-body-msg-left">
           <view class="imgBox">
-            <image src="{{goodsDetailData.goodsFileList[0].path}}"></image>
+            <image wx:if="{{goodsDetailData.goodsFileList[0].path}}" src="{{goodsDetailData.goodsFileList[0].path}}"></image>
+            <image wx:else src="{{imgHost}}/images/platform/account/default_img.jpg"></image>
             <image src="{{imgHost}}/images/platform/tag/icon_cross_big.png" class="corner_mark"></image>
           </view>
         </view>

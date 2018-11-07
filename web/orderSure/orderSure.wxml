@@ -31,7 +31,8 @@
               <view class="itemList">
                 <view class="commodity-info">
                   <view class="commodity-img">
-                    <image src="{{v3.itemImg}}"></image>
+                    <image wx:if="{{v3.itemImg}}" src="{{v3.itemImg}}"></image>
+                    <image wx:else src="{{imgHost}}/images/platform/account/default_img.jpg"></image>
                     <image wx:if="{{v2.type == 0}}" class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_cross.png"></image>
                     <image wx:if="{{v2.type == 2}}" class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_normal.png"></image>
                   </view>
@@ -82,7 +83,7 @@
                   </view>
               </view>
               <view class="commodity-payBtn">
-                <view class="btn btn_commit">提交订单</view>
+                <view class="btn btn_commit" data-type="{{k1}}" data-supplierId="{{k2}}"  bindtap="orderSubmit">提交订单</view>
               </view>
             </view>
           </view>

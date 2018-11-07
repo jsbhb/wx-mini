@@ -28,7 +28,8 @@ Page({
     var account = e.detail.value;
     var isPhone = (/^1(3|4|5|7|8)\d{9}$/gi).test(account);
     var data = {
-      account: account
+      account: account,
+      status: 0
     }
     if (isPhone){
       app.userCheck(that, data);
@@ -37,10 +38,14 @@ Page({
         'account.status': 0
       });
     }else{
-      console.log('手机号码不正确');
       that.setData({
         'account.value': account,
         'account.status': 1
+      })
+      wx.showToast({
+        title: '请输入正确的手机号码',
+        icon:'none',
+        duration: 1000
       })
     }
   },
@@ -54,7 +59,6 @@ Page({
         'password.status': 0
       });
     }else{
-      console.log('密码长度需6-12位');
       that.setData({
         'password.value': password,
         'password.status': 1
@@ -81,28 +85,82 @@ Page({
     }
     var register = that.data.register;
     if (register == false){
-      console.log('手机号未注册');
+      wx.showToast({
+        title: '该手机号未注册',
+        icon: 'none',
+        duration: 1000
+      })
       return false;
     }
-    if (account_status != 1 && password_status != 1){
+    if (!data.account || !data.password){
+      if (!data.account){
+        that.setData({
+          'account.status': 1
+        });
+        account_status = 1;
+      }
+      if (!data.password){
+        that.setData({
+          'password.status': 1
+        });
+        password_status = 1;
+      }
+    }
+    if (account_status != 1 && password_status != 1 && data.account && data.password){
       app.userLogin(that,data);
     }else{
       if (account_status == 1){
         if (account == ''){
-          console.log('帐号不能为空');
+          wx.showToast({
+            title: '帐号不能为空',
+            icon: 'none',
+            duration: 1000
+          })
         }else{
-          console.log('帐号格式不正确');
+          wx.showToast({
+            title: '帐号格式不正确',
+            icon: 'none',
+            duration: 1000
+          })
         }
       } else if (password_status == 1){
         if(password == ''){
-          console.log('密码不能为空');
+          wx.showToast({
+            title: '密码不能为空',
+            icon: 'none',
+            duration: 1000
+          })
         } else {
-          console.log('密码长度不正确');
+          wx.showToast({
+            title: '密码长度不正确',
+            icon: 'none',
+            duration: 1000
+          })
         }
       }
     }
   },
-
+  onGotUserInfo: function(e){
+    console.log(e);
+    wx.showModal({
+      title: '提示',
+      content: '模态弹窗',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else {
+          console.log('用户点击取消')
+        }
+      }
+    })
+    wx.showToast({
+      title: '成功',
+      icon: 'loading',
+      duration: 1000,
+      mask: true
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

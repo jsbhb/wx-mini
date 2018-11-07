@@ -41,7 +41,11 @@ Page({
         quantity: quantity
       });
     } else {
-      console.log('已超过最大购买数量');
+      wx.showToast({
+        title: '已超过最大购买数量',
+        icon: 'none',
+        duration: 1000
+      });
     }
   },
   numMinus: function(e){
@@ -59,7 +63,11 @@ Page({
         quantity: quantity
       });
     } else {
-      console.log('购买数量不得低于最小购买量');
+      wx.showToast({
+        title: '购买数量不得低于最小购买量',
+        icon: 'none',
+        duration: 1000
+      });
     }
   },
   numChange: function(e){
@@ -76,7 +84,11 @@ Page({
     var num = e.detail.value;
     var quantity = 1;
     if (num < minNum) {
-      console.log('数量不得低于最小购买量');
+      wx.showToast({
+        title: '购买数量不得低于最小购买量',
+        icon: 'none',
+        duration: 1000
+      });
     }
     if (num > minNum && num < stock && num < maxNum) {
       quantity = num;
@@ -84,10 +96,18 @@ Page({
     if (num > stock) {
       if (stock > maxNum) {
         quantity = maxNum;
-        console.log('数量不得超过最大购买量');
+        wx.showToast({
+          title: '购买数量不得超过最大购买量',
+          icon: 'none',
+          duration: 1000
+        });
       } else {
         quantity = stock;
-        console.log('数量不得超过最大库存量');
+        wx.showToast({
+          title: '购买数量不得超过最大库存量',
+          icon: 'none',
+          duration: 1000
+        });
       }
     }
     that.setData({
@@ -97,6 +117,7 @@ Page({
   goodsToBuy: function(){
     var that = this;
     var data = {};
+    var isToBuy = false;
     if (that.data.alertShow == false) {
       that.setData({
         alertShow: true
@@ -107,6 +128,8 @@ Page({
       if (goodsDetailData.goodsSpecsList.length == 1) {
         chooseItemData = goodsDetailData.goodsSpecsList[0];
       }
+      console.log(goodsDetailData);
+      console.log(chooseItemData);
       if (chooseItemData) {
         data[goodsDetailData.type] = {};
         data[goodsDetailData.type][goodsDetailData.supplierId] = {};
@@ -126,7 +149,11 @@ Page({
         data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].freeTax = goodsDetailData.freeTax;
         data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].incrementTax = 0.16;
         data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].quantity = that.data.quantity;
-        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].itemImg = goodsDetailData.goodsFileList[0].path;
+        if (goodsDetailData.goodsFileList){
+          data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].itemImg = goodsDetailData.goodsFileList[0].path;
+        }else{
+          data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].itemImg ='';
+        }
         data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].itemName = goodsDetailData.customGoodsName;
         if (chooseItemData.info){
           var info = '';
@@ -140,12 +167,45 @@ Page({
         data[goodsDetailData.type][goodsDetailData.supplierId].postFee = 0;
         data[goodsDetailData.type][goodsDetailData.supplierId].exciseTaxFee = 0;
         data[goodsDetailData.type][goodsDetailData.supplierId].incrementTaxFee = 0;
-        wx.setStorageSync('ordersInfo', data);
-        wx.navigateTo({
-          url: '/web/orderSure/orderSure',
-        })
+        if (goodsDetailData.type == 0){
+          if (that.data.quantity * chooseItemData.priceList[0].price > 2000){
+            if (that.data.quantity == 1){
+              isToBuy = true;
+            }else{
+              isToBuy = false;
+              wx.showToast({
+                title: '跨境商品订单不得超过2000元',
+                icon: 'none',
+                duration: 1000
+              })  
+            }
+          }else{
+            isToBuy = true;
+          }
+        } else if (goodsDetailData.type == 2){
+          if (that.data.quantity * chooseItemData.priceList[0].price < 500){
+            isToBuy = false;
+            wx.showToast({
+              title: '一般贸易商品订单不得低于500元',
+              icon: 'none',
+              duration: 1000
+            }) 
+          }else{
+            isToBuy = true;
+          }
+        }
+        if (isToBuy) {
+          wx.setStorageSync('ordersInfo', data);
+          wx.navigateTo({
+            url: '/web/orderSure/orderSure',
+          })
+        }
       } else {
-        console.log('请选择规格');
+        wx.showToast({
+          title: '请选择规格',
+          icon: 'none',
+          duration: 1000
+        });
         return;
       }
     }
@@ -173,7 +233,11 @@ Page({
         data.type = goodsDetailData.type;
         app.addShopCart(that, data);
       }else{
-        console.log('请选择规格');
+        wx.showToast({
+          title: '请选择规格',
+          icon: 'none',
+          duration: 1000
+        });
         return;
       }
     }

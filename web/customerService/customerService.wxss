@@ -17,6 +17,7 @@
   border-bottom: solid 1rpx #dfdfdf;
   background-color: #fff8db;
   border-radius: 8rpx;
+  box-sizing: border-box;
 }
 .customerService-1-prompt .prompt-text{
   display: inline-block;

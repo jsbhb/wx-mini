@@ -45,16 +45,26 @@ App({
         if (res.data && res.data.success) {
           wx.setStorageSync('authId', '"Bearer "' + res.data.obj.token);
           wx.setStorageSync('userId', res.data.obj.userCenterId);
-          wx.switchTab({
-            url: '/web/index/index',
-          })
           that.globalData.authentication = '"Bearer "' + res.data.obj.token;
           that.globalData.isLogin = true;
+          wx.navigateBack({
+            delta: 1
+          })
         } else if (res.data && !res.data.success) {
-          console.log(res.data.errorMsg);
+          wx.showToast({
+            title: res.data.errorMsg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -80,14 +90,39 @@ App({
           obj.setData({
             register: false
           });
-          console.log('手机号未注册');
+          if(data.status == 0){
+            wx.showToast({
+              title: '该手机号未注册',
+              icon: 'none',
+              duration: 1000
+            })
+            obj.setData({
+              'account.status': 2
+            });
+          }
         } else {
           obj.setData({
             register: true
           });
+          if (data.status == 1) {
+            wx.showToast({
+              title: '该手机号已注册',
+              icon: 'none',
+              duration: 1000
+            })
+            obj.setData({
+              'account.status': 2
+            });
+          }
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -109,7 +144,13 @@ App({
           });
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -130,7 +171,13 @@ App({
           });
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -149,10 +196,19 @@ App({
         var goodsListData_1 = [];
         var goodsListData_2 = [];
         if (data == []) {
-          console.log('获取数据失败');
+          wx.showToast({
+            title: '获取数据失败',
+            icon: 'none',
+            duration: 1500
+          })
         } else {
           for (var i = 0; i < data.length; i++) {
             if (data[i].code == "banner-1") {
+              data[i].cont.forEach(function(v,k){
+                if (v.href){
+                  v.href = '/web/searchProduct/searchProduct?' + v.href.split('?')[1];
+                }
+              });
               obj.setData({
                 ['bannerData.imgs']: data[i].cont
               });
@@ -171,13 +227,24 @@ App({
               }
             }
           }
+          goodsListData_1.forEach(function(v,i){
+            if (v.own.href){
+              v.own._href = v.own.href.split('?')[1];
+            }
+          });
           obj.setData({
             goodsListData_1: goodsListData_1,
             goodsListData_2: goodsListData_2,
           });
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -200,10 +267,16 @@ App({
             firstActive: res.data.obj[0].id
           });
         } else {
-          console.log('获取数据失败')
+          console.log('请求失败')
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -217,7 +290,9 @@ App({
     if (data.secondCategory) { requestUrl += '&secondCategory=' + data.secondCategory; }
     if (data.thirdCategory) { requestUrl += '&thirdCategory=' + data.thirdCategory; }
     if (data.upShelves) { requestUrl += '&upShelves=' + data.upShelves; }
+    if (data.goodsName) { requestUrl += '&goodsName=' + data.goodsName; }
     if (data.type) { requestUrl += '&type=' + data.type; }
+    if (data.tag) { requestUrl += '&tag=' + data.tag; }
     if (data.sortField && data.sortRule) { requestUrl += ('&sortList[0].sortField=' + data.sortField + '&sortList[0].sortRule=' + data.sortRule)};
     wx.request({
       url: requestUrl,
@@ -253,10 +328,16 @@ App({
             'searchListData.totalPages': res.data.obj.pagination.totalPages
           });
         } else {
-          console.log('获取数据失败');
+          console.log('请求失败');
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -278,11 +359,13 @@ App({
           var tagListArr = [];
           var priceArr = [];
           var commodityAttr = [];
-          for (var i = 0; i < data.goodsFileList.length; i++) {
-            imgsArr.push({
-              picPath: data.goodsFileList[i].path,
-              href: ''
-            });
+          if (data && data.goodsFileList){
+            for (var i = 0; i < data.goodsFileList.length; i++) {
+              imgsArr.push({
+                picPath: data.goodsFileList[i].path,
+                href: ''
+              });
+            }
           }
           if (data.goodsSpecsList && data.goodsSpecsList.length > 0) {
             for (var j = 0; j < data.goodsSpecsList.length; j++) {
@@ -339,10 +422,25 @@ App({
             }
           }
         } else {
-          console.log('获取数据失败');
+          wx.showToast({
+            title: '该商品已下架',
+            icon: 'none',
+            duration: 1500
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          },1500);
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -354,6 +452,8 @@ App({
     var shopId = wx.getStorageSync('shopId') || centerId;
     var allCrossPrice = 0;
     var allNormalPrice = 0;
+    var allCrossCount = 0;
+    var allNormalCount = 0;
     wx.request({
       url: host + '/ordercenter/1.0/order/shoping-cart/' + shopId + '/' + userId + '?centerId=' + centerId,
       method: 'GET',
@@ -385,8 +485,10 @@ App({
             infoStr = '';
             if(data[i].type == 0){
               allCrossPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
+              allCrossCount += data[i].quantity*1;
             } else if (data[i].type == 2) {
               allNormalPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
+              allNormalCount += data[i].quantity*1;
             }
             data[i].goodsSpecs.priceList[0].price = data[i].goodsSpecs.priceList[0].price.toFixed(2);
             if (data[i].goodsSpecs.status == 1){
@@ -401,11 +503,19 @@ App({
             shopCartData: res.data.obj,
             selectedNum: statusNum,
             allCrossPrice: allCrossPrice.toFixed(2),
-            allNormalPrice: allNormalPrice.toFixed(2)
+            allNormalPrice: allNormalPrice.toFixed(2),
+            allCrossCount: allCrossCount,
+            allNormalCount: allNormalCount
           });
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -415,6 +525,7 @@ App({
     var gradeId = that.globalData.gradeId;
     var shopCartId = data.ids.join(',');
     var allData = obj.data.shopCartData;
+    var selectedNum = 0;
     wx.request({
       url: host + '/ordercenter/1.0/order/shoping-cart/' + gradeId + '/' + data.userId + '/' + shopCartId,
       method: 'DELETE',
@@ -437,14 +548,25 @@ App({
           newIndexs.forEach(function (index) {
             allData.splice(index, 1);
           })
+          for (var i = 0; i < allData.length; i++) {
+            if (allData[i].status == 'selected') {
+              selectedNum ++;
+            }
+          }
           obj.setData({
             shopCartData: allData,
-            selectedNum: 0
+            selectedNum: selectedNum
           });
           obj.getAllPrice(allData);
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -474,12 +596,26 @@ App({
       },
       success: function (res) {
         if(res.data && res.data.success){
-          console.log('加入购物车成功');
-        }else{
-          console.log('加入购物车失败');
+          wx.showToast({
+            title: '加入购物车成功',
+            icon: 'none',
+            duration: 1000
+          })  
+        } else {
+          wx.showToast({
+            title: '加入购物车失败',
+            icon: 'none',
+            duration: 1000
+          })  
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -512,7 +648,13 @@ App({
           console.log('获取收货地址列表失败');
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -548,7 +690,13 @@ App({
           console.log('创建收货地址失败');
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -582,7 +730,13 @@ App({
           console.log('设置默认地址失败');
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -608,7 +762,13 @@ App({
           console.log('删除收货地址失败');
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     })
   },
@@ -634,8 +794,305 @@ App({
           });
         }
       },
-      fail: function (res) { },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
       complete: function (res) { }
     });
+  },
+  getUserDetail: function(obj, data){
+    var that = this;
+    var host = that.globalData.host;
+    var centerId = that.globalData.centerId;
+    var userId = wx.getStorageSync('userId') || '';
+    wx.request({
+      url: host + '/usercenter/1.0/user/' + centerId + '/' + userId,
+      method: 'GET',
+      data: {},
+      header: {
+        'content-type': 'application/json', // 默认值
+        'authentication': that.globalData.authentication
+      },
+      success: function (res) {
+        if(res.data && res.data.success){
+          var isNew = true;
+          if (res.data.obj.userDetail){
+            isNew = false;
+          }
+          obj.setData({
+            infoData: res.data.obj,
+            isNew: isNew
+          });
+        }else{
+          console.log('获取个人信息失败');
+        }
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
+      complete: function (res) { }
+    })
+  },
+  createUserDetail: function(obj, data){
+    var that = this;
+    var host = that.globalData.host;
+    var centerId = that.globalData.centerId;
+    var userId = wx.getStorageSync('userId') || '';
+    var d = data;
+    d.centerId = centerId;
+    d.userId = userId;
+    wx.request({
+      url: host + '/usercenter/1.0/user/userDetail',
+      method: 'POST',
+      data: d,
+      header: {
+        'content-type': 'application/json', // 默认值
+        'authentication': that.globalData.authentication
+      },
+      success: function (res) {
+        if(res.data && res.data.success){
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
+      complete: function (res) { }
+    })
+  },
+  saveUserDetail: function(obj, data){
+    var that = this;
+    var host = that.globalData.host;
+    var centerId = that.globalData.centerId;
+    var userId = wx.getStorageSync('userId') || '';
+    var d = data;
+    d.centerId = centerId;
+    d.userId = userId;
+    wx.request({
+      url: host + '/usercenter/1.0/user/userDetail',
+      method: 'PUT',
+      data: d,
+      header: {
+        'content-type': 'application/json', // 默认值
+        'authentication': that.globalData.authentication
+      },
+      success: function (res) {
+        if (res.data && res.data.success) {
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
+      complete: function (res) { }
+    })
+  },
+  getValidation: function(obj, data){
+    var that = this;
+    var host = that.globalData.host;
+    wx.request({
+      url: host + '/3rdcenter/auth/1.0/third-part/phone?phone=' + data.phone,
+      method: 'POST',
+      data: {},
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        if(res.data && res.data.success){
+          wx.showToast({
+            title: '验证码发送成功',
+            icon: 'none',
+            duration: 1500
+          })
+        } else if (res.data && !res.data.success){
+          wx.showToast({
+            title: '验证码发送频繁，请稍后重试',
+            icon: 'none',
+            duration: 1500
+          })
+        }else{
+          wx.showToast({
+            title: '验证码发送失败，请稍后重试',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
+      complete: function (res) { }
+    })
+  },
+  userRegister: function(obj, data){
+    var that = this;
+    var host = that.globalData.host;
+    var centerId = that.globalData.centerId;
+    var loginType = that.globalData.loginType;
+    var platUserType = that.globalData.platUserType;
+    var d = {
+      phone: data.phone,
+      centerId: centerId,
+      pwd: data.password,
+      userCenterId: centerId,
+      loginType: loginType,
+      userType: platUserType
+    }
+    if(data.shopId){
+      d.shopId = data.shopId;
+    }
+    wx.request({
+      url: host + '/usercenter/auth/1.0/user/register/' + data.invitationCode,
+      method: 'POST',
+      data: d,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        if(res.data && res.data.success){
+          var userCenterId = res.data.obj;
+          wx.request({
+            url: host + '/authcenter/auth/register',
+            method: 'POST',
+            data: {
+              phone: data.phone,
+              password: data.password,
+              userCenterId: userCenterId,
+              loginType: loginType,
+              platUserType: platUserType,
+              invitationCode: data.invitationCode
+            },
+            header: {
+              'content-type': 'application/json' // 默认值
+            },
+            success: function (res) {
+              if(res.data && res.data.success){
+                wx.setStorageSync('authId', '"Bearer "' + res.data.obj.token);
+                wx.setStorageSync('userId', res.data.obj.userCenterId);
+                that.globalData.authentication = '"Bearer "' + res.data.obj.token;
+                that.globalData.isLogin = true;
+                wx.navigateBack({
+                  delta: 2
+                })
+              } else if (res.data && !res.data.success) {
+                wx.showToast({
+                  title: res.data.errorMsg,
+                  icon: 'none',
+                  duration: 1500
+                })
+              } else {
+                wx.showToast({
+                  title: '帐号注册失败，请稍后重试',
+                  icon: 'none',
+                  duration: 1500
+                })
+              }
+            },
+            fail: function (res) {
+              wx.showToast({
+                title: '请求失败，请检查网络是否畅通',
+                icon: 'none',
+                duration: 1500
+              })
+            },
+            complete: function (res) { }
+          })
+        } else if (res.data && !res.data.success){
+          wx.showToast({
+            title: res.data.errorMsg,
+            icon: 'none',
+            duration: 1500
+          })
+        } else {
+          wx.showToast({
+            title: '帐号注册失败，请稍后重试',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
+      complete: function (res) { }
+    })
+  },
+  userPwdChange: function(obj, data){
+    var that = this;
+    var host = that.globalData.host;
+    var platUserType = that.globalData.platUserType;
+    wx.request({
+      url: host + '/authcenter/auth/modifyPwd?code=' + data.code,
+      method: 'POST',
+      data: {
+        userName: data.userName,
+        password: data.password,
+        platUserType: platUserType
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res);
+        if(res.data && res.data.success){
+          wx.showToast({
+            title: '密码修改成功',
+            icon: 'none',
+            duration: 1500
+          })
+          wx.navigateBack({
+            delta: 1
+          })
+        } else if (res.data && !res.data.success){
+          wx.showToast({
+            title: res.data.errorMsg,
+            icon: 'none',
+            duration: 1500
+          })
+        } else {
+          wx.showToast({
+            title: '修改密码失败',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
+      complete: function (res) { }
+    })
   }
 })

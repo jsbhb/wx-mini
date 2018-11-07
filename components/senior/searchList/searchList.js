@@ -88,7 +88,11 @@ Component({
         }
       });
       if (chooseItem.goodsSpecsList.length == 1){
-        data.goodsImg = chooseItem.goodsFileList[0].path;
+        if (chooseItem.goodsFileList){
+          data.goodsImg = chooseItem.goodsFileList[0].path;
+        }else{
+          data.goodsImg = '';
+        }
         data.goodsName = chooseItem.customGoodsName;
         data.itemId = chooseItem.goodsSpecsList[0].priceList[0].itemId;
         data.quantity = chooseItem.goodsSpecsList[0].priceList[0].min || 1;

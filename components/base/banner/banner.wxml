@@ -1,9 +1,18 @@
 <swiper indicator-dots="{{bannerData.indicatorDots}}"
   autoplay="{{bannerData.autoplay}}" interval="{{bannerData.interval}}" duration="{{bannerData.duration}}" class="banner-1" style="height:{{bannerData.imgHeight}}">
-  <block wx:for="{{bannerData.imgs}}" wx:key="">
-    <swiper-item wx:if="{{item.picPath}}">
-      <navigator url="{{item.href}}" open-type='navigator' hover-class='none'>
-        <image src="{{item.picPath}}" class="slide-image" style="height:{{bannerData.imgHeight}}"/>
+  <block wx:if="{{bannerData.imgs.length > 0}}">
+    <block wx:for="{{bannerData.imgs}}" wx:key="">
+      <swiper-item wx:if="{{item.picPath}}">
+        <navigator url="{{item.href}}" open-type='navigate' hover-class='none'>
+          <image src="{{item.picPath}}" class="slide-image" style="height:{{bannerData.imgHeight}}"/>
+        </navigator>
+      </swiper-item>
+    </block>
+  </block>
+  <block wx:else>
+    <swiper-item>
+      <navigator url="" open-type='navigator' hover-class='none'>
+        <image src="{{imgHost}}/images/platform/account/default_img.jpg" class="slide-image" style="height:{{bannerData.imgHeight}}"/>
       </navigator>
     </swiper-item>
   </block>

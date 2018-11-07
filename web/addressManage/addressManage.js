@@ -32,7 +32,15 @@ Page({
     var data = {
       id: id
     }
-    app.deteleAddressMsg(that, data);
+    wx.showModal({
+      title: '温馨提示',
+      content: '是否删除收货地址？',
+      success: function (res) {
+        if (res.confirm) {
+          app.deteleAddressMsg(that, data);
+        }
+      }
+    })  
   },
   addNewAddress: function(){
     wx.navigateTo({

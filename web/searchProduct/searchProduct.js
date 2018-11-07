@@ -28,6 +28,7 @@ Page({
       that.setData({
         ['headerData.searchData']: options.goodsName
       });
+      data.goodsName = options.goodsName;
     }
     if (options && options.firstCategory) {
       data.firstCategory = options.firstCategory;
@@ -43,6 +44,9 @@ Page({
     }
     if (options && options.type) {
       data.type = options.type;
+    }
+    if (options && options.tag) {
+      data.tag = options.tag;
     }
     app.getSearchListData(that, data, oldData);
     that.setData({

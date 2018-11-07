@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.90",
+	"libVersion": "2.3.2",
 	"appid": "wx31534096140741d9",
 	"projectname": "slot%E7%A4%BA%E4%BE%8B",
 	"condition": {

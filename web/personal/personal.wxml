@@ -9,7 +9,7 @@
     </view>
     <view class="userName">
       <text wx:if="{{!isLogin}}">游客（未登录）</text>
-      <text wx:else>{{personalData.userDetail.name}}(普通用户)</text>
+      <text wx:else>{{personalData.userDetail.name || personalData.phone}}(普通用户)</text>
     </view>
     <view class="aboutus">
       <text wx:if="{{isLogin}}">微店简介：{{shopInfoData.aboutus}}</text>

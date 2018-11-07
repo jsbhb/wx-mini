@@ -38,7 +38,11 @@ Page({
       that.setData({
         telephone: ''
       })
-      console.log('请填写正确的手机号码');
+      wx.showToast({
+        title: '请填写正确的手机号码',
+        icon: 'none',
+        duration: 1000
+      })
     }
   },
   changeAddress: function(e){
@@ -85,7 +89,11 @@ Page({
         delta: 1
       })
     }else{
-      console.log('请填写完整信息');
+      wx.showToast({
+        title: '请填写完整信息',
+        icon: 'none',
+        duration: 1000
+      })
     }
   },
   saveAddress: function(){
@@ -114,7 +122,11 @@ Page({
         delta: 1
       })
     } else {
-      console.log('请填写完整信息');
+      wx.showToast({
+        title: '请填写完整信息',
+        icon: 'none',
+        duration: 1000
+      })
     }
   },
   bindChange: function (e) {

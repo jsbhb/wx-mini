@@ -115,6 +115,14 @@ Page({
       ordersInfo: d
     });
   },
+  orderSubmit: function(e){
+    var that = this;
+    var ordersInfo = that.data.ordersInfo;
+    var t = e.currentTarget.dataset.type;
+    var supplierId = e.currentTarget.dataset.supplierid;
+    var data = ordersInfo[t][supplierId];
+    console.log(data);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -9,7 +9,8 @@
       <view class="name">头像</view>
       <view class="content">
         <view class="headPortrait">
-          <image src="{{imgHost}}/images/platform/personal/headPortrait.jpg"></image>
+          <image wx:if="{{infoData.userDetail.headImg}}" src="{{imgHost}}{{infoData.userDetail.headImg}}"></image>
+          <image wx:else src="{{imgHost}}/images/platform/personal/headPortrait.jpg"></image>
         </view>
       </view>
     </view>
@@ -17,7 +18,7 @@
       <view class="name">昵称</view>
       <view class="content">
         <view class="cont nickname">
-          <input type="text" value='CCC'></input>
+          <input type="text" value="{{infoData.userDetail.nickName}}" bindblur="nickNameChange"></input>
         </view>
       </view>
     </view>
@@ -25,23 +26,23 @@
       <view class="name important">真实姓名</view>
       <view class="content">
         <view class="cont realname">
-          <input type="text" value="测试名称"></input>
+          <input type="text" value="{{infoData.userDetail.name}}" bindblur="nameChange"></input>
         </view>
       </view>
     </view>
     <view class="mainCont gender">
-      <view class="name important">性别</view>
-      <view class="content">
-        <view class="cont gender">
-          <input type="text" value="男"></input>
+      <picker bindchange="bindSexChange" value="{{sexIndex}}" range="{{sexArr}}">
+        <view class="picker">
+          <text class="pickerName">性别</text>
+          <text class="pickerContent">{{sexArr[sexIndex]}}</text>
         </view>
-      </view>
+      </picker>
     </view>
     <view class="mainCont location">
       <view class="name">所在地区</view>
       <view class="content">
         <view class="cont location">
-          <input type="text" value="浙江省宁波市北仑区"></input>
+          <input type="text" value="{{infoData.userDetail.location}}" bindblur="locationChange"></input>
         </view>
       </view>
     </view>
@@ -49,11 +50,12 @@
       <view class="name important">身份证</view>
       <view class="content">
         <view class="cont identification">
-          <input type="text" value="33020616944054465"></input>
+          <input type="text" value="{{infoData.userDetail.idNum}}" bindblur="idCodeChange" maxlength="18"></input>
         </view>
       </view>
     </view>
   </view>
-  <view class="edit personal-information-commit">保存个人信息</view>
+  <view class="personal-information-commit" wx:if="{{isNew}}" bindtap="createInfo">创建个人信息</view>
+  <view class="personal-information-commit" wx:else bindtap="saveInfo">保存个人信息</view>
 </view>
 <component-footer></component-footer>

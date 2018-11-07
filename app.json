@@ -11,7 +11,9 @@
     "web/addressManage/addressManage",
     "web/addressEdit/addressEdit",
     "web/login/login",
-    "web/orderSure/orderSure"
+    "web/orderSure/orderSure",
+    "web/register/register",
+    "web/forgetPassword/forgetPassword"
   ],
   "window":{
     "backgroundTextStyle": "light",
