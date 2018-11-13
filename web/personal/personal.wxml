@@ -1,0 +1,68 @@
+<component-header headerData="{{headerData}}"></component-header>
+<view class="personal-content">
+  <view class="personal-header">
+    <view class="shopImg">
+      <view class="imgBox">
+        <image wx:if="{{isLogin}}" src="{{shopInfoData.headImg}}"></image>
+        <image wx:else src="{{imgHost}}/images/platform/personal/icon_shop.jpg"></image>
+      </view>
+    </view>
+    <view class="userName">
+      <text wx:if="{{!isLogin}}">游客（未登录）</text>
+      <text wx:else>{{personalData.userDetail.name || personalData.phone}}(普通用户)</text>
+    </view>
+    <view class="aboutus">
+      <text wx:if="{{isLogin}}">微店简介：{{shopInfoData.aboutus}}</text>
+      <text wx:else>微店简介：中国供销海外购</text>
+    </view>
+    <image class="personal-bgImg" src="{{imgHost}}/images/platform/personal/personalBgImg.png"></image>
+  </view>
+  <view class="personal-orders">
+    <view class="orders-content">
+      <navigator url="/web/orderList/orderList?status=null" open-type='navigate' hover-class='none'>
+        <image src="{{imgHost}}/images/platform/personal/order_all.png" class="order_all"></image>
+      </navigator>
+      <navigator url="/web/orderList/orderList?status=0" open-type='navigate' hover-class='none'>
+        <image src="{{imgHost}}/images/platform/personal/order_needPay.png" class="order_needPay"></image>
+      </navigator>
+      <navigator url="/web/orderList/orderList?status=1,2,3,4,5,11,12" open-type='navigate' hover-class='none'>
+        <image src="{{imgHost}}/images/platform/personal/order_needDeliver.png" class="order_needDeliver"></image>
+      </navigator>
+      <navigator url="/web/orderList/orderList?status=6" open-type='navigate' hover-class='none'>
+        <image src="{{imgHost}}/images/platform/personal/order_needReceived.png" class="order_needReceived"></image>
+      </navigator>
+      <navigator url="/web/orderList/orderList?status=7" open-type='navigate' hover-class='none'>
+        <image src="{{imgHost}}/images/platform/personal/order_finished.png" class="order_finished"></image>
+      </navigator>
+    </view>
+  </view>
+  <view class="personal-function">
+    <navigator url="/web/addressManage/addressManage" open-type='navigate' hover-class='none'>
+      <image src="{{imgHost}}/images/platform/personal/deliveryAddress.png"></image>
+      <text>收货地址</text>
+      <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
+    </navigator>
+    <navigator url="/web/personal-information/personal-information" open-type='navigate' hover-class='none'>
+      <image src="{{imgHost}}/images/platform/personal/information.png"></image>
+      <text>个人信息</text>
+      <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
+    </navigator>
+    <navigator url="/web/customerService/customerService" open-type='navigate' hover-class='none'>
+      <image src="{{imgHost}}/images/platform/personal/customerService.png"></image>
+      <text>客服信息</text>
+      <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
+    </navigator>
+    <!-- <navigator url='' open-type='navigate' hover-class='none'>
+      <image src="{{imgHost}}/images/platform/personal/welfare.png"></image>
+      <text>福利网站</text>
+      <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
+    </navigator> -->
+  </view>
+  <view class="personal-btn" bindtap="logout" wx:if="{{isLogin}}">
+    <text>退出登录</text>
+  </view>
+  <view class="personal-btn" bindtap="logout" wx:else>
+    <navigator url="/web/login/login" open-type='navigate' hover-class='none'>登陆</navigator>
+  </view>
+</view>
+<component-footer footerData="{{footerData}}"></component-footer>

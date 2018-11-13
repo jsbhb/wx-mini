@@ -1,0 +1,136 @@
+<component-header headerData="{{headerData}}"></component-header>
+<view class="goodsDetail-1-content">
+  <component-banner bannerData="{{bannerData}}"></component-banner>
+  <view class="goodsDetail-description">
+    <view class="text">
+      <image src="{{imgHost}}/images/platform/commodity/descript.png"></image>
+      <text wx:if="{{goodsDetailData.description}}">{{goodsDetailData.description}}</text>
+      <text wx:else>暂无商品相关描述</text>
+    </view>
+    <view class="tagBox">
+      <block wx:for="{{goodsDetailData.tagListArr}}" wx:key="">
+        <image wx:if="{{item == '必选'}}" src="{{imgHost}}/images/platform/tag/icon_tag1.png"></image>
+        <image wx:if="{{item == '爆款'}}" src="{{imgHost}}/images/platform/tag/icon_tag2.png"></image>
+        <image wx:if="{{item == '热销'}}" src="{{imgHost}}/images/platform/tag/icon_tag3.png"></image>
+        <image wx:if="{{item == '优选'}}" src="{{imgHost}}/images/platform/tag/icon_tag4.png"></image>
+      </block>
+    </view>
+  </view>
+  <view class="goodsDetail-goodsMsg">
+    <view class="goodsMsg-left">
+      <view>{{goodsDetailData.customGoodsName}}</view>
+      <view></view>
+      <view>
+        <view class="price" wx:if="{{chooseItemData && chooseItemData.priceList[0].price}}">￥{{chooseItemData.priceList[0].price}}</view>
+        <view class="price" wx:elif="{{goodsDetailData.priceRegion}}">￥{{goodsDetailData.priceRegion}}</view>
+        <view class="price" wx:else>￥{{goodsDetailData.goodsSpecsList[0].priceList[0].price}}</view>
+        <view class="real"></view>
+      </view>
+      <block wx:if="{{goodsDetailData.goodsSpecsList.length == 1}}">
+        <view>
+          <text>当前库存量：{{goodsDetailData.goodsSpecsList[0].stock}}</text>
+        </view>
+      </block>
+      <block wx:if="{{goodsDetailData.goodsSpecsList.length > 1}}">
+        <view wx:if="{{chooseItemData.stock != null}}">
+          <text>当前库存量：{{chooseItemData.stock}}</text>
+        </view>
+      </block>
+    </view>
+    <view class="btnGroup">
+      <image wx:if="{{goodsDetailData.origin}}" src="{{imgHost}}/images/platform/city/{{goodsDetailData.origin}}.png"></image>
+      <text>{{goodsDetailData.origin}}</text>
+    </view>
+  </view>
+  <view class="goodsDetail-moreMsg">
+    <view class="moreMsg-item">
+      发货仓库：
+      <text wx:if="{{goodsDetailData.supplierName == '天天仓'}}">保税TT仓</text>
+      <text wx:elif="{{goodsDetailData.supplierName == '粮油仓'}}">保税LY仓</text>
+      <text wx:elif="{{goodsDetailData.supplierName == '行云仓'}}">保税XY仓</text>
+      <text wx:elif="{{goodsDetailData.supplierName == '富邦仓'}}">富邦仓</text>
+      <text wx:else>{{goodsDetailData.supplierName}}</text>
+    </view>
+    <view class="moreMsg-item">
+      配送服务：
+      <text wx:if="{{goodsDetailData.type == 0}}">快递配送</text>
+      <text wx:if="{{goodsDetailData.type == 2}}">物流或快递</text>
+    </view>
+  </view>
+  <view class="goodsDetail-detailMsg">
+    <view class="goodsDetail-detailMsg-title">商品详情</view>
+    <view class="detailMsg">
+      <image src="{{imgHost}}/images/platform/goods/notice.jpg"></image>
+      <view class="detailMsgContent">
+        
+      </view>
+    </view>
+  </view>
+  <view class="goodsDetail-alert" wx:if="{{alertShow}}">
+    <view class="goodsDetail-alert-body">
+      <view class="goodsDetail-alert-body-msg">
+        <view class="goodsDetail-alert-body-msg-left">
+          <view class="imgBox">
+            <image wx:if="{{goodsDetailData.goodsFileList[0].path}}" src="{{goodsDetailData.goodsFileList[0].path}}"></image>
+            <image wx:else src="{{imgHost}}/images/platform/account/default_img.jpg"></image>
+            <image src="{{imgHost}}/images/platform/tag/icon_cross_big.png" class="corner_mark"></image>
+          </view>
+        </view>
+        <view class="goodsDetail-alert-body-msg-right">
+          <view class="goodsDetail-alert-body-msg-right-content">
+            <view class="name">{{goodsDetailData.customGoodsName}}</view>
+            <view class="price">
+              <view class="price" wx:if="{{chooseItemData && chooseItemData.priceList[0].price}}">￥{{chooseItemData.priceList[0].price}}</view>
+              <view class="price" wx:elif="{{goodsDetailData.priceRegion}}">￥{{goodsDetailData.priceRegion}}</view>
+              <view class="price" wx:else>￥{{goodsDetailData.goodsSpecsList[0].priceList[0].price}}</view>
+              <text></text>
+            </view>
+            <block wx:if="{{goodsDetailData.goodsSpecsList.length == 1}}">
+              <view wx:if="{{goodsDetailData.goodsSpecsList[0].stock != null}}">当前库存量：{{goodsDetailData.goodsSpecsList[0].stock}}</view>
+              <view wx:if="{{goodsDetailData.goodsSpecsList[0].priceList[0].min != null && goodsDetailData.goodsSpecsList[0].priceList[0].min != 0}}">当前最小购买量：{{goodsDetailData.goodsSpecsList[0].priceList[0].min}}</view>
+              <view wx:if="{{goodsDetailData.goodsSpecsList[0].priceList[0].max != null && goodsDetailData.goodsSpecsList[0].priceList[0].max != 0}}">当前最大购买量：{{goodsDetailData.goodsSpecsList[0].priceList[0].max}}</view>
+            </block>
+            <block wx:elif="{{goodsDetailData.goodsSpecsList.length > 1}}">
+              <view wx:if="{{chooseItemData.stock != null}}">当前库存量：{{chooseItemData.stock}}</view>
+              <view wx:if="{{chooseItemData.priceList[0].min != null && chooseItemData.priceList[0].min != 0}}">当前最小购买量：{{chooseItemData.priceList[0].min}}</view>
+              <view wx:if="{{chooseItemData.priceList[0].max != null && chooseItemData.priceList[0].max != 0}}">当前最大购买量：{{chooseItemData.priceList[0].max}}</view>
+            </block>
+          </view>
+        </view>
+      </view>
+      <view class="goodsDetail-alert-body-list">
+        <view class="goodsDetail-alert-body-item" wx:for="{{attrValueList}}" wx:for-item="attrValueObj" wx:for-index="attrIndex" wx:key="">
+            <view class="goodsDetail-alert-body-item-title">{{attrValueObj.attrKey}}</view>
+            <view class="goodsDetail-alert-body-item-content">
+              <view class="attr_value {{attrIndex==firstIndex || attrValueObj.attrValueStatus[valueIndex]?(value==attrValueObj.selectedValue?'attr_value_active':''):'attr_value_disabled'}}" bindtap="selectAttrValue" data-status="{{attrValueObj.attrValueStatus[valueIndex]}}"
+      data-value="{{value}}" data-key="{{attrValueObj.attrKey}}" data-index="{{attrIndex}}" data-selectedvalue="{{attrValueObj.selectedValue}}" wx:key="" wx:for="{{attrValueObj.attrValues}}" wx:for-item="value" wx:for-index="valueIndex">{{value}}</view>
+            </view>
+        </view>
+      </view>
+      <view class="goodsDetail-quantity-group">
+        <view class="goodsDetail-quantity">
+          <view class="text">购买数量</view>
+          <view class="inputGroup">
+            <view class="btn btn_plus" wx:if="{{goodsDetailData.goodsSpecsList.length == 1}}" data-itemId="{{goodsDetailData.goodsSpecsList[0].itemId}}" data-max="{{goodsDetailData.goodsSpecsList[0].priceList[0].max}}" data-stock="{{goodsDetailData.goodsSpecsList[0].stock}}" bindtap="numAdd"></view>
+            <view class="btn btn_plus" wx:elif="{{goodsDetailData.goodsSpecsList.length > 1}}" data-itemId="{{chooseItemData.itemId}}" data-max="{{chooseItemData.priceList[0].max}}" data-stock="{{chooseItemData.stock}}" bindtap="numAdd"></view>
+            <input type="number" class="btn btn_input" value="{{quantity}}" wx:if="{{goodsDetailData.goodsSpecsList.length == 1}}" data-itemId="{{goodsDetailData.goodsSpecsList[0].itemId}}" data-max="{{goodsDetailData.goodsSpecsList[0].priceList[0].max}}" data-stock="{{goodsDetailData.goodsSpecsList[0].stock}}" data-min="{{goodsDetailData.goodsSpecsList[0].priceList[0].min}}" bindchange="numChange"></input>
+            <input type="number" class="btn btn_input" value="{{quantity}}" wx:elif="{{goodsDetailData.goodsSpecsList.length > 1}}" data-itemId="{{chooseItemData.itemId}}" data-max="{{chooseItemData.priceList[0].max}}" data-stock="{{chooseItemData.stock}}" data-min="{{chooseItemData.priceList[0].min}}" bindchange="numChange"></input>
+            <view class="btn btn_minus" wx:if="{{goodsDetailData.goodsSpecsList.length == 1}}" data-itemId="{{goodsDetailData.goodsSpecsList[0].itemId}}" data-min="{{goodsDetailData.goodsSpecsList[0].priceList[0].min}}" data-stock="{{goodsDetailData.goodsSpecsList[0].stock}}" bindtap="numMinus"></view>
+            <view class="btn btn_minus" wx:elif="{{goodsDetailData.goodsSpecsList.length > 1}}" data-itemId="{{chooseItemData.itemId}}" data-min="{{chooseItemData.priceList[0].min}}" data-stock="{{chooseItemData.stock}}" bindtap="numMinus"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="goodsDetail-btns">
+    <view class="goodsDetail-btns-content">
+      <view class="btnBox">
+        <view class="btn icon_back small" bindtap="hideAlertContent">
+          <image src="{{imgHost}}/images/platform/goods/back.png"></image>
+        </view>
+        <view class="btn text_toBuy large" bindtap="goodsToBuy">立即购买</view>
+        <view class="btn text_addShopCart large" bindtap="goodsAddShopCart">加入购物车</view>
+      </view>
+    </view>
+  </view>
+</view>

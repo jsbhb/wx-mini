@@ -1,0 +1,17 @@
+<component-header headerData="{{headerData}}"></component-header>
+<component-banner bannerData="{{bannerData}}"></component-banner>
+<view class="introduce-1">
+  <view class="introduce-1-item">央企自营</view>
+  <view class="introduce-1-item">正品保障</view>
+  <view class="introduce-1-item">全球直采</view>
+  <view class="introduce-1-item">售后无忧</view>
+</view>
+<component-navInlet-1></component-navInlet-1>
+<component-navInlet-2></component-navInlet-2>
+<block wx:for="{{goodsListData_1}}" wx:key="">
+  <component-goodsList-1 goodsListData_1="{{item}}"></component-goodsList-1>
+</block>
+<block wx:for="{{goodsListData_2}}" wx:key="">
+  <component-goodsList-2 goodsListData_2="{{item}}"></component-goodsList-2>
+</block>
+<component-footer footerData="{{footerData}}"></component-footer>
