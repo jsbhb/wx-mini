@@ -16,7 +16,12 @@
     "web/forgetPassword/forgetPassword",
     "web/orderDetail/orderDetail",
     "web/orderList/orderList",
-    "web/logistics/logistics"
+    "web/logistics/logistics",
+    "web/bindMobile/bindMobile",
+    "web/bargainIndex/bargainIndex",
+    "web/bargainGoodsDetail/bargainGoodsDetail",
+    "web/loginChoose/loginChoose",
+    "web/protocol/protocol"
   ],
   "window":{
     "backgroundTextStyle": "light",

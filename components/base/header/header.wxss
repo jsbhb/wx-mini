@@ -100,3 +100,20 @@
   display: inline-block;
   position: relative;
 }
+.header-right > view{
+  position: relative;
+}
+.header-right > view .number{
+  min-width: 34rpx;
+  height: 34rpx;
+  text-align: center;
+  border-radius: 17rpx;
+  line-height: 34rpx;
+  font-weight: 400;
+  font-size: 20rpx;
+  color: #ffffff;
+  background-color: #b4282d;
+  position: absolute;
+  top: -5rpx;
+  right: -10rpx;
+}

@@ -7,7 +7,10 @@ Component({
     activeTab: 1,
     toHeight: '',
     imgHost: app.globalData.imgHost,
-    isEnd: false
+    isEnd: true,
+    footerData: {
+      shoppingCartCount: 0
+    }
   },
   methods: {
     getSearchListData_com: function(){
@@ -21,7 +24,6 @@ Component({
         activeTab: 1,
         toHeight: 0
       });
-      
     },
     getSearchListData_new: function(){
       var that = this;
@@ -70,6 +72,9 @@ Component({
       if (requestData.currentPage < totalPages){
         requestData.currentPage++; 
         app.getSearchListData(that, requestData, oldRenderData);
+        that.setData({
+          isEnd: false
+        })
       }else{
         that.setData({
           isEnd: true
@@ -80,6 +85,21 @@ Component({
       var that = this;
       var allData = that.data.searchListData.data;
       var goodsId = e.currentTarget.dataset.goodid;
+      var userId = wx.getStorageSync('userId');
+      if (!userId){
+        wx.showModal({
+          title: '温馨提示',
+          content: '您尚未登录，是否登录？',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/web/login/login',
+              })
+            }
+          }
+        })
+        return;
+      }
       var chooseItem = {};
       var data = {};
       allData.forEach(function(v1,i1){
@@ -96,15 +116,29 @@ Component({
         data.goodsName = chooseItem.customGoodsName;
         data.itemId = chooseItem.goodsSpecsList[0].priceList[0].itemId;
         data.quantity = chooseItem.goodsSpecsList[0].priceList[0].min || 1;
+        data.stock = chooseItem.goodsSpecsList[0].stock;
+        data.maxNum = chooseItem.goodsSpecsList[0].priceList[0].max || 9999999;
         data.supplierId = chooseItem.supplierId;
         data.supplierName = chooseItem.supplierName;
         data.type = chooseItem.type;
         app.addShopCart(that, data);
+        setTimeout(function(){
+          var myEventDetail = {
+            val: that.data.footerData.shoppingCartCount
+          }
+          that.triggerEvent('addShopCart', myEventDetail);
+        },300)
       } else if (chooseItem.goodsSpecsList.length > 1){
-        console.log('多规格商品，正在跳往商品详情页');
-        wx.navigateTo({
-          url: '/web/goodsDetail/goodsDetail?goodsId=' + goodsId,
+        wx.showToast({
+          title: '多规格商品，即将跳往商品详情页',
+          icon: 'none',
+          duration: 1500
         })
+        setTimeout(function(){
+          wx.navigateTo({
+            url: '/web/goodsDetail/goodsDetail?goodsId=' + goodsId,
+          })
+        },1500);
       }
     }
   }

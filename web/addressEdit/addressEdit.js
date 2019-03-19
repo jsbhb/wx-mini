@@ -84,10 +84,10 @@ Page({
         receiveName: name,
         receivePhone: telephone
       }
+      if (that.data.move == 'orderSure') {
+        data.move = that.data.move;
+      }
       app.createAddressMsg(that, data);
-      wx.navigateBack({
-        delta: 1
-      })
     }else{
       wx.showToast({
         title: '请填写完整信息',
@@ -118,9 +118,6 @@ Page({
         receivePhone: telephone
       }
       app.updateAddressMsg(that, data);
-      wx.navigateBack({
-        delta: 1
-      })
     } else {
       wx.showToast({
         title: '请填写完整信息',
@@ -196,9 +193,15 @@ Page({
   onLoad: function (e) {
     var that = this;
     var id = e.id;
+    var move = e.move;
     var province = '';
     var city = '';
     var county = '';
+    if (move){
+      that.setData({
+        move: move
+      });
+    }
     if(id){
       that.setData({
         id: id
@@ -294,7 +297,7 @@ Page({
       'city': city || citys[0].name,
       'county': county || countys[0].name
     });
-
+    app.shopDetailQuery();
   },
 
   /**
@@ -308,7 +311,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

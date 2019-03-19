@@ -4,10 +4,10 @@
   overflow: hidden;
 }
 .navInlet-1-content .content-item{
-  width: 78rpx;
-  height: 92rpx;
+  width: 86rpx;
+  height: 101rpx;
   float: left;
-  margin-right: 66rpx;
+  margin-right: 57rpx;
   margin-bottom: 40rpx;
 }
 .navInlet-1-content .content-item:nth-child(5n){

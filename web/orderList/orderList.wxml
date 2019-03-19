@@ -81,17 +81,17 @@
             <view class="order-btnControl">
               <view class="btnBox">
                 <block wx:if="{{item_1.status == 0}}">
-                  <view class="btn">立即付款</view>
+                  <view class="btn" data-orderId="{{item_1.orderId}}" bindtap="toOrderPay">立即付款</view>
                   <view class="btn" data-orderId="{{item_1.orderId}}" bindtap="toCloseOrder">关闭订单</view>
                   <view class="btn" data-orderId="{{item_1.orderId}}" bindtap="toOrderDetail">查看详情</view>
                 </block>
                 <block wx:if="{{item_1.status == 1 || item_1.status == 2 || item_1.status == 3 || item_1.status == 4 ||item_1.status == 5 || item_1.status == 11 || item_1.status == 12}}">
-                  <view class="btn">申请退款</view>
+                  <button class="btn" hover-class="none" open-type='contact'>申请退款</button>
                   <view class="btn" data-orderId="{{item_1.orderId}}" bindtap="toOrderDetail">查看详情</view>
                 </block>
                 <block wx:if="{{item_1.status == 6}}">
                   <view class="btn" data-orderId="{{item_1.orderId}}" bindtap="toSureOrder">确认收货</view>
-                  <view class="btn">申请退款</view>
+                  <button class="btn" hover-class="none" open-type='contact'>申请退款</button>
                   <view class="btn" data-orderId="{{item_1.orderId}}" bindtap="toLogistics">查看物流</view>
                   <view class="btn" data-orderId="{{item_1.orderId}}" bindtap="toOrderDetail">查看详情</view>
                 </block>
@@ -117,7 +117,7 @@
       </view>
     </scroll-view>
   </block>
-  <block wx:else>
+  <block wx:if="{{orderListData.length == 0}}">
     <view class="order-empty">
       <image src="{{imgHost}}/images/platform/order/empty.png"></image>
       <view class="text">还没有这类订单呢！</view>

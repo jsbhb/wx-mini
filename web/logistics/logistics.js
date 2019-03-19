@@ -17,7 +17,8 @@ Page({
       var that = this;
       var orderExpressList = [];
       newVal.forEach(function(v1,i1){
-        if(v1.orderExpressList){
+        console.log(v1.orderExpressList);
+        if(v1.orderExpressList.length > 0){
           newVal[0].orderExpressList.forEach(function(v2,i2){
             let d = {
               expressId: v2.expressId,
@@ -65,6 +66,7 @@ Page({
     }
     app.setWatcher(that);
     app.getOrderListData(that, data);
+    app.shopDetailQuery();
   },
 
   /**

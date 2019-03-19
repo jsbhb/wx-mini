@@ -1,4 +1,3 @@
-// web/shoppingCart/shoppingCart.js
 const app = getApp();
 Page({
 
@@ -6,14 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    headerData:{
-      type: 'title',
-      title: '购物车',
-      leftIcon: 'back',
-      rightIcon: 'edit'
-    },
+    // headerData:{
+    //   type: 'title',
+    //   title: '购物车',
+    //   leftIcon: false,
+    //   rightIcon: 'edit'
+    // },
     footerData: {
-      active: 3
+      active: 3,
+      shoppingCartCount: 0
     },
     startX: 0,
     startY: 0,
@@ -28,7 +28,14 @@ Page({
     var orderCount = 0;
     var orders = {}
     var isCrossOK = true;
-    var isNormalOk = true;
+    if (selectedData.length == 0){
+      wx.showToast({
+        title: '请选择需要购买的商品',
+        icon: 'none',
+        duration: 1500
+      })
+      return;
+    }
     selectedData.forEach(function (o1, n1) {
       if (o1.goodsSpecs) {
         var type = o1.type;
@@ -85,6 +92,7 @@ Page({
     });
     for (let k1 in orders){
       for (let k2 in orders[k1]) {
+        let tdq = 0;
         orders[k1][k2].taxFee = 0;
         orders[k1][k2].postFee = 0;
         orders[k1][k2].exciseTaxFee = 0;
@@ -97,6 +105,10 @@ Page({
         }
         orders[k1][k2].supplierPrice = orders[k1][k2].supplierPrice;
         orders[k1][k2].supplierWeight = orders[k1][k2].supplierWeight;
+        for (let k3 in orders[k1][k2].itemObj){
+          tdq ++;
+        }
+        orders[k1][k2].tdq = tdq;
       }
     }
     if (that.data.allCrossPrice > 2000){
@@ -108,33 +120,14 @@ Page({
     }else{
       isCrossOK = true;
     }
-    if(that.data.allNormalPrice > 500){
-      isNormalOk = true;
-    }else{
-      isNormalOk = false;
-    }
-    if (!isCrossOK && !isNormalOk){
-      wx.showToast({
-        title: '跨境商品订单不得超过2000元,一般贸易商品订单不得低于500元',
-        icon: 'none',
-        duration: 1500
-      })
-    }
-    if (isCrossOK && !isNormalOk){
-      wx.showToast({
-        title: '一般贸易商品订单不得低于500元',
-        icon: 'none',
-        duration: 1500
-      })
-    }
-    if (!isCrossOK && isNormalOk) {
+    if (!isCrossOK){
       wx.showToast({
         title: '跨境商品订单不得超过2000元',
         icon: 'none',
         duration: 1500
       })
     }
-    if (isCrossOK && isNormalOk) {
+    if (isCrossOK) {
       wx.setStorageSync('ordersInfo', orders);
       wx.navigateTo({
         url: '/web/orderSure/orderSure',
@@ -284,32 +277,61 @@ Page({
     var itemIdIndex = itemIdReturn.index;
     var allData = that.data.shopCartData;
     var num = e.detail.value;
-    if (num < minNum){
+    if (num < minNum) {
+      allData[itemIdIndex].quantity = minNum;
       wx.showToast({
         title: '购买数量不得低于最小购买量',
         icon: 'none',
-        duration: 1500
-      })
-      allData[itemIdIndex].quantity = minNum;
+        duration: 1000
+      });
     }
-    if (num > minNum && num < stock && num < maxNum){
+    if (num >= minNum && num <= stock && num <= maxNum) {
       allData[itemIdIndex].quantity = num;
     }
-    if(num > stock){
-      if (stock > maxNum){
+    if (num > stock) {
+      if (stock > maxNum) {
         allData[itemIdIndex].quantity = maxNum;
         wx.showToast({
           title: '购买数量不得超过最大购买量',
           icon: 'none',
-          duration: 1500
-        })
-      }else{
+          duration: 1000
+        });
+      } else {
         allData[itemIdIndex].quantity = stock;
         wx.showToast({
           title: '购买数量不得超过最大库存量',
           icon: 'none',
-          duration: 1500
-        })
+          duration: 1000
+        });
+      }
+    }
+    if (num > maxNum) {
+      if (maxNum > stock) {
+        allData[itemIdIndex].quantity = stock;
+        wx.showToast({
+          title: '购买数量不得超过最大库存量',
+          icon: 'none',
+          duration: 1000
+        });
+      } else {
+        allData[itemIdIndex].quantity = maxNum;
+        wx.showToast({
+          title: '购买数量不得超过最大购买量',
+          icon: 'none',
+          duration: 1000
+        });
+      }
+    }
+    if (num == maxNum) {
+      if (maxNum > stock) {
+        allData[itemIdIndex].quantity = stock;
+        wx.showToast({
+          title: '购买数量不得超过最大库存量',
+          icon: 'none',
+          duration: 1000
+        });
+      } else {
+        allData[itemIdIndex].quantity = maxNum;
       }
     }
     that.setData({
@@ -339,12 +361,14 @@ Page({
     var allCrossCount = 0;
     var allNormalCount = 0;
     for (var i = 0; i < data.length; i++){
-      if (data[i].type == 0 && data[i].status == 'selected') {
-        allCrossPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
-        allCrossCount += data[i].quantity;
-      } else if (data[i].type == 2 && data[i].status == 'selected') {
-        allNormalPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
-        allNormalCount += data[i].quantity;
+      if(data[i].status != 'lose'){
+        if (data[i].type == 0 && data[i].status == 'selected') {
+          allCrossPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
+          allCrossCount += data[i].quantity;
+        } else if (data[i].type == 2 && data[i].status == 'selected') {
+          allNormalPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
+          allNormalCount += data[i].quantity;
+        }
       }
     }
     that.setData({
@@ -370,7 +394,6 @@ Page({
     var shopCartId = e.currentTarget.dataset.id;
     ids.push(shopCartId);
     var data = {
-      userId: wx.getStorageSync('userId'),
       ids: ids
     };
     wx.showModal({
@@ -392,7 +415,6 @@ Page({
       ids.push(v.id);
     });
     var data = {
-      userId: wx.getStorageSync('userId'),
       ids: ids
     };
     wx.showModal({
@@ -408,10 +430,11 @@ Page({
   touchstart: function (e) {
     var that = this;
     var allData = that.data.shopCartData;
-    allData.forEach(function (v, i) {
-      if (v.isTouchMove)
-        v.isTouchMove = false;
-    })
+    // allData.forEach(function (v, i) {
+    //   if (v.isTouchMove){
+    //     v.isTouchMove = false;
+    //   }
+    // })
     this.setData({
       startX: e.changedTouches[0].clientX,
       startY: e.changedTouches[0].clientY,
@@ -460,13 +483,16 @@ Page({
   changeStatus:function(e){
     var that = this;
     var allData = that.data.shopCartData;
+    var statusNum = 0;
     var shopCartStatus = e.detail.shopCartStatus;
     that.setData({
       shopCartStatus: shopCartStatus
     });
     if (shopCartStatus == 'delete'){
       allData.forEach(function (v, i) {
-        v.status = '';
+        if (v.status != "lose"){
+          v.status = '';
+        }
       });
       that.getAllPrice(allData);
       that.setData({
@@ -476,11 +502,18 @@ Page({
       });
     }else{
       allData.forEach(function (v, i) {
-        v.status = 'selected';
+        if (v.status != "lose") {
+          v.status = 'selected';
+        }
       });
       that.getAllPrice(allData);
+      for (var i = 0; i < allData.length; i++) {
+        if (allData[i].status != 'lose') {
+          statusNum++;
+        }
+      }
       that.setData({
-        selectedNum: allData.length,
+        selectedNum: statusNum,
         shopCartData: allData,
         allChooseStatus: 'selected'
       });
@@ -490,7 +523,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.shopDetailQuery();
   },
 
   /**
@@ -506,13 +539,23 @@ Page({
   onShow: function () {
     var that = this;
     if (app.globalData.isLogin == false) {
-      wx.redirectTo({
-        url: '/web/login/login'
+      wx.navigateTo({
+        url: '/web/loginChoose/loginChoose'
       })
       return;
     }
-    var data = {};
-    app.getShoppingCartData(that, data);
+    app.getShoppingCartData(that, {});
+    var userId = wx.getStorageSync('userId');
+    if (userId) {
+      app.getShoppingCartCount(that, {});
+    } else {
+      that.setData({
+        'footerData.shoppingCartCount': 0
+      });
+    }
+    that.setData({
+      allChooseStatus: 'selected'
+    });
   },
 
   /**

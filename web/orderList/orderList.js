@@ -31,7 +31,7 @@ Page({
       }
       that.setData({
         currentPage: 1,
-        orderListData: []
+        orderListData: null
       },function(){
         app.getOrderListData(that, data);
       });
@@ -106,7 +106,15 @@ Page({
     var data = {
       orderId: orderId
     }
-    app.closeOrder(that, data);
+    wx.showModal({
+      title: '温馨提示',
+      content: '是否关闭订单',
+      success: function (res) {
+        if (res.confirm) {
+          app.closeOrder(that, data);
+        }
+      }
+    })
   },
   toSureOrder: function(e){
     var that = this;
@@ -116,14 +124,37 @@ Page({
     }
     app.sureOrder(that, data);
   },
-  getAllNum: function(){
+  toOrderPay: function (e){
     var that = this;
+    var orderId = e.currentTarget.dataset.orderid;
     var data = {
-      numPerPage: that.data.numPerPage,
-      currentPage: that.data.currentPage,
+      orderId: orderId
+    }
+    app.orderToPay(that,data);
+  },
+  getAllNum: function () {
+    var that = this;
+    var data1 = {
+      numPerPage: 5,
+      currentPage: 1,
+      status: 0,
       type: 'getNumber'
     };
-    app.getOrderListData(that, data);
+    var data2 = {
+      numPerPage: 5,
+      currentPage: 1,
+      status: '1,2,3,4,5,11,12',
+      type: 'getNumber'
+    };
+    var data3 = {
+      numPerPage: 5,
+      currentPage: 1,
+      status: 6,
+      type: 'getNumber'
+    };
+    app.getOrderListData(that, data1);
+    app.getOrderListData(that, data2);
+    app.getOrderListData(that, data3);
   },
   /**
    * 生命周期函数--监听页面加载
@@ -142,6 +173,8 @@ Page({
         status: status
       })
     }
+    app.shopDetailQuery();
+    wx.hideLoading();
   },
 
   /**

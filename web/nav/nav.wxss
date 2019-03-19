@@ -50,7 +50,7 @@
 }
 .nav-list .classify-list-right{
   width: 588rpx;
-  padding: 0 10rpx 0 23rpx;
+  padding: 0 20rpx;
   box-sizing: border-box;
   border-left: solid 2rpx #eee;
 }
@@ -61,6 +61,7 @@
   position: relative;
   padding: 40rpx 0 20rpx 0;
   display: block;
+  border-bottom: 2rpx solid #eee;
 }
 .nav-list .classify-list-right .classify-list-right-item{
   width: 100%;
@@ -74,24 +75,29 @@
   color: #333;
   height: 76rpx;
 }
+.nav-list .classify-list-right .classify-list-right-item navigator{
+  width: calc(100% / 3);
+  height: 240rpx;
+  float: left;
+  text-align: center;
+  padding: 10rpx 0;
+}
+.nav-list .classify-list-right .classify-list-right-item navigator image{
+  width: 160rpx;
+  height: 160rpx;
+}
 .nav-list .classify-list-right .classify-list-right-item view text{
   width: 98%;
   display: inline-block;
-  height: 45rpx;
   padding: 0 10rpx;
   font-size: 24rpx;
   font-weight: 400;
   text-align: center;
-  line-height: 45rpx;
-  border-radius: 10rpx;
-  border: solid 1rpx #cccccc;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }

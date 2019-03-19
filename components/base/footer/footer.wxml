@@ -13,10 +13,11 @@
       </navigator>
     </view>
     <view class="footer-shortcutIcon icon_4">
-      <navigator url="/web/shoppingCart/shoppingCart" open-type='switchTab' hover-class='none'>
+      <view data-url="/web/shoppingCart/shoppingCart" bindtap="toShoppingCart">
         <image wx:if="{{footerData.active == 3}}" src='{{imgHost}}/images/platform/footer/shoppingCart_active.png'></image>
         <image wx:else src='{{imgHost}}/images/platform/footer/shoppingCart.png'></image>
-      </navigator>
+        <view class="number" wx:if="{{footerData.shoppingCartCount}}">{{footerData.shoppingCartCount}}</view>
+      </view>
     </view>
     <view class="footer-shortcutIcon icon_4">
       <navigator url="/web/personal/personal" open-type='switchTab' hover-class='none'>

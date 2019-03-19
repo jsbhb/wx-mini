@@ -192,6 +192,7 @@ Page({
         password: password,
         invitationCode: validation,
         shopId: shopId,
+        loginType: 1
       }
       app.userRegister(that, data);
     }
@@ -234,7 +235,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.shopDetailQuery();
   },
 
   /**

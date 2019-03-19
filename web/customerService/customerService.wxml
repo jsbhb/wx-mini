@@ -37,15 +37,24 @@
         </view>
       </view>
     </view>
-    <view class="mainCont emailBox">
+    <view class="mainCont QQBox">
       <view class="name">客服QQ</view>
       <view class="content">
-        <view class="cont emailBox">
+        <view class="cont QQBox">
           <input type="text" value="{{customerData.companyQQ}}" disabled="true"></input>
+        </view>
+      </view>
+    </view>
+    <view class="mainCont wxBox">
+      <view class="name">客服微信</view>
+      <view class="content">
+        <view class="cont ewxBox">
+          <input type="text" value="{{customerData.companyWx}}" disabled="true"></input>
         </view>
       </view>
     </view>
   </view>
   <view class="customerService-1-commit" bindtap="phoneCall">拨打热线</view>
+  <button class="btn" hover-class="none" open-type="contact">在线客服</button>
 </view>
 <component-footer></component-footer>

@@ -1,4 +1,4 @@
-<component-header headerData="{{headerData}}"></component-header>
+<!-- <component-header headerData="{{headerData}}"></component-header> -->
 <view class="address-manage-content">
   <view class="address-manage-list">
     <block wx:for="{{addressListData}}" wx:key="">

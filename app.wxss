@@ -4,7 +4,7 @@
   color: transparent;
 }
 page{
-  background: #eee;
+  background: #f4f4f4;
   padding-bottom: 98rpx;
   padding-top: 90rpx;
 }

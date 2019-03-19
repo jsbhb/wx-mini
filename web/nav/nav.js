@@ -15,24 +15,17 @@ Page({
       rightIcon: 'news'
     },
     footerData: {
-      active: 2
+      active: 2,
+      shoppingCartCount: 0
     }
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var that = this;
-    var data = {};
-    app.getNavData(that, data);
-  },
-  chooseItem: function(e){
+  
+  chooseItem: function (e) {
     var that = this;
     var firstActive = e.currentTarget.id;
     var navTotalData = that.data.navTotalData;
-    for (var i = 0; i < navTotalData.length; i++){
-      if (navTotalData[i].id == firstActive){
+    for (var i = 0; i < navTotalData.length; i++) {
+      if (navTotalData[i].id == firstActive) {
         that.setData({
           navRightData: navTotalData[i].dictList,
           firstActive: firstActive
@@ -40,6 +33,16 @@ Page({
       }
     }
   },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this;
+    var data = {};
+    app.getNavData(that, data);
+    app.shopDetailQuery();
+  },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -52,7 +55,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    var userId = wx.getStorageSync('userId');
+    if (userId) {
+      app.getShoppingCartCount(that, {});
+    } else {
+      that.setData({
+        'footerData.shoppingCartCount': 0
+      });
+    }
   },
 
   /**

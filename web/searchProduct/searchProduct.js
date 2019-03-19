@@ -10,7 +10,16 @@ Page({
       leftIcon: 'scan',
       rightIcon: 'news'
     },
-    currentPage: 1
+    currentPage: 1,
+    footerData: {
+      shoppingCartCount: 0
+    }
+  },
+  getShoppingCartCount: function(e){
+    var that = this;
+    that.setData({
+      'footerData.shoppingCartCount': e.detail.val
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -52,6 +61,7 @@ Page({
     that.setData({
       'searchListData.requestData': data
     });
+    app.shopDetailQuery();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -64,7 +74,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    var userId = wx.getStorageSync('userId');
+    if (userId) {
+      app.getShoppingCartCount(that, {});
+    } else {
+      that.setData({
+        'footerData.shoppingCartCount': 0
+      });
+    }
   },
 
   /**

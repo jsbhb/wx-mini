@@ -56,14 +56,9 @@
   box-sizing: border-box;
 }
 .goodsList-list .content-list .list-item .shopImg image{
-  max-width: 96%;
-  max-height: 96%;
+  max-width: 148rpx;
+  max-height: 148rpx;
   display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   margin: auto;
 }
 .goodsList-list .content-list .list-item .shopName{
@@ -82,6 +77,14 @@
   font-weight: 600;
   padding-top: 8rpx;
   color: #f00;
+}
+.goodsList-list .content-list .list-item .shopPrice .linePrice{
+  font-size: 16rpx;
+  padding-top: 12rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 5rpx;
+  float: left;
 }
 .goodsList-list .content-list .list-item.lookMore{
   text-align: center;

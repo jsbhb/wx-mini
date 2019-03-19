@@ -18,6 +18,14 @@
       <image class="deliveryInfoBgImg" src="{{imgHost}}/images/platform/order/href.png"></image>
     </navigator>
   </block>
+  <block wx:if="{{addressListData.length == 0}}">
+    <navigator url="/web/addressEdit/addressEdit" open-type="navigate" hover-class="none">
+      <view class="noAddressList">
+        <text>+</text>添加收货地址 
+        <image class="deliveryInfoBgImg" src="{{imgHost}}/images/platform/order/href.png"></image>
+      </view>
+    </navigator>
+  </block>
   <view class="orderSure-orderDetails">
     <block wx:for="{{ordersInfo}}" wx:for-index="k1"  wx:for-item="v1" wx:key="">
       <block wx:for="{{v1}}" wx:for-index="k2"  wx:for-item="v2" wx:key="">
@@ -38,7 +46,7 @@
                   </view>
                   <view class="commodity-description">
                     <view class="commodity-name">
-                      <view class="text">{{v3.itemName}}</view>
+                      {{v3.itemName}}
                     </view>
                     <view class="commodity-specifications" wx:if="{{v3.infoStr}}">
                       <view class="name">规格</view>
@@ -70,10 +78,18 @@
                   <view class="money">￥{{v2.supplierPrice}}</view>
                   <view class="text">商品总价</view>
                 </view>
+                <view class="commodity-price">
+                  <view class="money">￥{{v2.supplierBargainPrice || '0.00'}}</view>
+                  <view class="text">优惠金额</view>
+                </view>
               </view>
             </view>
             <view class="commodity-remark">
-              <input type="text" placeholder="买家留言：选填，填写内容已和客服确认"></input>
+              <input type="text" bindblur="remarkBlur" placeholder="买家留言：选填，填写内容已和客服确认"></input>
+            </view>
+            <view class="commodity-protocol">
+              提交订单则表示您同意
+              <view bindtap="toProtocol">《用户购买协议》</view>
             </view>
             <view class="commodity-payInfo">
               <view class="commodity-actualPrice">
@@ -90,5 +106,25 @@
         </view>
       </block>
     </block>
+  </view>
+  <view class="alert-idNum" wx:if="{{idNumAlert}}">
+    <view class="alert-cancel-btn" bindtap="hideIdNumAlert"></view>
+    <view class="alert-title">
+      <text>实名认证</text>
+      <view bindtap="hideIdNumAlert">x</view>
+    </view>
+    <view class="alert-content">
+      <view class="content-desc">
+        <image src="{{imgHost}}/images/platform/order/2.png"></image>
+        <text>海关要求购买跨境商品需要提供实名信息哦~ </text>
+      </view>
+      <input bindinput="userNameInput" class="userName" type="text" placeholder="真实姓名（即付款账户的实名）"></input>
+      <input bindinput="idNumInput" class="idNum" type="text" placeholder="身份证号码（将加密处理）"></input>
+      <view class="content-alert">
+        <text bindtap="showContent">了解实名认证</text>
+        <image bindtap="showContent" src="{{imgHost}}/images/platform/order/1.png"></image>
+      </view>
+    </view>
+    <view class="alert-btn" bindtap="confirmIdNum">提交</view>
   </view>
 </view>

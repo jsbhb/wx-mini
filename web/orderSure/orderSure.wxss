@@ -17,10 +17,10 @@ page{
   position: relative;
 }
 .orderSure-content navigator .textGroup{
-    width: calc(100% - 115rpx);
-    height: auto;
-    margin-bottom: 14rpx;
-    display: inline-block;
+  width: calc(100% - 115rpx);
+  height: auto;
+  margin-bottom: 14rpx;
+  display: inline-block;
 }
 .orderSure-content navigator .textGroup .text{
   width: 100%;
@@ -54,6 +54,28 @@ page{
   right: 30rpx;
   top: 49rpx;
 }
+.orderSure-content .noAddressList{
+  font-size: 30rpx;
+  color: #666;
+  padding: 40rpx 0;
+  height: 36rpx;
+  line-height: 36rpx;
+}
+.orderSure-content .noAddressList text{
+  float: left;
+  background: #ff1104;
+  color: #fff;
+  width: 36rpx;
+  height: 36rpx;
+  text-align: center;
+  line-height: 34rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+  margin-right: 10rpx;
+}
+.orderSure-content .noAddressList image{
+  top: 15rpx;
+}
 .orderSure-orderDetails{
   width: 100%;
   height: auto;
@@ -62,6 +84,9 @@ page{
   width: 100%;
   height: auto;
   margin-bottom: 20rpx;
+}
+.orderSure-orderDetails .goodsList:last-child{
+  margin-bottom: 0;
 }
 .orderSure-orderDetails .goodsList .header{
   width: 100%;
@@ -201,7 +226,7 @@ page{
 .orderSure-orderDetails .goodsList .body .itemList .commodity-info .commodity-number .commodity-price{
   width: 100%;
   padding-right: 10rpx;
-  margin-top: 55rpx;
+  margin-top: 35rpx;
   font-family: PingFangSC-Light,helvetica,'Heiti SC';
   font-size: 28rpx;
   color: #333333;
@@ -260,7 +285,7 @@ page{
 .orderSure-orderDetails .goodsList .body .commodity-price{
   height: 50rpx;
   float: left;
-  padding: 0 5rpx 0 50rpx;
+  padding: 0 5rpx 0 20rpx;
 }
 .orderSure-orderDetails .goodsList .body .commodity-price .money{
   padding-right: 10rpx;
@@ -282,7 +307,7 @@ page{
   content: '：';
 }
 .orderSure-orderDetails .goodsList .body .commodity-priceInfo .commodity-totalPrice .commodity-price{
-  height: 100rpx;
+  height: 50rpx;
   padding: 0 5rpx 0 20rpx;
   float: right;
 }
@@ -292,7 +317,7 @@ page{
   font-family: PingFangSC-Light,helvetica,'Heiti SC';
   font-size: 35rpx;
   color: #f34d4d;
-  line-height: 100rpx;
+  line-height: 50rpx;
 }
 .orderSure-orderDetails .goodsList .body .commodity-priceInfo .commodity-totalPrice .commodity-price .text{
   padding-right: 15rpx;
@@ -300,7 +325,7 @@ page{
   font-family: PingFangSC-Light,helvetica,'Heiti SC';
   font-size: 27rpx;
   color: #666666;
-  line-height: 100rpx;
+  line-height: 50rpx;
 }
 .orderSure-orderDetails .goodsList .body .commodity-remark{
   display: inline-block;
@@ -319,6 +344,19 @@ page{
   padding: 0 40rpx;
   width: 100%;
   background: #fff;
+}
+.orderSure-orderDetails .goodsList .body .commodity-protocol{
+  font-size: 27rpx;
+  padding: 20rpx 40rpx;
+  width: 100%;
+  background: #fff;
+  color: #666;
+  margin-top: -5rpx;
+  margin-bottom: 1rpx;
+}
+.orderSure-orderDetails .goodsList .body .commodity-protocol view{
+  display: inline-block;
+  color: #333;
 }
 .orderSure-orderDetails .goodsList .body .commodity-payInfo{
   width: 100%;
@@ -380,5 +418,100 @@ page{
   font-size: 28rpx;
   line-height: 62rpx;
   text-align: center;
+  border-radius: 10rpx;
+}
+.orderSure-content .alert-idNum{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  z-index:99;
+}
+.orderSure-content .alert-cancel-btn{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 514rpx);
+  background: rgba(0,0,0,.3);
+}
+.alert-idNum .alert-title{
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  overflow: hidden;
+  font-size: 34rpx;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  background: #fdf9f8;
+  color: #333;
+  border-bottom: 2rpx solid #efefef;
+}
+.alert-idNum .alert-title view{
+  float: right;
+  line-height: inherit;
+  margin-right: 20rpx;
+  font-size: 42rpx;
+  color: #666;
+  margin-top: -5rpx;
+  padding: 0 20rpx;
+}
+.alert-idNum .alert-content .content-desc, 
+.alert-idNum .alert-content text{
+  display: inline-block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+.alert-idNum .alert-content .content-desc image{
+  width: 30rpx;
+  height: 36rpx;
+  padding: 12rpx 10rpx;
+  float: left;
+  margin-top: 8rpx;
+}
+.alert-idNum .alert-content .content-desc text{
+  padding: 0;
+  color: #333;
+}
+.alert-idNum .alert-content input{
+  margin: 0 20rpx 15rpx 20rpx;
+  box-sizing: border-box;
+  height: 80rpx;
+  background: #f4f4f4;
+  font-size: 28rpx;
+  padding-left: 20rpx;
+  border-radius: 10rpx;
+}
+.alert-idNum .alert-content input.idNum{
+  margin-bottom: 0;
+}
+.alert-idNum .alert-content view{
+  overflow: hidden;
+}
+.alert-idNum .alert-content view text{
+  float: right;
+  color: #999;
+  margin: 10rpx 20rpx 10rpx 0;
+}
+.alert-idNum .alert-content .content-alert image{
+  float:right;
+  width: 36rpx;
+  height: 36rpx;
+  margin-top: 20rpx;
+}
+.alert-idNum .alert-content .content-alert text{
+  padding-left: 10rpx;
+}
+.alert-idNum .alert-btn{
+  margin: 0 20rpx 20rpx 20rpx;
+  background: #e64240;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  color: #fff;
   border-radius: 10rpx;
 }

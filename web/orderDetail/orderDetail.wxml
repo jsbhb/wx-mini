@@ -43,6 +43,10 @@
     <text class="value" wx:if="{{orderListData[0].orderDetail.payType == 1}}">微信</text>
     <text class="value" wx:if="{{orderListData[0].orderDetail.payType == 2}}">支付宝</text>
   </view>
+  <view class="orderDetail-where">
+    <text class="name">订单来源</text>
+    <text class="value">{{orderListData[0].shopName}}</text>
+  </view>
   <view class="orderDetail-show">
     <view class="orderItem">
       <view class="header">
@@ -51,8 +55,9 @@
           订单号: {{orderListData[0].orderId}}
         </view>
         <view class="btnBox">
-          <text wx:if="{{orderListData[0].status == 0}}" class="btn">去支付</text>
-          <text wx:if="{{orderListData[0].status == 6}}" class="btn">看物流</text>
+          <text wx:if="{{orderListData[0].status == 0}}" class="btn" data-orderId="{{orderListData[0].orderId}}" bindtap="toOrderPay">去支付</text>
+          <text wx:if="{{orderListData[0].status == 6}}" class="btn" data-orderId="{{orderListData[0].orderId}}" bindtap="toLogistics">看物流</text>
+          <text wx:if="{{orderListData[0].status == 7}}" class="btn" data-orderId="{{orderListData[0].orderId}} " bindtap="toLogistics">看物流</text>
         </view>
       </view>
       <view class="body">

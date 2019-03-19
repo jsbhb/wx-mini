@@ -1,4 +1,4 @@
-// web/customerService/customerService.js
+const app = getApp();
 Page({
 
   /**
@@ -15,7 +15,8 @@ Page({
       companyAddress: '浙江省宁波市北仑区保税区港东大道5号进口商品市场317室',
       companyPhone: '010-59423991',
       companyEmail: '1917761259@qq.com',
-      companyQQ: '1917761259'
+      companyQQ: '1917761259',
+      companyWx: 'zggxhwg2018'
     }
   },
 
@@ -35,7 +36,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.shopDetailQuery();
   },
 
   /**

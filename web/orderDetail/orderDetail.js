@@ -13,7 +13,20 @@ Page({
     },
     imgHost: app.globalData.imgHost
   },
-
+  toOrderPay: function(e){
+    var that = this;
+    var orderId = e.currentTarget.dataset.orderid;
+    var data = {
+      orderId: orderId
+    }
+    app.orderToPay(that, data);
+  },
+  toLogistics: function(e){
+    var orderId = e.currentTarget.dataset.orderid;
+    wx.navigateTo({
+      url: '/web/logistics/logistics?orderId=' + orderId,
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -27,6 +40,7 @@ Page({
       type: 'getData'
     }
     app.getOrderListData(that, data);
+    app.shopDetailQuery();
   },
 
   /**

@@ -87,3 +87,20 @@
   border-radius: 15rpx;
   display: block;
 }
+.customerService-1-content .btn{
+  width: calc(100% - 88rpx);
+  height: 92rpx;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 36rpx;
+  line-height: 92rpx;
+  text-align: center;
+  margin: auto;
+  border-radius: 15rpx;
+  display: block;
+  border: 1rpx solid #eee;
+  color: #666;
+  background: #fff;
+}
+.customerService-1-content .btn::after{
+  border: none;
+}

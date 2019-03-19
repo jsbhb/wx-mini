@@ -27,13 +27,32 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 1,
+			"list": [
+				{
+					"id": 0,
+					"name": "scan",
+					"pathName": "web/index/index",
+					"query": "shopId=2",
+					"scene": "1047"
+				},
+				{
+					"id": 1,
+					"name": "scan",
+					"pathName": "web/index/index",
+					"query": "shopId=12",
+					"scene": "1001"
+				}
+			]
 		}
 	}
 }

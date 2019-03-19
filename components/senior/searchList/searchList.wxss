@@ -40,20 +40,22 @@ page{
   color: #b4282d;
 }
 .searchProduct-body-item{
-  padding-top: 20rpx;
   background: #fff;
   overflow: hidden;
 }
 .searchProduct-body-item .item-content{
   width: 50%;
-  margin-right: -3rpx;
-  margin-bottom: 30rpx;
   text-align: center;
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
-  padding: 0 10rpx 0 15rpx;
+  padding: 5rpx 10rpx 10rpx 15rpx;
   box-sizing: border-box;
+  border-bottom: 1rpx solid #efefef;
+  border-right: 1rpx solid #efefef;
+}
+.searchProduct-body-item .item-content:nth-child(2n){
+  border-right: none;
 }
 .searchProduct-body-item .item-content navigator{
   width: 100%;
@@ -65,7 +67,6 @@ page{
   height: 350rpx;
   padding-top: 35rpx;
   padding-left: 35rpx;
-  background-color: #f4f4f4;
   position: relative;
   box-sizing: border-box;
 }
@@ -97,14 +98,12 @@ page{
   margin: 0;
   max-width: 120rpx;
 }
-.searchProduct-body-item .item-content navigator .description{
+.searchProduct-body-item .item-content .description{
   width: 350rpx;
-  height: 58rpx;
   color: #9F8A60;
-  background-color: #F1ECE2;
   overflow: hidden;
 }
-.searchProduct-body-item .item-content navigator .description text{
+.searchProduct-body-item .item-content .description text{
   width: calc(100% - 140rpx);
   height: 58rpx;
   float: left;
@@ -118,19 +117,18 @@ page{
   white-space: nowrap;
   box-sizing: border-box;
 }
-.searchProduct-body-item .item-content navigator .description .tagBox{
-  float: right;
-  width: 138rpx;
+.searchProduct-body-item .item-content .description .tagBox{
+  float: left;
   height: 30rpx;
   padding-right: 10rpx;
-  margin-top: 14rpx;
+  margin-left: 10rpx;
   overflow: hidden;
   box-sizing: border-box;
 }
-.searchProduct-body-item .item-content navigator .description .tagBox image{
+.searchProduct-body-item .item-content .description .tagBox image{
   width: 60rpx;
   height: 24rpx;
-  float: right;
+  float: left;
   margin: 3rpx 3rpx 0 0;
   display: block;
   background-position: center;
@@ -143,18 +141,18 @@ page{
 }
 .searchProduct-body-item .item-content .textGroup .name{
   width: 100%;
-  height: 50rpx;
+  text-align: left;
+  padding: 0 10rpx;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  text-align: left;
-  padding-left: 10rpx;
-}
-.searchProduct-body-item .item-content .textGroup .name text{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
   font-size: 25rpx;
   font-weight: 500;
   color: #333;
-  line-height: 60rpx;
+  box-sizing: border-box;
 }
 .searchProduct-body-item .item-content .textGroup .price{
   max-width: calc(100% - 75rpx);

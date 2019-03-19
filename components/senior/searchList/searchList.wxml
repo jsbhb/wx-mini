@@ -29,12 +29,22 @@
               <view>
                 <image wx:if="{{item.goodsFileList != null}}" src="{{item.goodsFileList[0].path}}"></image>
                 <image wx:else src="{{imgHost}}/images/platform/account/default_img.jpg"></image>
-                <image class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_cross.png"></image>
+                <image wx:if="{{item.type == 0}}" class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_cross.png"></image>
+                <image wx:elif="{{item.type == 2}}" class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_normal.png"></image>
               </view>
+              </view>
+            </navigator>
+            <view class="textGroup">
+              <view class="name">
+                {{item.customGoodsName}}
+              </view>
+              <view>
+                <view class="price">￥{{item.oneRealPrice}}</view>
+                <!-- <view class="imgBox" bindtap="addShopCart" data-goodId="{{item.goodsId}}">
+                  <image src="{{imgHost}}/images/platform/product/icon_shoppingCart.png"></image>
+                </view> -->
               </view>
               <view class="description">
-                <text wx:if="{{item.description}}">{{item.description}}</text>
-                <text wx:else>中国供销海外购</text>
                 <view class="tagBox">
                   <block wx:for="{{item.tagListArr}}" wx:key="">
                     <image wx:if="{{item == '必选'}}" src="{{imgHost}}/images/platform/tag/icon_tag1.png"></image>
@@ -42,17 +52,6 @@
                     <image wx:if="{{item == '热销'}}" src="{{imgHost}}/images/platform/tag/icon_tag3.png"></image>
                     <image wx:if="{{item == '优选'}}" src="{{imgHost}}/images/platform/tag/icon_tag4.png"></image>
                   </block>
-                </view>
-              </view>
-            </navigator>
-            <view class="textGroup">
-              <view class="name">
-                <text>{{item.customGoodsName}}</text>
-              </view>
-              <view>
-                <view class="price">￥{{item.realPrice}}</view>
-                <view class="imgBox" bindtap="addShopCart" data-goodId="{{item.goodsId}}">
-                  <image src="{{imgHost}}/images/platform/product/icon_shoppingCart.png"></image>
                 </view>
               </view>
             </view>
@@ -63,7 +62,7 @@
           <view class="load-text" wx:else>已经到底啦。。。</view>
         </view>
       </view>
-      <view class="empty_search" wx:else>
+      <view class="empty_search" wx:if="{{searchListData.data.length == 0}}">
         <image src="{{imgHost}}/images/platform/product/search.png"></image>
         <view class="text">您寻找的商品还未上架！</view>
       </view>

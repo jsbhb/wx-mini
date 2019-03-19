@@ -339,6 +339,10 @@ page{
   background-color: #f9f9f9;
   color: #777777;
   box-sizing: border-box;
+  border-radius: 0;
+}
+.orderItem .body .order-btnControl .btnBox .btn::after{
+  border: none;
 }
 .orderItem .body .order-btnControl .btnBox .btn:not(:last-child) {
   border-left: solid 1rpx #dfdfdf;

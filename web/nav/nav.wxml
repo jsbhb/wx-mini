@@ -13,6 +13,7 @@
             <text class="item-title">{{item.dictName}}</text>
             <block wx:for="{{item.entryList}}" wx:key="">
               <navigator url="/web/searchProduct/searchProduct?thirdCategory={{item.id}}&goodsName={{item.entryName}}" open-type="navigate" hover-class="none">
+                <image src="{{item.thirdPicPath}}"></image>
                 <view><text>{{item.entryName}}</text></view>
               </navigator>
             </block>

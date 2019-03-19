@@ -5,12 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    headerData: {
-      type: 'title',
-      title: '管理收货地址',
-      leftIcon: 'back',
-      rightIcon: false
-    },
+    // headerData: {
+    //   type: 'title',
+    //   title: '管理收货地址',
+    //   leftIcon: 'back',
+    //   rightIcon: false
+    // },
     imgHost: app.globalData.imgHost
   },
   setDefaultAddress: function(e){
@@ -24,6 +24,7 @@ Page({
         data = v;
       }
     });
+    data.type = 'setDefault';
     app.updateAddressMsg(that, data);
   },
   addressDelete: function(e){
@@ -80,7 +81,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    // app.shopDetailQuery();
   },
 
   /**
@@ -95,7 +96,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**
