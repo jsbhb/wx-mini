@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -51,6 +51,13 @@
 					"pathName": "web/index/index",
 					"query": "shopId=12",
 					"scene": "1001"
+				},
+				{
+					"id": 2,
+					"name": "商详分享",
+					"pathName": "web/goodsDetail/goodsDetail",
+					"query": "goodsId=100000912&shopId=2&isShare=true",
+					"scene": null
 				}
 			]
 		}
