@@ -264,6 +264,14 @@ App({
                 delta: 2
               })
             } else if (data.loginType == 5){
+              var pages = getCurrentPages()    //获取加载的页面
+              var currentPage = pages[pages.length - 1]    //获取当前页面的对象
+              var url = currentPage.route
+              if (url == 'web/bindMobile/bindMobile'){
+                wx.navigateBack({
+                  delta: 2
+                })
+              }
               wx.navigateBack({
                 delta: 1
               })
