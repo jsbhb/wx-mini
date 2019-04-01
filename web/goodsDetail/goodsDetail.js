@@ -219,7 +219,7 @@ Page({
         data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId] = chooseItemData;
         data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].freePost = goodsDetailData.freePost;
         data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].freeTax = goodsDetailData.freeTax;
-        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].incrementTax = 0.16;
+        data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].incrementTax = chooseItemData.incrementTax;
         data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].quantity = that.data.quantity;
         if (goodsDetailData.goodsFileList){
           data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].itemImg = goodsDetailData.goodsFileList[0].path;

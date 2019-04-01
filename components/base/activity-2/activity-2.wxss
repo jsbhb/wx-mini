@@ -81,6 +81,7 @@
   line-height: 25rpx;
   overflow: hidden;
   margin-top: 5rpx;
+  word-break: break-all;
 }
 .goodsList-list .content-list .list-item .shopPrice{
   text-align: center;

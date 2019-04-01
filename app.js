@@ -3051,7 +3051,7 @@ App({
           data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId] = chooseItemData;
           data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].freePost = goodsDetailData.freePost;
           data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].freeTax = goodsDetailData.freeTax;
-          data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].incrementTax = 0.16;
+          data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].incrementTax = chooseItemData.incrementTax;
           data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].priceList[0].price = obj.data.bargainData.goodsPrice;
           data[goodsDetailData.type][goodsDetailData.supplierId].itemObj[chooseItemData.itemId].quantity = 1;
           if (goodsDetailData.goodsFileList) {
