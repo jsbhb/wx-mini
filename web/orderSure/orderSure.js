@@ -55,7 +55,7 @@ Page({
     },
     personalData: function (newVal, oldVal){
       var that = this;
-      if (newVal.userDetail && newVal.userDetail.idNum && newVal.userDetail.name){
+      if (newVal && newVal.userDetail && newVal.userDetail.idNum && newVal.userDetail.name){
         that.setData({
           haveCode: true
         });
