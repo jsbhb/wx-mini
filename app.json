@@ -21,6 +21,7 @@
     "web/bargainIndex/bargainIndex",
     "web/bargainGoodsDetail/bargainGoodsDetail",
     "web/loginChoose/loginChoose",
+    "web/myStore/myStore",
     "web/protocol/protocol"
   ],
   "window":{

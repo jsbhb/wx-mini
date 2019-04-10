@@ -1,0 +1,9 @@
+<view class="myStore-content">
+  <view class="content-image">
+    <image src="{{scanImg}}"></image>
+  </view>
+  <view class="content-btns">
+    <view class="save" bindtap="save">保存图片</view>
+    <button class="share" open-type="share">分享给朋友</button>
+  </view>
+</view>

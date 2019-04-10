@@ -1,0 +1,43 @@
+page{
+  padding: 0;
+  background: #fff;
+}
+.content-image{
+  width: 500rpx;
+  height: 500rpx;
+  margin: 150rpx 0 0 125rpx;
+}
+.content-image image{
+  width: 100%;
+  height: 100%;
+}
+.content-btns{
+  overflow: hidden;
+  text-align: center;
+  margin-top: 100rpx;
+}
+.content-btns view,
+.content-btns button{
+  display: inline-block;
+  font-size: 32rpx;
+  width: 240rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  border-radius: 15rpx;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.content-btns .save{
+  background-color: #f8e392;
+  border: 1rpx solid #edd74e;
+  color: #333;
+}
+.content-btns .share{
+  margin-left: 80rpx;
+  background-color: #f64949;
+  border: 1rpx solid #f64949;
+  color: #fff;
+}

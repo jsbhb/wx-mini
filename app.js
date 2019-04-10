@@ -3264,5 +3264,27 @@ App({
       },
       success: function () { }
     })
+  },
+  setOpenShopData: function(data){
+    var that = this;
+    var nodeHost = that.globalData.nodeHost;
+    wx.request({
+      url: nodeHost + '/Data/img/json',
+      method: 'POST',
+      data: data,
+      header: {
+        'content-type': 'application/json', // 默认值
+      },
+      success: function (res) { 
+        if(res.data.success){
+          wx.showModal({
+            title: '申请成功',
+            content: '申请成功，工作员人将在三个工作日内会联系您，请保持手机通讯畅通',
+            showCancel: false,
+            success(res) {}
+          })
+        }
+      }
+    })
   }
 })
