@@ -1,4 +1,5 @@
 const app = getApp();
+const FileSystemManager = wx.getFileSystemManager();
 Page({
 
   /**
@@ -14,7 +15,11 @@ Page({
     userAddress: '',
     userCompany: '',
     userContent: '',
-    submit: true
+    submit: true,
+    alertShare: false,
+    hidden: true,
+    saveImgBtnHidden: false,
+    openSettingBtnHidden: true,
   },
   changeName: function (e) {
     var that = this;
@@ -93,7 +98,7 @@ Page({
     var cardImg1 = that.data.cardImg1;
     var cardImg2 = that.data.cardImg2;
     var companyImg = that.data.companyImg;
-    var isPhone = (/^1(3|4|5|7|8)\d{9}$/gi).test(userPhone);
+    var isPhone = (/^1(3|4|5|7|8|9)\d{9}$/gi).test(userPhone);
     var data = {
       userName: userName,
       userPhone: userPhone,
@@ -180,6 +185,126 @@ Page({
     }
     
   },
+  showShare: function () {
+    var that = this;
+    that.setData({
+      alertShare: true
+    });
+  },
+  hideShare: function () {
+    var that = this;
+    that.setData({
+      alertShare: false
+    });
+  },
+  share: function(){
+    var that = this;
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    })
+    app.gertMyStoreCode(that);
+    that.hideShare();
+  },
+  save: function () {
+    var that = this;
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success() {
+              that.saveImg(that.data.scanImg);
+            },
+            fail() {
+              wx.showToast({
+                title: '获取用户授权失败，请重新授权',
+                icon: 'none',
+                duration: 1500
+              })
+              that.setData({
+                saveImgBtnHidden: true,
+                openSettingBtnHidden: false
+              })
+            }
+          })
+        } else {
+          that.saveImg(that.data.scanImg);
+        }
+      }
+    })
+  },
+  handleSetting: function (e) {
+    let that = this;
+    if (!e.detail.authSetting['scope.writePhotosAlbum']) {
+      wx.showModal({
+        title: '警告',
+        content: '若不打开授权，则无法将图片保存在相册中',
+        showCancel: false
+      })
+      that.setData({
+        saveImgBtnHidden: true,
+        openSettingBtnHidden: false
+      })
+    } else {
+      wx.showToast({
+        title: '授权成功，赶紧将图片保存在相册中吧',
+        icon: 'none',
+        duration: 1500
+      })
+      that.setData({
+        saveImgBtnHidden: false,
+        openSettingBtnHidden: true
+      })
+    }
+  },
+  saveImg: function (url) {
+    var that = this;
+    var data = wx.base64ToArrayBuffer(url.slice(22, -1));
+    FileSystemManager.writeFile({
+      filePath: `${wx.env.USER_DATA_PATH}/myStore_qrCode.png`,
+      data: data,
+      encoding: 'binary',
+      success: res => {
+        wx.saveImageToPhotosAlbum({
+          filePath: `${wx.env.USER_DATA_PATH}/myStore_qrCode.png`,
+          success(res) {
+            wx.showToast({
+              title: '保存图片成功，请到相册查看分享',
+              icon: 'none',
+              duration: 1500
+            })
+            that.setData({
+              hidden: true,
+              alertShare: false
+            })
+          },
+          fail(res) {
+            wx.showToast({
+              title: '保存图片失败',
+              icon: 'none',
+              duration: 1500
+            })
+            that.setData({
+              hidden: true,
+              alertShare: false
+            })
+          }
+        })
+      },
+      fail: res => {
+        wx.showToast({
+          title: '保存图片失败',
+          icon: 'none',
+          duration: 1500
+        })
+        that.setData({
+          hidden: true,
+          alertShare: false
+        })
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -233,6 +358,16 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    var that = this;
+    var shopId = app.globalData.shopId || 2;
+    var pages = getCurrentPages(); //获取加载的页面
+    var currentPage = pages[pages.length - 1]; //获取当前页面的对象
+    var url = currentPage.route; //当前页面url
+    var imageUrl = that.data.imgHost + '/images/platform/joinUs/joinUs01.jpg';
+    return {
+      title: '邀请开店',
+      path: url + '?scene=shopId%3D' + shopId,
+      imageUrl: imageUrl
+    }
   }
 })

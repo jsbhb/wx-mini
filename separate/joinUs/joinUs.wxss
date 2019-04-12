@@ -29,6 +29,8 @@ page{
   border: solid 1rpx #cccccc;
   border-radius: 15rpx;
   padding: 0 30rpx;
+  position: relative;
+  z-index: 9;
 }
 .content-form .list-item textarea{
   padding: 20rpx 30rpx;
@@ -93,7 +95,7 @@ page{
   height: 100%;
 }
 .joinUs-content .home{
-  position: absolute;
+  position: fixed;
   right: 10rpx;
   bottom: 150rpx;
   width: 80rpx;
@@ -110,4 +112,112 @@ page{
   width: 60rpx;
   height: 56rpx;
   padding: 10rpx 12rpx;
+}
+.share-btns{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 999999;
+}
+.share-bg{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  z-index: 9999;
+  box-shadow: 0rpx -5rpx 10rpx rgba(220,220,220,0.3); 
+}
+.share-bg-cancel{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: calc(100% - 212rpx);
+  z-index: 9999;
+}
+.share-title{
+  overflow: hidden;
+  width: 100%;
+  background: #eee;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #666;
+}
+.share-title .text{
+  float: left;
+  font-size: 26rpx;
+  padding-left: 20rpx;
+}
+.share-title .btn{
+  float: right;
+  font-size: 26rpx;
+  padding: 0 20rpx;
+}
+.share-btns .share-item{
+  width: 50%;
+  float: left;
+  text-align: center;
+  padding: 20rpx 0;
+  line-height: inherit;
+  background: #fff;
+}
+.share-btns .share-item::after{
+  border: none;
+}
+.share-btns .share-item image{
+  width: 80rpx;
+  height: 80rpx;
+}
+.share-btns .share-item .friends image{
+  width: 70rpx;
+  height: 70rpx;
+  padding: 5rpx;
+}
+.share-btns .share-item .text{
+  font-size: 26rpx;
+  color: #333;
+  margin-top: -10rpx;
+}
+.preview {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999999;
+}
+.preview image{
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 20%;
+  z-index: 3;
+  border: 1px dashed #fff;
+}
+.preview button{
+  width: 40%;
+  position: absolute;
+  left: 30%;
+  bottom: 5%;
+}
+.fixedShare{
+  position: fixed;
+  right: 10rpx;
+  bottom: 250rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  border:1rpx solid #efefef;
+  overflow: hidden;
+  background: #fff;
+}
+.fixedShare image{
+  width: 40rpx;
+  height: 40rpx;
+  padding: 20rpx;
 }

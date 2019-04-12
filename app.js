@@ -1862,11 +1862,21 @@ App({
       },
       success: function (res) {
         if (res.data && res.data.success) {
-          wx.navigateBack({
-            delta: 1
-          })
-          that.userDetailQuery(obj,{});
-        }else{
+          var pages = getCurrentPages();    //获取加载的页面
+          var currentPage = pages[pages.length - 1];    //获取当前页面的对象
+          var url = currentPage.route;    //当前页面url
+          if (url != 'web/orderSure/orderSure') {
+            wx.navigateBack({
+              delta: 1
+            })
+          } else {
+            obj.setData({
+              idNumAlert: false,
+              haveCode: true
+            })
+          }
+          that.userDetailQuery(obj, {});
+        } else {
           wx.showToast({
             title: '保存个人信息失败',
             icon: 'none',
@@ -3281,7 +3291,39 @@ App({
             title: '申请成功',
             content: '申请成功，工作员人将在三个工作日内会联系您，请保持手机通讯畅通',
             showCancel: false,
-            success(res) {}
+            success(res) {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          })
+        }
+      }
+    })
+  },
+  gertMyStoreCode: function (obj) {
+    var that = this;
+    var host = that.globalData.host;
+    var shopId = wx.getStorageSync('shopId') || 2;
+    wx.request({
+      url: host + '/usercenter/auth/1.0/grade/shopBillboard?shopId=' + shopId,
+      method: 'POST',
+      data: {},
+      header: {
+        'content-type': 'application/json', // 默认值
+      },
+      success: function (res) {
+        wx.hideLoading();
+        if (res && res.data) {
+          obj.setData({
+            scanImg: 'data:image/png;base64,' + res.data,
+            hidden: false
+          });
+        } else {
+          wx.showToast({
+            title: '生成分享图片失败，请稍后重试',
+            icon: 'none',
+            duration: 1500
           })
         }
       }

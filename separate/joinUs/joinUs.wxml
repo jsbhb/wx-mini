@@ -16,7 +16,7 @@
       <input id="itemUserCompany" type="text" placeholder="请输入公司名称（选填）" vaule="{{userCompany}}" bindinput="changeCompany"></input>
     </view>
     <view class="list-item userContent">
-      <textarea id="itemUserContent" placeholder="请输入留言内容（选填）" value="{{userContent}}" bindinput="changeContent"></textarea>
+      <textarea wx:if="{{hidden}}" id="itemUserContent" placeholder="请输入留言内容（选填）" value="{{userContent}}" bindinput="changeContent"></textarea>
     </view>
     <view class="imgContent">
       <view class="cardImg1 imgItem">
@@ -57,4 +57,34 @@
       <image src="{{imgHost}}/images/platform/joinUs/home.png"></image>
     </navigator>
   </view>
+  <view class="fixedShare" bindtap="showShare">
+    <image src="{{imgHost}}/images/platform/goods/icon_share.png"></image>
+  </view>
+  <view hidden='{{hidden}}' class='preview'>
+  <image src='{{scanImg}}' mode='widthFix'></image>
+  <button type='primary' size='mini' class='saveImg' bindtap='save' hidden='{{saveImgBtnHidden}}'>保存图片</button>
+  <button type='primary' size='mini' class='openSetting' open-type="openSetting"
+bindopensetting='handleSetting' hidden='{{openSettingBtnHidden}}'>去授权</button>
+</view>
+<view class="share-btns" style="display:{{alertShare ? 'block' : 'none'}}">
+  <view class="share-bg-cancel" bindtap="hideShare"></view>
+  <view class="share-bg">
+    <view class="share-title">
+      <view class="text">分享</view>
+      <view class="btn" bindtap="hideShare">X</view>
+    </view>
+    <button class="share-item" bindtap="statistics_friend" open-type="share">
+      <view class="imgBox">
+        <image src="{{imgHost}}/images/platform/goods/share_01.png"></image>
+      </view>
+      <view class="text" style="margin-top: -15rpx;">分享给朋友</view>
+    </button>
+    <button class="share-item" data-goodsId="{{goodsDetailData.goodsId}}" bindtap="share" type="primary">
+      <view class="imgBox friends">
+        <image src="{{imgHost}}/images/platform/goods/share_02.png"></image>
+      </view>
+      <view class="text">保存图片</view>
+    </button>
+  </view>
+</view>
 </view>
