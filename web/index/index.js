@@ -23,7 +23,8 @@ Page({
       currentPage: 1,
       numPerPage: 10
     },
-    toTopShow: false
+    toTopShow: false,
+    alertAdv: true
   },
   scanCode: function () {
     wx.scanCode({
@@ -78,6 +79,17 @@ Page({
     var that = this;
     that.setData({
       scrollHeight: 0
+    });
+  },
+  toOpenStore: function(){
+    wx.navigateTo({
+      url: '/separate/joinUs/joinUs',
+    })
+  },
+  alertAdvCancel: function(){
+    var that = this;
+    that.setData({
+      alertAdv: false
     });
   },
   /**

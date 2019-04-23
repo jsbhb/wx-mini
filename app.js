@@ -623,6 +623,12 @@ App({
     var host = that.globalData.host;
     var shopId = that.globalData.shopId;
     var centerId = that.globalData.centerId;
+    if (shopId == 375) {
+      wx.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#ff8500',
+      })
+    }
     wx.request({
       url: host + '/usercenter/auth/1.0/grade/config/' + centerId + '?shopId=' + shopId,
       method: 'GET',
