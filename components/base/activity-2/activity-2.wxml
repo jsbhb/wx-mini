@@ -12,6 +12,7 @@
             <navigator url="{{item.href}}" data-goodsId="{{item.goodsId}}" open-type='navigate' hover-class='none' bindtap="statistics">
               <view class="shopImg">
                 <image src="{{item.picPath}}"></image>
+                <image class="remark" src="{{imgHost}}/images/platform/index/icon_hot.png"></image>
               </view>
               <view class="shopName">{{item.title}}</view>
               <view class="shopPrice">
