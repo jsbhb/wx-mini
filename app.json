@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "web/index/index",
     "web/nav/nav",
     "web/personal/personal",
@@ -22,9 +22,20 @@
     "web/bargainGoodsDetail/bargainGoodsDetail",
     "web/loginChoose/loginChoose",
     "web/protocol/protocol",
+    "web/shopSetting/shopSetting",
+    "web/storeMaintenance/storeMaintenance",
+    "web/goodsManage/goodsManage",
+    "web/saleMoeny/saleMoeny",
+    "web/saleMoney-1/saleMoney-1",
+    "web/saleMoney-1-1/saleMoney-1-1",
+    "web/saleMoney-2/saleMoney-2",
+    "web/saleMoney-3/saleMoney-3",
+    "web/saleMoney-4/saleMoney-4",
+    "web/saleMoney-4-1/saleMoney-4-1",
+    "web/shopStatistics/shopStatistics",
     "separate/joinUs/joinUs"
   ],
-  "window":{
+  "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#009944",
     "navigationBarTitleText": "中国供销海外购",
@@ -49,5 +60,6 @@
         "text": "个人"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

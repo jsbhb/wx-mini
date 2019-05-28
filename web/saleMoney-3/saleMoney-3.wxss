@@ -1,0 +1,42 @@
+page{
+  padding: 0;
+  background: #fff;
+  font-size: 28rpx;
+  color: #333;
+}
+.list-header{
+  width: 100%;
+  overflow: hidden;
+  padding: 20rpx 15rpx;
+  box-sizing: border-box;
+  background: #efefef;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.list-header view{
+  float: left;
+  width: 20%;
+  text-align: center;
+}
+.list-header view:first-child{
+  width: 40%;
+  text-align: left;
+}
+.list-item{
+  overflow: hidden;
+  padding: 20rpx 15rpx;
+  box-sizing: border-box;
+}
+.list-item:nth-child(even){
+  background:#efefef;
+}
+.list-item view{
+  float: left;
+  width: 20%;
+  text-align: center;
+}
+.list-item view:first-child{
+  width: 40%;
+  text-align: left;
+}

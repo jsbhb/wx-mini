@@ -81,9 +81,13 @@ Page({
       scrollHeight: 0
     });
   },
-  toOpenStore: function(){
+  toOpenStore: function () {
+    var that = this;
     wx.navigateTo({
       url: '/separate/joinUs/joinUs',
+    })
+    that.setData({
+      alertAdv: false
     })
   },
   alertAdvCancel: function(){

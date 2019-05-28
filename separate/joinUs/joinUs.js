@@ -1,4 +1,5 @@
 const app = getApp();
+var tcity = require("../../utils/citys.js");
 const FileSystemManager = wx.getFileSystemManager();
 Page({
 
@@ -20,6 +21,15 @@ Page({
     hidden: true,
     saveImgBtnHidden: false,
     openSettingBtnHidden: true,
+    nodeHost: app.globalData.nodeHost,
+    provinces: [],
+    province: "",
+    citys: [],
+    city: "",
+    countys: [],
+    county: '',
+    value: [0, 0, 0],
+    condition: false,
   },
   changeName: function (e) {
     var that = this;
@@ -65,7 +75,7 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         wx.uploadFile({
-          url: 'https://testfront.cncoopay.com/Data/img/upLoad',
+          url: that.data.nodeHost + '/Data/img/upLoad',
           filePath: res.tempFilePaths[0],
           name: 'image',
           success: function(res){
@@ -305,10 +315,134 @@ Page({
       }
     });
   },
+  bindChange: function (e) {
+    var that = this;
+    var val = e.detail.value;
+    var v = that.data.value;
+    var cityData = that.data.cityData[86];
+    var provinces = that.data.provinces;
+    var citys = that.data.citys;
+    var countys = that.data.countys;
+    var newCitys = [];
+    var newCountys = [];
+    if (val[0] != v[0]) {
+      let d1 = cityData[provinces[val[0]].code];
+      for (let k1 in d1) {
+        let data = {};
+        data.code = k1;
+        data.name = d1[k1];
+        newCitys.push(data);
+      }
+      let d2 = cityData[newCitys[0].code];
+      for (let k2 in d2) {
+        let data = {};
+        data.code = k2;
+        data.name = d2[k2];
+        newCountys.push(data);
+      }
+      val[1] = 0;
+      val[2] = 0;
+      that.setData({
+        province: provinces[val[0]].name,
+        citys: newCitys,
+        city: newCitys[0].name,
+        countys: newCountys,
+        county: newCountys[0].name,
+        value: val
+      });
+    }
+    if (val[1] != v[1]) {
+      let d3 = cityData[citys[val[1]].code];
+      for (let k3 in d3) {
+        let data = {};
+        data.code = k3;
+        data.name = d3[k3];
+        newCountys.push(data);
+      }
+      val[2] = 0;
+      that.setData({
+        city: citys[val[1]].name,
+        countys: newCountys,
+        county: newCountys[0].name,
+        value: val
+      });
+    }
+    if (val[2] != v[2]) {
+      that.setData({
+        county: countys[val[2]].name,
+        value: val
+      });
+    }
+  },
+  open: function () {
+    this.setData({
+      condition: !this.data.condition
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    var province = '';
+    var city = '';
+    var county = '';
+    tcity.init(that);//三级联动数据初始化
+    var cityData = that.data.cityData[86];//获取三级联动数据
+    var d1 = {};
+    var d2 = {};
+    const provinces = [];
+    const citys = [];
+    const countys = [];
+    for (var k1 in cityData) {
+      if (k1 == 100000) {
+        for (var k2 in cityData[k1]) {
+          let data = {};
+          data.code = k2;
+          data.name = cityData[k1][k2];
+          provinces.push(data);
+        }
+      }
+    }
+    if (province) {
+      provinces.forEach(function (v, i) {
+        if (province && v.name == province) {
+          d1 = cityData[v.code];
+        }
+      });
+    } else {
+      d1 = cityData[provinces[0].code]
+    }
+    for (var k in d1) {
+      let data = {};
+      data.code = k;
+      data.name = d1[k];
+      citys.push(data);
+    }
+    if (city) {
+      citys.forEach(function (v, i) {
+        if (city && v.name == city) {
+          d2 = cityData[v.code];
+        }
+      });
+    } else {
+      d2 = cityData[citys[0].code];
+    }
+    for (var k in d2) {
+      let data = {};
+      data.code = k;
+      data.name = d2[k];
+      countys.push(data);
+    }
+    that.setData({
+      'provinces': provinces,
+      'citys': citys,
+      'countys': countys,
+      'province': province || provinces[0].name,
+      'city': city || citys[0].name,
+      'county': county || countys[0].name
+    });
     app.shopDetailQuery();
   },
 

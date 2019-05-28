@@ -1,0 +1,120 @@
+page{
+  padding: 0;
+  color: #333;
+}
+.goodsManageContent .chooseType{
+  overflow: hidden;
+  background: #fff;
+}
+.chooseType .typeItem{
+  float: left;
+  text-align: center;
+  width: 22%;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  vertical-align: middle;
+  border-bottom: 1rpx solid #efefef;
+}
+.chooseType .typeItem .icon{
+  width: 0;
+  height: 0;
+  display: inline-block;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
+  border-top: 20rpx solid transparent;
+  margin-left: 10rpx;
+}
+.chooseType .typeItem .icon.top{
+  border-bottom: none;
+  border-top: 20rpx solid #f00;
+}
+.chooseType .typeItem .icon.bottom{
+  border-top: none;
+  border-bottom: 20rpx solid #f00;
+}
+.typeItem.imgBox{
+  width: 12%;
+}
+.typeItem.imgBox image{
+  float: left;
+  width: 38rpx;
+  height: 38rpx;
+  margin-left: 15rpx;
+  margin-top: 21rpx;
+}
+.serachContent{
+  margin-top: 81rpx;
+  font-size: 28rpx;
+  padding: 10rpx 40rpx;
+  border-bottom: 1rpx solid #efefef;
+}
+.goodsList .listItem{
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1rpx solid #efefef;
+  padding: 10rpx;
+}
+.listItemLeft{
+  float: left;
+  width: 200rpx;
+  height: 200rpx;
+  padding: 10rpx;
+}
+.listItemLeft image{
+  width: 100%;
+  height: 100%;
+}
+.listItemRight{
+  float: left;
+  width: 490rpx;
+  height: 220rpx;
+  padding: 10rpx;
+  box-sizing: border-box;
+  position: relative;
+  margin-left: 10rpx;
+}
+.listItemRight .goodsName{
+  font-size: 28rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 40rpx;
+  margin-top: 5rpx;
+}
+.listItemRight .goodsContent{
+  position: absolute;
+  left: 10rpx;
+  bottom: 10rpx;
+  width: 490rpx;
+  font-size: 24rpx;
+  color: #666;
+  overflow: hidden;
+}
+.listItemRight .goodsContent view{
+  float: left;
+  width: 50%;
+}
+.listItemRight .tagIcon{
+  /* position: absolute;
+  bottom: 80rpx;
+  left: 0; */
+  color: #f00;
+  font-size: 20rpx;
+  margin-top: 10rpx;
+}
+.listItemRight .tagIcon text{
+  display: inline-block;
+  border-radius: 40rpx;
+  border: 1rpx solid #f00;
+  padding: 0 10rpx;
+  margin-right: 10rpx;
+}
+.listItemRight .tagIcon text.icon_2{
+  color: #a562f9;
+  border-color: #a562f9;
+}

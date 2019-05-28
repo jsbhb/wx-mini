@@ -1,0 +1,64 @@
+<view class="goodsManageContent">
+  <view class="chooseType">
+    <view class="typeItem" bindtap="chooseItem" data-id="0">
+      <text class="text">销量</text>
+      <text class="icon {{icon_type == 'top_0' ? 'top' : icon_type == 'bottom_0' ? 'bottom' : ''}}"></text>
+    </view>
+    <view class="typeItem" bindtap="chooseItem" data-id="1">
+      <text class="text">佣金</text>
+      <text class="icon {{icon_type == 'top_1' ? 'top' : icon_type == 'bottom_1' ? 'bottom' : ''}}"></text>
+    </view>
+    <view class="typeItem" bindtap="chooseItem" data-id="2">
+      <text class="text">库存</text>
+      <text class="icon {{icon_type == 'top_2' ? 'top' : icon_type == 'bottom_2' ? 'bottom' : ''}}"></text>
+    </view>
+    <view class="typeItem" bindtap="chooseItem" data-id="3">
+      <text class="text">时间</text>
+      <text class="icon {{icon_type == 'top_3' ? 'top' : icon_type == 'bottom_3' ? 'bottom' : ''}}"></text>
+    </view>
+    <view class="typeItem imgBox" bindtap="showSearch">
+      <image src="{{imgHost}}/images/platform/header/i_search.png"></image>
+    </view>
+    <view class="serachContent" style="display:{{inputShow? 'block' : 'none'}}">
+      <input placeholder="请输入商品名称" type="text" value="{{searchValue}}"></input>
+    </view>
+  </view>
+  <view class="goodsList">
+    <view class="listItem">
+      <view class="listItemLeft">
+        <image src="https://static.cncoopay.com:8080/goods/7220518/master/images/d1f9fea6-90f7-4df7-a4e9-d475080fc389.jpg"></image>
+      </view>
+      <view class="listItemRight">
+        <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发自然棕色</view>
+        <view class="tagIcon">
+          <text class="icon_1">推荐</text>
+          <text class="icon_2">优选</text>
+        </view>
+        <view class="goodsContent">
+          <view class="price">售价 ：￥86.00</view>
+          <view class="commission">佣金 ：￥20.00</view>
+          <view class="sales">销量 ：123</view>
+          <view class="stock">库存 ：20</view>
+        </view>
+      </view>
+    </view>
+    <view class="listItem">
+      <view class="listItemLeft">
+        <image src="https://static.cncoopay.com:8080/goods/7220518/master/images/d1f9fea6-90f7-4df7-a4e9-d475080fc389.jpg"></image>
+      </view>
+      <view class="listItemRight">
+        <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发自然棕色</view>
+        <view class="tagIcon">
+          <text class="icon_1">推荐</text>
+          <text class="icon_2">优选</text>
+        </view>
+        <view class="goodsContent">
+          <view class="price">售价 ：￥86.00</view>
+          <view class="commission">佣金 ：￥20.00</view>
+          <view class="sales">销量 ：123</view>
+          <view class="stock">库存 ：20</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -2,8 +2,8 @@
   <view class="content-bg">
     <view class="title">
       <!-- <image src="{{imgHost}}/images/platform/index/floorIcon_week.png"></image> -->
-      本周特卖
-      <navigator open-type="navigate" url="/web/searchProduct/searchProduct?goodsName=优选&upShelves=1&tag=优选" class="more" hover-class="none">查看更多</navigator>
+      {{activityData_2.own.title}}
+      <navigator open-type="navigate" url="{{activityData_2.own.href}}" class="more" hover-class="none">查看更多</navigator>
     </view>
     <view class="goodsList-list">
       <view class="content-list">

@@ -8,7 +8,7 @@ page{
 .content-bgImg image{
   float: left;
   width: 750rpx;
-  height: 1920rpx;
+  height: 1860rpx;
 }
 .content-showImg image{
   width: 750rpx;
@@ -46,6 +46,30 @@ page{
   padding: 20rpx 30rpx;
   height: 180rpx;
 }
+.obvious{
+  box-sizing: border-box;
+  width: calc((100% - 160rpx) / 3);
+  float: left;
+  margin-right: 30rpx;
+  text-align: center;
+}
+.obvious.county{
+  margin-right: 0;
+}
+.obvious.province{
+  margin-left: 50rpx;
+}
+.obvious input{
+  height: 86rpx;
+  font-size: 30rpx;
+  line-height: inherit;
+  outline: none;
+  background-color: #fff;
+  border: solid 1rpx #cccccc;
+  border-radius: 15rpx;
+  position: relative;
+  z-index: 9;
+}
 .content-form .btn-submit {
   box-sizing: border-box;
   display: inline-block;
@@ -59,6 +83,32 @@ page{
   text-decoration: none;
   color: #fff;
   background: #b4282d;
+}
+.cardImgContent{
+  width: calc(100% - 100rpx);
+  height: 300rpx;
+  line-height: 300rpx;
+  text-align: center;
+  margin: 0 50rpx;
+  background-color: #fff;
+  border: solid 1rpx #cccccc;
+  border-radius: 15rpx;
+  font-size: 30rpx;
+  color: #666;
+  position: relative;
+}
+.cardImgContent .icon{
+  font-size: 40rpx;
+  font-weight: 700;
+  margin-right: 10rpx;
+}
+.cardImgContent input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
 }
 .imgContent{
   margin: 0 50rpx;

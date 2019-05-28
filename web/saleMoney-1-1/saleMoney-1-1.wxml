@@ -1,0 +1,20 @@
+<view class="saleMoeny-1-1-content">
+  <view class="bankList">
+    <view class="title">到账银行卡</view>
+    <view class="content">
+      <text>农业银行（7879）</text>
+      <text>2小时内到账</text>
+    </view>
+  </view>
+  <view class="moneyContent">
+    <view class="title">提现金额</view>
+    <view class="inputContent">
+      <view class="icon">￥</view>
+      <input type="number" value=""></input>
+    </view>
+    <view class="msg">
+      当前佣金余额40.53元，<text>全部提现</text>
+    </view>
+  </view>
+  <view class="submitBtn">提现</view>
+</view>

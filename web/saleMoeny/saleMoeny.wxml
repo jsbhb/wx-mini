@@ -1,0 +1,20 @@
+<view class="saleMoney-content">
+  <view data-url="/web/saleMoney-1/saleMoney-1" bindtap="locationTo">
+    <text>可用金额</text>
+    <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
+    <text class="money">￥5231.00</text>
+  </view>
+  <view data-url="/web/saleMoney-2/saleMoney-2" bindtap="locationTo">
+    <text>冻结金额</text>
+    <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
+    <text class="money">￥521.00</text>
+  </view>
+  <view data-url="/web/saleMoney-3/saleMoney-3" bindtap="locationTo">
+    <text>提现记录</text>
+    <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
+  </view>
+  <view data-url="/web/saleMoney-4/saleMoney-4" bindtap="locationTo">
+    <text>银行卡</text>
+    <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
+  </view>
+</view>

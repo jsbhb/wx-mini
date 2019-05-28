@@ -1,0 +1,91 @@
+<view class="shopStatistics-content">
+  <view class="chooseType">
+    <view class="chooseItem active" data-id="1" bindtap="">本周</view>
+    <view class="chooseItem" data-id="2" bindtap="">本月</view>
+  </view>
+  <view class="echart-content">
+    <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+  </view>
+  <view class="content-middle">
+    <view class="middle-item" data-url="" bindtap="locationTo">
+      <view class="num">86</view>
+      <view class="name">访客人数</view>
+    </view>
+    <view class="middle-item" data-url="" bindtap="locationTo">
+      <view class="num">201</view>
+      <view class="name">浏览次数</view>
+    </view>
+    <view class="middle-item" data-url="" bindtap="locationTo">
+      <view class="num">10</view>
+      <view class="name">付款单数</view>
+    </view>
+    <view class="middle-item" data-url="" bindtap="locationTo">
+      <view class="num">202.6</view>
+      <view class="name">销售佣金</view>
+    </view>
+  </view>
+  <view class="content-footer">
+    <view class="footer-title">
+      <view class="title">30天商品销售排行榜</view>
+      <view class="desc">排行数据截止到昨日</view>
+    </view>
+    <scroll-view class="footer-list" scroll-y>
+      <view class="list-item">
+        <view class="index">1</view>
+        <view class="content">
+          <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发韩国丽彩娜发丝丰盈 快速补发喷雾 密发</view>
+          <view class="statistics">30天订单数 5</view>
+        </view>
+      </view>
+      <view class="list-item">
+        <view class="index">2</view>
+        <view class="content">
+          <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发韩国丽彩娜发丝丰盈 快速补发喷雾 密发</view>
+          <view class="statistics">30天订单数 5</view>
+        </view>
+      </view>
+      <view class="list-item">
+        <view class="index">3</view>
+        <view class="content">
+          <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发韩国丽彩娜发丝丰盈 快速补发喷雾 密发</view>
+          <view class="statistics">30天订单数 5</view>
+        </view>
+      </view>
+      <view class="list-item">
+        <view class="index">4</view>
+        <view class="content">
+          <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发韩国丽彩娜发丝丰盈 快速补发喷雾 密发</view>
+          <view class="statistics">30天订单数 5</view>
+        </view>
+      </view>
+      <view class="list-item">
+        <view class="index">5</view>
+        <view class="content">
+          <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发韩国丽彩娜发丝丰盈 快速补发喷雾 密发</view>
+          <view class="statistics">30天订单数 5</view>
+        </view>
+      </view>
+      <view class="list-item">
+        <view class="index">6</view>
+        <view class="content">
+          <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发韩国丽彩娜发丝丰盈 快速补发喷雾 密发</view>
+          <view class="statistics">30天订单数 5</view>
+        </view>
+      </view>
+      <view class="list-item">
+        <view class="index">7</view>
+        <view class="content">
+          <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发韩国丽彩娜发丝丰盈 快速补发喷雾 密发</view>
+          <view class="statistics">30天订单数 5</view>
+        </view>
+      </view>
+      <view class="list-item">
+        <view class="index">8</view>
+        <view class="content">
+          <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发韩国丽彩娜发丝丰盈 快速补发喷雾 密发</view>
+          <view class="statistics">30天订单数 5</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

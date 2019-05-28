@@ -1,0 +1,24 @@
+<view class="shopMaintenanceContent">
+  <view class="shopImg">
+    <view class="name">店铺头像</view>
+    <view class="text">
+      <view class="imgBox">
+        <image src="{{userShopImg}}"></image>
+      </view>
+    </view>
+    <input class="uploadInput" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="" bindtap="upload" disabled></input>
+  </view>
+  <view class="shopName">
+    <view class="name">店铺名称</view>
+    <view class="text">
+      <input type="text" class="receiveName_state" value="{{shopName}}" bindblur="changeShopName"></input>
+    </view>
+  </view>
+  <view class="shopDesc">
+    <view class="name">店铺描述</view>
+    <view class="text">
+      <input type="text" class="receiveName_state" value="{{shopDesc}}" bindblur="changeShopDesc"></input>
+    </view>
+  </view>
+</view>
+<view class="sbumit" bindtap="saveShopMsg">保存信息</view>

@@ -62,6 +62,13 @@
         <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
       </view>
     </block>
+
+    <view data-url="/web/shopSetting/shopSetting" bindtap="toCustomerService">
+      <image style="margin: 16rpx 16rpx 0 0; width: 56rpx;height:56rpx;" src="{{imgHost}}/images/platform/personal/shopSetting_icon.png"></image>
+      <text>微店管理</text>
+      <image src="{{imgHost}}/images/platform/personal/href_blod.png" class="icon_right"></image>
+    </view>
+
   </view>
   <view class="personal-btn" bindtap="toLoginChoose" wx:if="{{isLogin}}">
     <text>切换登录</text>

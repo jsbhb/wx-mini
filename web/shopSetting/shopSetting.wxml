@@ -1,0 +1,47 @@
+<view class="shopSettingContent">
+  <view class="content-header">
+   <view class="shopImg">
+      <view class="imgBox">
+        <image wx:if="{{shopInfoData.headImg}}" src="{{shopInfoData.headImg}}"></image>
+        <image wx:else src="{{imgHost}}/images/platform/personal/icon_shop.jpg"></image>
+      </view>
+    </view>
+    <view class="shopName">
+      <text>测试店铺111</text>
+    </view>
+    <image class="personal-bgImg" src="{{imgHost}}/images/platform/personal/personalBgImg.png"></image>
+  </view>
+  <view class="content-middle">
+    <view class="middle-item" data-url="" bindtap="locationTo">
+      <view class="num">100.00</view>
+      <view class="name">今日营业额</view>
+    </view>
+    <view class="middle-item" data-url="" bindtap="locationTo">
+      <view class="num">2</view>
+      <view class="name">今日订单数</view>
+    </view>
+  </view>
+  <view class="content-footer">
+    <view class="footer-item" data-url="/web/storeMaintenance/storeMaintenance" bindtap="locationTo">
+      <image src="{{imgHost}}/images/platform/shopSetting/icon_shop.png"></image>
+      <text>店铺维护</text>
+    </view>
+    <view class="footer-item" data-url="/web/goodsManage/goodsManage" bindtap="locationTo">
+      <image src="{{imgHost}}/images/platform/shopSetting/icon_goods.png"></image>
+      <text>商品管理</text>
+    </view>
+    <view class="footer-item" data-url="/web/saleMoeny/saleMoeny" bindtap="locationTo">
+      <image src="{{imgHost}}/images/platform/shopSetting/icon_money.png"></image>
+      <text>佣金管理</text>
+    </view>
+    <view class="footer-item" data-url="/web/shopStatistics/shopStatistics" bindtap="locationTo">
+      <image src="{{imgHost}}/images/platform/shopSetting/icon_static.png"></image>
+      <text>数据统计</text>
+    </view>
+    <view class="footer-item" data-url="" bindtap="locationTo">
+      <image src="{{imgHost}}/images/platform/shopSetting/icon_order.png"></image>
+      <text>订单管理</text>
+    </view>
+  </view>
+</view>
+<component-footer footerData="{{footerData}}"></component-footer>

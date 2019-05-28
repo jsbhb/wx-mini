@@ -1,0 +1,32 @@
+<view class="activity-4-content">
+  <view class="content-bg">
+    <view class="title">
+      <!-- <image src="{{imgHost}}/images/platform/index/floorIcon_week.png"></image> -->
+      {{activityData_4.own.title}}
+      <navigator open-type="navigate" url="{{activityData_4.own.href}}" class="more" hover-class="none">查看更多</navigator>
+    </view>
+    <view class="goodsList-list">
+      <view class="content-list">
+        <block wx:for="{{activityData_4.cont}}" wx:key="">
+          <view class="list-item">
+            <navigator url="{{item.href}}" data-goodsId="{{item.goodsId}}" open-type='navigate' hover-class='none' bindtap="statistics">
+              <view class="shopImg">
+                <image src="{{item.picPath}}"></image>
+              </view>
+              <view class="shopName">{{item.title}}</view>
+              <view class="shopPrice">
+                惊爆价￥{{item.price}}
+              </view>
+              <view class="oldPrice">
+                原价￥{{item.enname}}
+              </view>
+              <view class="btn">
+                <text>立即抢购</text>
+              </view>
+            </navigator>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
