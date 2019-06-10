@@ -1,15 +1,18 @@
-<view class="saleMoeny-1-content">
-  <view class="icon">
-    <image src="{{imgHost}}/images/platform/personal/icon_getMoney.png"></image>
+<view class="saleMoney-3-content">
+  <view class="list-header">
+    <view>订单编号</view>
+    <view>创建时间</view>
+    <view>返佣金额</view>
+    <view>返佣状态</view>
   </view>
-  <view class="title">冻结金额</view>
-  <view class="money">
-    <text>￥</text>
-    <text>42.00</text>
-  </view>
-  <view class="desc">分享微信商品可用获得更多佣金！</view>
-  <view class="btns">
-    <view class="list1" bindtap="location1">待到账订单</view>
-    <view class="list2" bindtap="location1">待对账订单</view>
-  </view>
+  <scroll-view scroll-y class="list-content" bindscrolltolower="getMoreData">
+    <block wx:for="{{rebateListData}}" wx:key="">
+      <view class="list-item">
+        <view>{{item.orderId}}</view>
+        <view>{{item.createTime}}</view>
+        <view>￥{{item.rebateMoney}}</view>
+        <view>{{item.status == 0 ? '待到账' : item.status == 1 ? '已到账' : item.status == 2 ? '退款' : ''}}</view>
+      </view>
+    </block>
+  </scroll-view>
 </view>

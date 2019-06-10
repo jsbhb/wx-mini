@@ -3,7 +3,8 @@
     <view class="name">店铺头像</view>
     <view class="text">
       <view class="imgBox">
-        <image src="{{userShopImg}}"></image>
+        <image wx:if="{{shopInfoData.headImg}}" src="{{shopInfoData.headImg}}"></image>
+        <image wx:else src="{{imgHost}}/images/platform/personal/icon_shop.jpg"></image>
       </view>
     </view>
     <input class="uploadInput" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="" bindtap="upload" disabled></input>
@@ -11,13 +12,13 @@
   <view class="shopName">
     <view class="name">店铺名称</view>
     <view class="text">
-      <input type="text" class="receiveName_state" value="{{shopName}}" bindblur="changeShopName"></input>
+      <input type="text" class="receiveName_state" value="{{shopInfoData.name || ''}}" bindinput="changeName"></input>
     </view>
   </view>
   <view class="shopDesc">
     <view class="name">店铺描述</view>
     <view class="text">
-      <input type="text" class="receiveName_state" value="{{shopDesc}}" bindblur="changeShopDesc"></input>
+      <input type="text" class="receiveName_state" value="{{shopInfoData.aboutus || ''}}" bindinput="changeAboutUs"></input>
     </view>
   </view>
 </view>

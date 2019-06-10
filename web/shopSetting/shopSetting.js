@@ -5,7 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgHost: app.globalData.imgHost
+    imgHost: app.globalData.imgHost,
+    footerData: {
+      active: 5
+    }
   },
   locationTo: function(e){
     var url = e.currentTarget.dataset.url;
@@ -31,7 +34,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    app.shopDetailQuery(that);
+    app.getManagerIndexData(that);
   },
 
   /**
@@ -66,6 +71,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    var that = this;
+    var shopId = app.globalData.shopId;
+    var imageUrl = '';
+    return {
+      title: '微店推广',
+      path: 'separate/joinUs/joinUs?scene=shopId%3D' + shopId,
+      imageUrl: imageUrl
+    }
   }
 })

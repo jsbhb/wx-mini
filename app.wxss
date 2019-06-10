@@ -16,6 +16,12 @@ page{
   background-color: red;
   z-index: 999;
 }
+.citypikcer-bg{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: calc(100% - 400rpx);
+}
 picker-view{
   background: #fff;
   font-size: 36rpx;

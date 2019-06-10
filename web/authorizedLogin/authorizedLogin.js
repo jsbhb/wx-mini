@@ -1,4 +1,5 @@
 const app = getApp();
+
 Page({
 
   /**
@@ -7,12 +8,18 @@ Page({
   data: {
     imgHost: app.globalData.imgHost
   },
-
-  locationTo: function(e){
-    var url = e.currentTarget.dataset.url;
-    wx.navigateTo({
-      url: url,
-    })
+  bindGetUserInfo: function(e){
+    if (e.detail.userInfo){
+      var that = this;
+      var data = {
+        type: 'wechat'
+      };
+      app.wxLogin(data);
+    }else{
+      wx.switchTab({
+        url: '/web/index/index',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -32,8 +39,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    app.getRebateManageData(that);
+
   },
 
   /**

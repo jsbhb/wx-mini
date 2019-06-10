@@ -38,7 +38,7 @@
 <button open-type='contact' class="fixed-kefu">
   <image src="{{imgHost}}/images/platform/page/kefu.png"></image>
 </button>
-<block wx:if="{{shopInfoData.shopExtensionFlg == 1}}">
+<!-- <block wx:if="{{shopInfoData.shopExtensionFlg == 1}}">
   <view class="fixed-openStore">
     <image src="{{imgHost}}/images/platform/index/openStore.gif" bindtap="toOpenStore"></image>
   </view>
@@ -50,5 +50,5 @@
       <view class="adv-cancel-btn" bindtap="alertAdvCancel">X</view>
     </view>
   </view>
-</block>
+</block> -->
 <component-footer footerData="{{footerData}}"></component-footer>

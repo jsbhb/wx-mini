@@ -14,11 +14,12 @@ page{
   position: absolute;
   right: 45rpx;
   top: 25rpx;
+  z-index: 999;
 }
 .chooseType .chooseItem{
   display: inline-block;
   font-size: 26rpx;
-  width: 80rpx;
+  width: 100rpx;
   height: 40rpx;
   line-height: 40rpx;
   text-align: center;

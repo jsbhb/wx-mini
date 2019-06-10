@@ -899,6 +899,7 @@ Page({
         backgroundColor: '#ff8500',
       })
     }
+    app.pvuvStatic();
   },
 
   /**

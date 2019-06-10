@@ -26,8 +26,8 @@ page{
   margin-left: -200rpx
 }
 .bankList .bankList-del{
-  width: 200rpx;
-  height: 160rpx;
+  width: 180rpx;
+  height: 180rpx;
   text-align: center;
   font-size: 36rpx;
   line-height: 240rpx;
@@ -42,9 +42,10 @@ page{
   transform: translateX(200rpx);
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
+  margin-top: -10rpx;
 }
-.bankList.touch-move-active .bankList-body,
-.bankList.touch-move-active .bankList-del {
+.bankList-item.touch-move-active .bankList-body,
+.bankList-item.touch-move-active .bankList-del {
  -webkit-transform: translateX(0);
  transform: translateX(0);
 }
@@ -85,8 +86,14 @@ page{
 .addBankList{
   color: #8f8f8f;
   padding: 20rpx 0 20rpx 50rpx;
+  box-sizing: border-box;
+  height: 100rpx;
+  line-height: 60rpx;
 }
 .addBankList text{
-  font-size: 50rpx;
+  font-size: 30rpx;
   font-weight: 700;
+  height: 100rpx;
+  line-height: 60rpx;
+  margin-right: 10rpx;
 }

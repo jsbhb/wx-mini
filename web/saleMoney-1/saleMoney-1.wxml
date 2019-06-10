@@ -5,7 +5,7 @@
   <view class="title">我的佣金</view>
   <view class="money">
     <text>￥</text>
-    <text>40.00</text>
+    <text>{{rebateManageData.alreadyCheck || 0}}</text>
   </view>
   <view class="desc">分享微信商品可用获得更多佣金！</view>
   <view class="btns">

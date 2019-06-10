@@ -5,18 +5,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgHost: app.globalData.imgHost
+    currentPage: 1,
+    numPerPage: 20
   },
-  location1: function () {
-    wx.navigateTo({
-      url: '/web/saleMoney-1-1/saleMoney-1-1',
-    })
+
+  getMoreData: function () {
+    var that = this;
+    var currentPage = that.data.currentPage;
+    var numPerPage = that.data.numPerPage;
+    var totalPages = that.data.totalPages;
+    var oldData = that.data.rebateListData;
+    if (currentPage < totalPages) {
+      currentPage++;
+      that.setData({
+        currentPage: currentPage
+      })
+      var data = {
+        currentPage: currentPage,
+        numPerPage: numPerPage
+      }
+      app.getRebateOrdersList(that, data, oldData);
+    }
   },
-  location2: function () {
-    wx.navigateTo({
-      url: '/web/saleMoney-3/saleMoney-3',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -35,7 +46,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    var data = {
+      currentPage: 1,
+      numPerPage: 20
+    }
+    app.getRebateOrdersList(that, data);
   },
 
   /**

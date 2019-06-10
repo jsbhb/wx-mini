@@ -12,6 +12,7 @@ Page({
     cardImg2: null,
     companyImg: null,
     userName: '',
+    checkNum: '',
     userPhone: '',
     userAddress: '',
     userCompany: '',
@@ -19,6 +20,9 @@ Page({
     submit: true,
     alertShare: false,
     hidden: true,
+    vNum: 60, 
+    isOk: true,
+    vClick: false,
     saveImgBtnHidden: false,
     openSettingBtnHidden: true,
     nodeHost: app.globalData.nodeHost,
@@ -30,6 +34,38 @@ Page({
     county: '',
     value: [0, 0, 0],
     condition: false,
+    shopStatus: 0
+  },
+  watch: {
+    infoData: function(newVal, oldVal){
+      var that = this;
+      that.setData({
+        userPhone: newVal.phone
+      })
+      var data = {
+        phone: newVal.phone
+      }
+      app.getShopCheck(that, data);
+    },
+    shopStatus: function(newVal, oldVal){
+      var that = this;
+      var data = {
+        phone: that.data.infoData.phone
+      }
+      var isReSubmit = wx.getStorageSync('isReSubmit');
+      if (isReSubmit){
+        that.setData({
+          isReSubmit: isReSubmit
+        })
+      }
+      if (newVal == 2){
+        app.getApplyShopData(that, data);
+      } else if(newVal == 3){
+        wx.redirectTo({
+          url: '/web/shopSetting/shopSetting',
+        })
+      }
+    }
   },
   changeName: function (e) {
     var that = this;
@@ -80,19 +116,22 @@ Page({
           name: 'image',
           success: function(res){
             var r = JSON.parse(res.data);
-            if(type == 1){
-              that.setData({
-                cardImg1: that.data.imgHost + r.downUrl
-              });
-            } else if (type == 2){
-              that.setData({
-                cardImg2: that.data.imgHost + r.downUrl
-              });
-            } else if (type == 3) {
-              that.setData({
-                companyImg: that.data.imgHost + r.downUrl
-              });
-            }
+            that.setData({
+              cardImg: 'https://teststatic.cncoopay.com:8080/' + r.downUrl
+            });
+            // if(type == 1){
+            //   that.setData({
+            //     cardImg1: that.data.imgHost + r.downUrl
+            //   });
+            // } else if (type == 2){
+            //   that.setData({
+            //     cardImg2: that.data.imgHost + r.downUrl
+            //   });
+            // } else if (type == 3) {
+            //   that.setData({
+            //     companyImg: that.data.imgHost + r.downUrl
+            //   });
+            // }
           }
         })
       }
@@ -100,25 +139,27 @@ Page({
   },
   listSubmit: function(){
     var that = this;
+    var openId = wx.getStorageSync('openId');
     var userName = that.data.userName;
     var userPhone = that.data.userPhone;
     var userAddress = that.data.userAddress;
-    var userCompany = that.data.userCompany;
     var userContent = that.data.userContent;
-    var cardImg1 = that.data.cardImg1;
-    var cardImg2 = that.data.cardImg2;
-    var companyImg = that.data.companyImg;
+    var province = that.data.province;
+    var city = that.data.city;
+    var county = that.data.county;
+    var cardImg = that.data.cardImg;
     var isPhone = (/^1(3|4|5|7|8|9)\d{9}$/gi).test(userPhone);
     var data = {
-      userName: userName,
-      userPhone: userPhone,
-      userAddress: userAddress,
-      usercompany: userCompany,
-      userContent: userContent,
-      cardImg1: cardImg1,
-      cardImg2: cardImg2,
-      companyImg: companyImg,
-      shopId: wx.getStorageSync('shopId') || 2
+      wechat: openId,
+      personInCharge: userName,
+      phone: userPhone,
+      province: province,
+      city: city,
+      district: county,
+      address: userAddress,
+      remark: userContent,
+      idCardPicPath: cardImg,
+      parentId: wx.getStorageSync('shopId') || 2
     }
     if (userName == ''){
       wx.showToast({
@@ -146,21 +187,13 @@ Page({
     }
     if (userAddress == '') {
       wx.showToast({
-        title: '请输入您的联系地址',
+        title: '请输入您的详细地址',
         icon: 'none',
         duration: 1500
       })
       return;
     }
-    if (userCompany != '' && companyImg == null){
-      wx.showToast({
-        title: '若填写公司名称，请长传营业执照',
-        icon: 'none',
-        duration: 1500
-      })
-      return;
-    }
-    if(cardImg1 == null){
+    if(cardImg == null){
       wx.showToast({
         title: '请上传身份证正面照片',
         icon: 'none',
@@ -168,24 +201,30 @@ Page({
       })
       return;
     }
-    if (cardImg2 == null) {
-      wx.showToast({
-        title: '请上传身份证反面照片',
-        icon: 'none',
-        duration: 1500
-      })
-      return;
-    }
-    if(that.data.submit){
-      app.setOpenShopData(data);
-      that.setData({
-        submit: false
-      })
-      setTimeout(function(){
+    if (that.data.submit) {
+      if (that.data.isOk){
+        var isReSubmit = wx.getStorageSync('isReSubmit');
+        if (isReSubmit){
+          data.id = that.data.reId;
+          app.shopReApply(that, data);
+        }else{
+          app.shopApply(that, data);
+        }
         that.setData({
-          submit: true
+          submit: false
         })
-      },10000);
+        setTimeout(function () {
+          that.setData({
+            submit: true
+          })
+        }, 10000);
+      }else{
+        wx.showToast({
+          title: '手机验证码错误',
+          icon: 'none',
+          duration: 1500
+        })
+      }
     }else{
       wx.showToast({
         title: '请勿频繁提交，请稍后再试',
@@ -193,7 +232,6 @@ Page({
         duration: 1500
       })
     }
-    
   },
   showShare: function () {
     var that = this;
@@ -378,13 +416,67 @@ Page({
     this.setData({
       condition: !this.data.condition
     })
-    
+  },
+  getValidation: function(){
+    var that = this;
+    var phone = that.data.userPhone;
+    var isPhone = (/^1(3|4|5|7|8|9)\d{9}$/gi).test(phone);
+    if (isPhone) {
+      var data = {
+        phone: phone
+      }
+      app.getValidation(that, data);
+      that.setData({
+        vClick: true
+      });
+    }
+    if (that.data.vClick) {
+      var t = setInterval(function () {
+        var vNum = that.data.vNum;
+        if (vNum == 0) {
+          clearInterval(t);
+          that.setData({
+            vClick: false,
+            vNum: 60
+          });
+          return;
+        }
+        vNum--;
+        that.setData({
+          vNum: vNum
+        });
+      }, 1000);
+    }
+  },
+  validationBlur: function(e){
+    var that = this;
+    var phone = that.data.userPhone;
+    var isPhone = (/^1(3|4|5|7|8|9)\d{9}$/gi).test(phone);
+    var checkNum = e.detail.value;
+    var data = {
+      phone: phone,
+      code: checkNum
+    }
+    if (isPhone && checkNum != ''){
+      app.checkVerify(that, data);
+    }
+  },
+  reSubmit: function(){
+    var that = this;
+    that.setData({
+      shopStatus: 0
+    })
+    wx.setStorageSync('isReSubmit', true);
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
+    app.setWatcher(that);
+    var userId = wx.getStorageSync('userId');
+    var openId = wx.getStorageSync('openId');
+    var shopStatus = wx.getStorageSync('shopStatus');
     var province = '';
     var city = '';
     var county = '';
@@ -443,7 +535,18 @@ Page({
       'city': city || citys[0].name,
       'county': county || countys[0].name
     });
-    app.shopDetailQuery();
+    if(userId){
+      app.shopDetailQuery();
+      that.setData({
+        isOk: true,
+        showChekNum: false
+      });
+    }else{
+      that.setData({
+        isOk: false,
+        showChekNum: true
+      });
+    }
   },
 
   /**
@@ -457,7 +560,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    var userId = wx.getStorageSync('userId');
+    var openId = wx.getStorageSync('openId');
+    if(userId){
+      app.getUserDetail(that); 
+      that.setData({
+        showChekNum: false
+      });
+    }else{
+      that.setData({
+        showChekNum: true
+      });
+    }
+    if(!openId){
+      // wx.getUserInfo({
+      //   success: function (res) {
+      //     console.log(res)
+      //   }
+      // })
+      wx.navigateTo({
+        url: '/web/authorizedLogin/authorizedLogin',
+      })
+    }
   },
 
   /**

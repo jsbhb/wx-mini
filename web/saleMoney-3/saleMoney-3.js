@@ -1,11 +1,31 @@
-// web/saleMoney-1-2/saleMoney-1-2.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    currentPage: 1,
+    numPerPage: 20
+  },
 
+  getMoreData: function(){
+    var that = this;
+    var currentPage = that.data.currentPage;
+    var numPerPage = that.data.numPerPage;
+    var totalPages = that.data.totalPages;
+    var oldData = that.data.rebateListData;
+    if (currentPage < totalPages) {
+      currentPage++;
+      that.setData({
+        currentPage: currentPage
+      })
+      var data = {
+        currentPage: currentPage,
+        numPerPage: numPerPage
+      }
+      app.getRebateListData(that, data, oldData);
+    }
   },
 
   /**
@@ -26,7 +46,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    var data = {
+      currentPage: 1,
+      numPerPage: 20
+    }
+    app.getRebateListData(that, data);
   },
 
   /**

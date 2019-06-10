@@ -1,62 +1,55 @@
 page{
   padding: 0;
   background: #fff;
-  text-align: center;
-}
-.saleMoeny-1-content .icon{
-  margin-top: 100rpx;
-}
-.saleMoeny-1-content .icon image{
-  width: 100rpx;
-  height: 100rpx;
-}
-.saleMoeny-1-content .title{
-  font-size: 30rpx;
-  margin-top: 50rpx;
-}
-.saleMoeny-1-content .money{
-  font-size: 80rpx;
-  font-weight: 700;
-  margin-top: 10rpx;
-  margin-left: -20rpx;
-  vertical-align: top;
-}
-.saleMoeny-1-content .money text{
-  display: inline-block;
-}
-.saleMoeny-1-content .money text:first-child{
-  font-size: 50rpx;
-  margin-right: 10rpx;
-}
-.saleMoeny-1-content .desc{
-  color: #ffc300;
-  font-size: 24rpx;
-  margin-top: 40rpx;
-}
-.saleMoeny-1-content .btns{
-  margin-top: 280rpx;
-}
-.saleMoeny-1-content .btns view{
-  width: 320rpx;
-  height: 70rpx;
-  line-height: 70rpx;
   font-size: 28rpx;
-  margin: 0 auto;
+  color: #333;
+  overflow: hidden;
+  height: 100%;
 }
-.saleMoeny-1-content .btns view.list1{
-  color: #fff;
-  background: #07c062;
-  border-radius: 10rpx;
+.saleMoney-3-content{
+  height: 100%;
 }
-.saleMoeny-1-content .btns view.list2{
-  color: #07c062;
-  background: #ededed;
-  margin-top: 40rpx;
-  border-radius: 10rpx;
+.list-header{
+  width: 100%;
+  overflow: hidden;
+  padding: 20rpx 15rpx;
+  box-sizing: border-box;
+  background: #efefef;
 }
-.saleMoeny-1-content .btns view.list3{
-  color: #fff;
-  background: #07c062;
-  margin-top: 40rpx;
-  border-radius: 10rpx;
+.list-header view{
+  float: left;
+  width: 20%;
+  text-align: center;
+  overflow: hidden;
+}
+.list-header view:first-child{
+  width: 40%;
+  text-align: left;
+}
+.list-content{
+  height: calc(100% - 79rpx);
+}
+.list-item{
+  overflow: hidden;
+  padding: 20rpx 15rpx;
+  box-sizing: border-box;
+}
+.list-item:nth-child(even){
+  background:#efefef;
+}
+.list-item view{
+  float: left;
+  width: 20%;
+  text-align: center;
+  word-break: break-all;
+  padding: 0 5rpx;
+  box-sizing: border-box;
+}
+.list-item view:first-child{
+  width: 35%;
+  text-align: left;
+}
+.list-item view:nth-child(2){
+  width: 25%;
+  text-align: center;
 }

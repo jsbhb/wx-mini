@@ -14,11 +14,11 @@ Page({
   },
   touchstart: function (e) {
     var that = this;
-    var allData = that.data.shopCartData;
+    var allData = that.data.bankListData;
     this.setData({
       startX: e.changedTouches[0].clientX,
       startY: e.changedTouches[0].clientY,
-      shopCartData: allData
+      bankListData: allData
     })
   },
   touchmove: function (e) {
@@ -29,7 +29,7 @@ Page({
     var touchMoveX = e.changedTouches[0].clientX;//滑动变化坐标
     var touchMoveY = e.changedTouches[0].clientY;//滑动变化坐标
     var angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });//获取滑动角度
-    var allData = that.data.shopCartData;
+    var allData = that.data.bankListData;
     allData.forEach(function (v, i) {
       v.isTouchMove = false;
       //滑动超过30度角 return
@@ -44,7 +44,7 @@ Page({
     })
     //更新数据
     that.setData({
-      shopCartData: allData
+      bankListData: allData
     })
   },
   angle: function (start, end) {
@@ -52,11 +52,48 @@ Page({
       _Y = end.Y - start.Y
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
+  bankDelete: function(e){
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    var data = {
+      id: id
+    }
+    wx.showModal({
+      title: '温馨提示',
+      content: '是否确认删除该银行卡？',
+      showCancel: true,
+      success: function (res) {
+        if (res.confirm) {
+          app.deleteBank(that, data);
+        }
+      }
+    })
+  },
+  chooseCardBank: function(e){
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    var isChoose = that.data.isChoose;
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];
+    if (isChoose){
+      prevPage.setData({
+        cardBankId: id
+      })
+      wx.navigateBack({
+        delta: 1
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    if(options.isChoose){
+      that.setData({
+        isChoose: true
+      })
+    }
   },
 
   /**
@@ -70,7 +107,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    app.getBankListData(that);
   },
 
   /**

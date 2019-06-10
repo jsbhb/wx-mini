@@ -1,145 +1,30 @@
 <view class="saleMoney-4-content">
-  <!-- <view class="bankList {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchstart" bindtouchmove="touchmove" data-index="{{index}}"> -->
   <view class="bankList">
-    <view class="bankList-item">
-      <view class="bankList-body">
-        <view class="bankMsg">
-          <view class="bankImg">
-            <image src="{{imgHost}}/images/platform/personal/nyyh.png"></image>
+    <block wx:for="{{bankListData}}" wx:key="">
+      <view class="bankList-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchstart" bindtouchmove="touchmove" data-index="{{index}}" bindtap="chooseCardBank" data-id="{{item.id}}">
+        <view class="bankList-body">
+          <view class="bankMsg">
+            <view class="bankImg">
+              <image wx:if="{{item.cardBank == '中国农业银行'}}" src="{{imgHost}}/images/platform/personal/nyyh.png"></image>
+              <image wx:if="{{item.cardBank == '中国银行'}}" src="{{imgHost}}/images/platform/personal/zgyh.png"></image>
+              <image wx:if="{{item.cardBank == '中国建设银行'}}" src="{{imgHost}}/images/platform/personal/jsyh.png"></image>
+              <image wx:if="{{item.cardBank == '中国工商银行'}}" src="{{imgHost}}/images/platform/personal/gsyh.png"></image>
+            </view>
+            <view class="bankContent">
+              <view class="bankName">{{item.cardBank}}</view>
+              <view class="bankType">储蓄卡</view>
+            </view>
           </view>
-          <view class="bankContent">
-            <view class="bankName">中国农业银行</view>
-            <view class="bankType">储蓄卡</view>
+          <view class="bankNum">
+            <text>{{item.cardNo}}</text>
           </view>
         </view>
-        <view class="bankNum">
-          <text>**** **** **** 8877</text>
-        </view>
+        <view class="bankList-del" bindtap="bankDelete" data-id="{{item.id}}">删除</view>
       </view>
-      <view class="bankList-del" bindtap="bankDelete" data-id="{{item.id}}">删除</view>
-    </view>
-    <view class="bankList-item">
-      <view class="bankList-body">
-        <view class="bankMsg">
-          <view class="bankImg">
-            <image src="{{imgHost}}/images/platform/personal/nyyh.png"></image>
-          </view>
-          <view class="bankContent">
-            <view class="bankName">中国农业银行</view>
-            <view class="bankType">储蓄卡</view>
-          </view>
-        </view>
-        <view class="bankNum">
-          <text>**** **** **** 8877</text>
-        </view>
-      </view>
-      <view class="bankList-del" bindtap="bankDelete" data-id="{{item.id}}">删除</view>
-    </view>
-    <view class="bankList-item">
-      <view class="bankList-body">
-        <view class="bankMsg">
-          <view class="bankImg">
-            <image src="{{imgHost}}/images/platform/personal/nyyh.png"></image>
-          </view>
-          <view class="bankContent">
-            <view class="bankName">中国农业银行</view>
-            <view class="bankType">储蓄卡</view>
-          </view>
-        </view>
-        <view class="bankNum">
-          <text>**** **** **** 8877</text>
-        </view>
-      </view>
-      <view class="bankList-del" bindtap="bankDelete" data-id="{{item.id}}">删除</view>
-    </view>
-    <view class="bankList-item">
-      <view class="bankList-body">
-        <view class="bankMsg">
-          <view class="bankImg">
-            <image src="{{imgHost}}/images/platform/personal/nyyh.png"></image>
-          </view>
-          <view class="bankContent">
-            <view class="bankName">中国农业银行</view>
-            <view class="bankType">储蓄卡</view>
-          </view>
-        </view>
-        <view class="bankNum">
-          <text>**** **** **** 8877</text>
-        </view>
-      </view>
-      <view class="bankList-del" bindtap="bankDelete" data-id="{{item.id}}">删除</view>
-    </view>
-    <view class="bankList-item">
-      <view class="bankList-body">
-        <view class="bankMsg">
-          <view class="bankImg">
-            <image src="{{imgHost}}/images/platform/personal/nyyh.png"></image>
-          </view>
-          <view class="bankContent">
-            <view class="bankName">中国农业银行</view>
-            <view class="bankType">储蓄卡</view>
-          </view>
-        </view>
-        <view class="bankNum">
-          <text>**** **** **** 8877</text>
-        </view>
-      </view>
-      <view class="bankList-del" bindtap="bankDelete" data-id="{{item.id}}">删除</view>
-    </view>
-    <view class="bankList-item">
-      <view class="bankList-body">
-        <view class="bankMsg">
-          <view class="bankImg">
-            <image src="{{imgHost}}/images/platform/personal/nyyh.png"></image>
-          </view>
-          <view class="bankContent">
-            <view class="bankName">中国农业银行</view>
-            <view class="bankType">储蓄卡</view>
-          </view>
-        </view>
-        <view class="bankNum">
-          <text>**** **** **** 8877</text>
-        </view>
-      </view>
-      <view class="bankList-del" bindtap="bankDelete" data-id="{{item.id}}">删除</view>
-    </view>
-    <view class="bankList-item">
-      <view class="bankList-body">
-        <view class="bankMsg">
-          <view class="bankImg">
-            <image src="{{imgHost}}/images/platform/personal/nyyh.png"></image>
-          </view>
-          <view class="bankContent">
-            <view class="bankName">中国农业银行</view>
-            <view class="bankType">储蓄卡</view>
-          </view>
-        </view>
-        <view class="bankNum">
-          <text>**** **** **** 8877</text>
-        </view>
-      </view>
-      <view class="bankList-del" bindtap="bankDelete" data-id="{{item.id}}">删除</view>
-    </view>
-    <view class="bankList-item">
-      <view class="bankList-body">
-        <view class="bankMsg">
-          <view class="bankImg">
-            <image src="{{imgHost}}/images/platform/personal/nyyh.png"></image>
-          </view>
-          <view class="bankContent">
-            <view class="bankName">中国农业银行</view>
-            <view class="bankType">储蓄卡</view>
-          </view>
-        </view>
-        <view class="bankNum">
-          <text>**** **** **** 8877</text>
-        </view>
-      </view>
-      <view class="bankList-del" bindtap="bankDelete" data-id="{{item.id}}">删除</view>
-    </view>
+    </block>
     <view class="addBankList" bindtap="locationTo">
       <text>+</text> 
-      添加银行卡
+      <text>添加银行卡</text>
     </view>
   </view>
 </view>

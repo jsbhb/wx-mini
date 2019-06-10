@@ -7,18 +7,26 @@
       </view>
     </view>
     <view class="shopName">
-      <text>测试店铺111</text>
+      <text>{{shopInfoData.aboutus || shopInfoData.name}}</text>
     </view>
     <image class="personal-bgImg" src="{{imgHost}}/images/platform/personal/personalBgImg.png"></image>
   </view>
   <view class="content-middle">
-    <view class="middle-item" data-url="" bindtap="locationTo">
-      <view class="num">100.00</view>
-      <view class="name">今日营业额</view>
+    <view class="middle-item" data-url="/web/shopStatistics/shopStatistics" bindtap="locationTo">
+      <view class="num">{{managerIndexData.visitView}}</view>
+      <view class="name">今日访问量</view>
     </view>
-    <view class="middle-item" data-url="" bindtap="locationTo">
-      <view class="num">2</view>
+     <view class="middle-item" data-url="/web/shopStatistics/shopStatistics" bindtap="locationTo">
+      <view class="num">{{managerIndexData.pageView}}</view>
+      <view class="name">今日浏览量</view>
+    </view>
+    <view class="middle-item" data-url="/web/saleMoney-3/saleMoney-3" bindtap="locationTo">
+      <view class="num">{{managerIndexData.orderNum}}</view>
       <view class="name">今日订单数</view>
+    </view>
+    <view class="middle-item" data-url="/web/saleMoney-3/saleMoney-3" bindtap="locationTo">
+      <view class="num">{{managerIndexData.rebate}}</view>
+      <view class="name">今日返佣</view>
     </view>
   </view>
   <view class="content-footer">
@@ -38,10 +46,14 @@
       <image src="{{imgHost}}/images/platform/shopSetting/icon_static.png"></image>
       <text>数据统计</text>
     </view>
-    <view class="footer-item" data-url="" bindtap="locationTo">
+    <button class="footer-item" open-type="share">
+      <image src="{{imgHost}}/images/platform/goods/share_01.png"></image>
+      <text>微店推广</text>
+    </button>
+    <!-- <view class="footer-item" data-url="" bindtap="locationTo">
       <image src="{{imgHost}}/images/platform/shopSetting/icon_order.png"></image>
       <text>订单管理</text>
-    </view>
+    </view> -->
   </view>
 </view>
 <component-footer footerData="{{footerData}}"></component-footer>

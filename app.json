@@ -11,6 +11,7 @@
     "web/addressManage/addressManage",
     "web/addressEdit/addressEdit",
     "web/login/login",
+    "web/authorizedLogin/authorizedLogin",
     "web/orderSure/orderSure",
     "web/register/register",
     "web/forgetPassword/forgetPassword",

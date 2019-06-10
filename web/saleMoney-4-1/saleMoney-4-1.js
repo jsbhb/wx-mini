@@ -7,7 +7,55 @@ Page({
   data: {
     imgHost: app.globalData.imgHost
   },
-
+  cardBankChange: function(e){
+    var that = this;
+    var cardBank = e.detail.value;
+    that.setData({
+      cardBank: cardBank
+    });
+  },
+  cardNoChange: function(e){
+    var that = this;
+    var cardNo = e.detail.value;
+    var reg = /^([1-9]{1})(\d{14}|\d{18})$/;
+    that.setData({
+      cardNo: cardNo
+    });
+    var data = {
+      cardNo: cardNo
+    }
+    if (reg.test(cardNo)){
+      app.checkBankType(that, data);
+    }
+  },
+  cardNameChange: function(e){
+    var that = this;
+    var cardName = e.detail.value;
+    that.setData({
+      cardName: cardName
+    });
+  },
+  cardMobileChange: function(e){
+    var that = this;
+    var cardMobile = e.detail.value;
+    that.setData({
+      cardMobile: cardMobile
+    });
+  },
+  addBankList: function(){
+    var that = this;
+    var cardNo = that.data.cardNo;
+    var cardBank = that.data.cardBank;
+    var cardName = that.data.cardName;
+    var cardMobile = that.data.cardMobile;
+    var data = {
+      cardNo: cardNo,
+      cardBank: cardBank,
+      cardName: cardName,
+      cardMobile: cardMobile
+    }
+    app.bindBank(that,data);
+  },
   /**
    * 生命周期函数--监听页面加载
    */

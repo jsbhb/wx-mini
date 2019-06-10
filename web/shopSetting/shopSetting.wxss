@@ -68,7 +68,7 @@ page{
 }
 .middle-item{
   float: left;
-  width: 50%;
+  width: 25%;
   text-align: center;
   color: #333;
   border-right: 1rpx solid #efefef;
@@ -100,6 +100,10 @@ page{
   width: 25%;
   text-align: center;
   padding: 30rpx 0;
+  background: #fff;
+}
+.content-footer .footer-item::after{
+  border: none;
 }
 .content-footer .footer-item image{
   width: 80rpx;

@@ -5,31 +5,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    shopName: '',
-    shopDesc: '',
     imgHost: app.globalData.imgHost,
-    nodeHost: app.globalData.nodeHost,
-    userShopImg: app.globalData.imgHost + '/images/platform/personal/icon_shop.jpg'
+    nodeHost: app.globalData.nodeHost
   },
-  changeShopName: function(e){
+  changeName: function(e){
     var that = this;
-    var shopName = e.detail.value;
+    var name = e.detail.value;
     that.setData({
-      shopName: shopName
+      'shopInfoData.name': name
     })
   },
-  changeShopDesc: function (e) {
+  changeAboutUs: function (e) {
     var that = this;
-    var shopDesc = e.detail.value;
+    var aboutus = e.detail.value;
     that.setData({
-      shopDesc: shopDesc
+      'shopInfoData.aboutus': aboutus
     })
   },
   saveShopMsg: function(){
     var that = this;
-    var shopName = that.data.shopName;
-    var shopDesc = that.data.shopDesc;
-    //ajax
+    var shopName = that.data.shopInfoData.name;
+    var aboutus = that.data.shopInfoData.aboutus;
+    var headImg = that.data.shopInfoData.headImg;
+    var data = {
+      name: shopName,
+      aboutUs: aboutus,
+      headImg: headImg
+    }
+    app.saveStoreMsg(that,data);
   },
   upload: function (e) {
     var that = this;
@@ -48,7 +51,7 @@ Page({
           success: function (res) {
             var r = JSON.parse(res.data);
               that.setData({
-                userShopImg: imgUrl + r.downUrl
+                'shopInfoData.headImg': imgUrl + r.downUrl
               });
           }
         })
@@ -73,7 +76,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    app.shopDetailQuery(that);
   },
 
   /**

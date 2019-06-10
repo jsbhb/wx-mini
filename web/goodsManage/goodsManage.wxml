@@ -20,45 +20,30 @@
       <image src="{{imgHost}}/images/platform/header/i_search.png"></image>
     </view>
     <view class="serachContent" style="display:{{inputShow? 'block' : 'none'}}">
-      <input placeholder="请输入商品名称" type="text" value="{{searchValue}}"></input>
+      <input placeholder="请输入商品名称" type="text" confirm-type="search" bindconfirm="searchProduct" value="{{goodsName}}"></input>
     </view>
   </view>
-  <view class="goodsList">
-    <view class="listItem">
-      <view class="listItemLeft">
-        <image src="https://static.cncoopay.com:8080/goods/7220518/master/images/d1f9fea6-90f7-4df7-a4e9-d475080fc389.jpg"></image>
-      </view>
-      <view class="listItemRight">
-        <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发自然棕色</view>
-        <view class="tagIcon">
-          <text class="icon_1">推荐</text>
-          <text class="icon_2">优选</text>
+  <scroll-view scroll-y class="goodsList {{inputShow ? 'active' : ''}}" scroll-top="{{scrollTop}}" bindscrolltolower="getMoreData">
+    <block wx:for="{{goodsManageData}}" wx:key="">
+      <view class="listItem" bindtap="toGoodsDetail" data-goodsId="{{item.goodsId}}">
+        <view class="listItemLeft">
+          <image wx:if="{{item.picPath}}" src="{{item.picPath}}"></image>
+          <image wx:else src="{{imgHost}}/images/platform/account/default_img.jpg"></image>
         </view>
-        <view class="goodsContent">
-          <view class="price">售价 ：￥86.00</view>
-          <view class="commission">佣金 ：￥20.00</view>
-          <view class="sales">销量 ：123</view>
-          <view class="stock">库存 ：20</view>
-        </view>
-      </view>
-    </view>
-    <view class="listItem">
-      <view class="listItemLeft">
-        <image src="https://static.cncoopay.com:8080/goods/7220518/master/images/d1f9fea6-90f7-4df7-a4e9-d475080fc389.jpg"></image>
-      </view>
-      <view class="listItemRight">
-        <view class="goodsName">韩国丽彩娜发丝丰盈 快速补发喷雾 密发自然棕色</view>
-        <view class="tagIcon">
-          <text class="icon_1">推荐</text>
-          <text class="icon_2">优选</text>
-        </view>
-        <view class="goodsContent">
-          <view class="price">售价 ：￥86.00</view>
-          <view class="commission">佣金 ：￥20.00</view>
-          <view class="sales">销量 ：123</view>
-          <view class="stock">库存 ：20</view>
+        <view class="listItemRight">
+          <view class="goodsName">{{item.goodsName}}</view>
+          <view class="tagIcon">
+            <text class="icon_1" wx:if="{{item.tagList.length > 0}}">{{item.tagList[0].tagName}}</text>
+            <text class="icon_2" wx:if="{{item.tagList.length > 1}}">{{item.tagList[1].tagName}}</text>
+          </view>
+          <view class="goodsContent">
+            <view class="price">售价 ：￥{{item.retailPrice}}</view>
+            <view class="commission">佣金 ：￥{{item.rebate}}</view>
+            <view class="sales">销量 ：{{item.saleNum}}</view>
+            <view class="stock">库存 ：{{item.stock}}</view>
+          </view>
         </view>
       </view>
-    </view>
-  </view>
+    </block>
+  </scroll-view>
 </view>
