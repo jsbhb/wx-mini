@@ -1994,9 +1994,12 @@ App({
     var that = this;
     var host = that.globalData.host;
     var centerId = that.globalData.centerId;
-    var userId = wx.getStorageSync('userId');
+    var userId = data.userId || null;
     var shopId = that.globalData.shopId;
-    var url = host + '/ordercenter/1.0/order?centerId=' + centerId + '&shopId=' + shopId + '&userId=' + userId + '&numPerPage=' + data.numPerPage + '&currentPage=' + data.currentPage;
+    var url = host + '/ordercenter/1.0/order?centerId=' + centerId + '&shopId=' + shopId + '&numPerPage=' + data.numPerPage + '&currentPage=' + data.currentPage;
+    if (userId){
+      url += '&userId=' + userId;
+    }
     if (data.status != null && data.status != 'null'){
       if (data.status.toString().indexOf(',') != -1){
         url += '&statusArr=' + data.status;
@@ -3553,6 +3556,10 @@ App({
       },
       success: function (res) {
         if (res.data && res.data.success) {
+          res.data.obj.forEach(function(v,k){
+            v.rebate = v.rebate.toFixed(2);
+            v.retailPrice = v.retailPrice.toFixed(2);
+          });
           obj.setData({
             goodsManageData: oldData.concat(res.data.obj),
             totalPages: res.data.pagination.totalPages
@@ -4062,7 +4069,7 @@ App({
       fail: function () {}
     })
   },
-  getRebateOrdersList: function(obj, data){
+  getRebateOrdersList: function (obj, data, oldData){
     var that = this;
     var host = that.globalData.host;
     var shopId = that.globalData.shopId;

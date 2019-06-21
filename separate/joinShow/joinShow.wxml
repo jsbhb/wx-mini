@@ -4,4 +4,7 @@
     <image style="width:{{item.width}};height:{{item.height}}" src="{{imgHost}}{{item.src}}" bindload="imageLoad"  data-index="{{index}}"></image>
   </block>
   <image style="width: 750rpx;height: 130rpx;" bindtap="toFormList" src="{{imgHost}}/images/platform/shopPromotion/promotion_21.png"></image>
+  <view class="fixed-openStore">
+    <image src="{{imgHost}}/images/platform/index/openStore.gif" bindtap="toOpenStore"></image>
+  </view>
 </view>

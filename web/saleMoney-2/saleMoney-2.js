@@ -27,6 +27,12 @@ Page({
       app.getRebateOrdersList(that, data, oldData);
     }
   },
+  toOrderDetail: function (e) {
+    var orderId = e.currentTarget.dataset.orderid;
+    wx.navigateTo({
+      url: '/web/orderDetail/orderDetail?orderId=' + orderId,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载

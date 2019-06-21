@@ -15,3 +15,17 @@ page{
   width: 200rpx;
   height: 50rpx;
 }
+.fixed-openStore{
+  position: fixed;
+  right: 10rpx;
+  bottom: 240rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1rpx solid #efefef;
+}
+.fixed-openStore image{
+  width: 80rpx;
+  height: 80rpx;
+}

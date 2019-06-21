@@ -89,6 +89,12 @@ Page({
       url: '/separate/joinUs/joinUs',
     })
   },
+  toOpenStore: function(){
+    var that = this;
+    wx.navigateTo({
+      url: '/separate/joinUs/joinUs',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

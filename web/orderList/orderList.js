@@ -23,10 +23,12 @@ Page({
   watch: {
     status: function (newVal, oldVal){
       var that = this;
+      var userId = wx.getStorageSync('userId');
       var data = {
         numPerPage: that.data.numPerPage,
         currentPage: 1,
         status: newVal,
+        userId: userId,
         type: 'getData'
       }
       that.setData({
@@ -43,12 +45,14 @@ Page({
     var totalPages = that.data.totalPages;
     var numPerPage = that.data.numPerPage;
     var status = that.data.status;
+    var userId = wx.getStorageSync('userId');
     if (currentPage < totalPages){
       currentPage ++;
       var data = {
         numPerPage: numPerPage,
         currentPage: currentPage,
         status: status,
+        userId: userId,
         type: 'getData'
       };
       if (that.data.status){
@@ -134,22 +138,26 @@ Page({
   },
   getAllNum: function () {
     var that = this;
+    var userId = wx.getStorageSync('userId');
     var data1 = {
       numPerPage: 5,
       currentPage: 1,
       status: 0,
+      userId: userId,
       type: 'getNumber'
     };
     var data2 = {
       numPerPage: 5,
       currentPage: 1,
       status: '1,2,3,4,5,11,12',
+      userId: userId,
       type: 'getNumber'
     };
     var data3 = {
       numPerPage: 5,
       currentPage: 1,
       status: 6,
+      userId: userId,
       type: 'getNumber'
     };
     app.getOrderListData(that, data1);

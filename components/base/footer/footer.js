@@ -27,6 +27,12 @@ Component({
       var userId = wx.getStorageSync('userId');
       var shopId = app.globalData.shopId;
       var shopStatus = that.data.shopStatus;
+      var pages = getCurrentPages()    //获取加载的页面
+      var currentPage = pages[pages.length - 1]    //获取当前页面的对象
+      var url = currentPage.route;
+      if (url == 'web/shopSetting/shopSetting'){
+        return ;
+      }
       if(userId){
         if (shopStatus == 3) {
           if (shopId == reId) {
