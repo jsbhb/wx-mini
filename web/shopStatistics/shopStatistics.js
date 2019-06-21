@@ -710,6 +710,14 @@ Page({
     }
     that.getStaticData(data);
   },
+  locationTo: function(e){
+    var goodsId = e.currentTarget.dataset.id;
+    if (goodsId){
+      wx.navigateTo({
+        url: '/web/goodsDetail/goodsDetail?goodsId=' + goodsId,
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -726,6 +734,7 @@ Page({
       time: 7
     }
     that.getStaticData(data);
+    app.getManagerIndexData(that);
   },
 
   /**

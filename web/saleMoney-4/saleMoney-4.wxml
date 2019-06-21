@@ -6,9 +6,10 @@
           <view class="bankMsg">
             <view class="bankImg">
               <image wx:if="{{item.cardBank == '中国农业银行'}}" src="{{imgHost}}/images/platform/personal/nyyh.png"></image>
-              <image wx:if="{{item.cardBank == '中国银行'}}" src="{{imgHost}}/images/platform/personal/zgyh.png"></image>
-              <image wx:if="{{item.cardBank == '中国建设银行'}}" src="{{imgHost}}/images/platform/personal/jsyh.png"></image>
-              <image wx:if="{{item.cardBank == '中国工商银行'}}" src="{{imgHost}}/images/platform/personal/gsyh.png"></image>
+              <image wx:elif="{{item.cardBank == '中国银行'}}" src="{{imgHost}}/images/platform/personal/zgyh.png"></image>
+              <image wx:elif="{{item.cardBank == '中国建设银行'}}" src="{{imgHost}}/images/platform/personal/jsyh.png"></image>
+              <image wx:elif="{{item.cardBank == '中国工商银行'}}" src="{{imgHost}}/images/platform/personal/gsyh.png"></image>
+              <image wx:else src="{{imgHost}}/images/platform/personal/mryh.png"></image>
             </view>
             <view class="bankContent">
               <view class="bankName">{{item.cardBank}}</view>

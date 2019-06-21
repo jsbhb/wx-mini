@@ -17,15 +17,11 @@ Page({
   cardNoChange: function(e){
     var that = this;
     var cardNo = e.detail.value;
-    var reg = /^([1-9]{1})(\d{14}|\d{18})$/;
     that.setData({
       cardNo: cardNo
     });
     var data = {
       cardNo: cardNo
-    }
-    if (reg.test(cardNo)){
-      app.checkBankType(that, data);
     }
   },
   cardNameChange: function(e){
@@ -54,7 +50,39 @@ Page({
       cardName: cardName,
       cardMobile: cardMobile
     }
-    app.bindBank(that,data);
+    if (!cardNo){
+      wx.showToast({
+        title: '银行卡号不得为空',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
+    if (!cardBank) {
+      wx.showToast({
+        title: '开户银行不得为空',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
+    if (!cardName) {
+      wx.showToast({
+        title: '持卡人姓名不得为空',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
+    if (!cardMobile) {
+      wx.showToast({
+        title: '预留手机不得为空',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
+    app.bindBank(that, data);
   },
   /**
    * 生命周期函数--监听页面加载

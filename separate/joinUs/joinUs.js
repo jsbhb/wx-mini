@@ -58,9 +58,16 @@ Page({
           isReSubmit: isReSubmit
         })
       }
-      if (newVal == 2){
+      if (newVal == 2 || newVal == 3){
         app.getApplyShopData(that, data);
-      } else if(newVal == 3){
+      }
+    },
+    reId: function(newVal, oldVal){
+      var that = this;
+      var shopStatus = that.data.shopStatus;
+      wx.setStorageSync('shopId', newVal);
+      app.globalData.shopId = newVal;
+      if (shopStatus == 3) {
         wx.redirectTo({
           url: '/web/shopSetting/shopSetting',
         })
@@ -105,19 +112,20 @@ Page({
   upload: function(e){
     var that = this;
     var type = e.currentTarget.dataset.id;
+    var shopId = app.globalData.shopId;
     wx.chooseImage({
       count: 1, //最多可以选择的图片总数
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         wx.uploadFile({
-          url: that.data.nodeHost + '/Data/img/upLoad',
+          url: that.data.nodeHost + '/Data/img/upLoad?shopId=' + shopId,
           filePath: res.tempFilePaths[0],
           name: 'image',
           success: function(res){
             var r = JSON.parse(res.data);
             that.setData({
-              cardImg: 'https://teststatic.cncoopay.com:8080/' + r.downUrl
+              cardImg: app.globalData.imgUrl + r.downUrl
             });
             // if(type == 1){
             //   that.setData({
@@ -468,6 +476,11 @@ Page({
     })
     wx.setStorageSync('isReSubmit', true);
   },
+  toIndex: function(){
+    wx.switchTab({
+      url: '/web/index/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -574,11 +587,6 @@ Page({
       });
     }
     if(!openId){
-      // wx.getUserInfo({
-      //   success: function (res) {
-      //     console.log(res)
-      //   }
-      // })
       wx.navigateTo({
         url: '/web/authorizedLogin/authorizedLogin',
       })

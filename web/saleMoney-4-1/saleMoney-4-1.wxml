@@ -9,7 +9,7 @@
   <view class="bankName">
     <view class="title">开户银行</view>
     <view class="content">
-      <input type="text" disabled value="{{cardBank}}" bindinput="cardBankChange"></input>
+      <input type="text" value="{{cardBank}}" bindinput="cardBankChange"></input>
     </view>
   </view>
   <view class="userName">

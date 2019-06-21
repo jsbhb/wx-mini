@@ -87,7 +87,7 @@ page{
   position: relative;
   z-index: 9;
 }
-.btn-submit {
+.btn-submit, .btn {
   box-sizing: border-box;
   display: inline-block;
   width: calc(100% - 100rpx);
@@ -100,6 +100,9 @@ page{
   text-decoration: none;
   color: #fff;
   background: #b4282d;
+}
+.btn{
+  margin-top: 100rpx;
 }
 .cardImgContent{
   width: calc(100% - 100rpx);
@@ -323,4 +326,6 @@ page{
 .success-content .desc,.fail-content .desc{
   font-size: 28rpx;
   color: #999;
+  padding: 0 40rpx;
+  box-sizing: border-box;
 }

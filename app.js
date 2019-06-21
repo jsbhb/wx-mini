@@ -4,6 +4,7 @@ App({
     host: 'https://testapi.cncoopay.com',
     imgHost: 'https://teststatic.cncoopay.com:8080/wechat',
     nodeHost: 'https://testfront.cncoopay.com',
+    imgUrl: 'https://static.cncoopay.com:8080',
     centerId: 2,
     platUserType: 5,
     loginType: 1,
@@ -450,9 +451,18 @@ App({
                   wx.setStorageSync('userId', res.data.obj.userCenterId);
                   that.globalData.authentication = '"Bearer "' + res.data.obj.token;
                   that.globalData.isLogin = true;
-                  wx.navigateBack({
-                    delta: 2
-                  })
+                  var pages = getCurrentPages();//获取加载的页面
+                  var currentPage = pages[pages.length - 1];//获取当前页面的对象
+                  var url = currentPage.route;//当前页面url
+                  if (url == 'web/register/register'){
+                    wx.navigateBack({
+                      delta: 3
+                    })
+                  }else{
+                    wx.navigateBack({
+                      delta: 2
+                    })
+                  }
                 } else if (res.data && !res.data.success) {
                   wx.showToast({
                     title: res.data.errorMsg,
@@ -1098,7 +1108,7 @@ App({
               if (data[i].type == 0) {
                 allCrossPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
                 allCrossCount += data[i].quantity * 1;
-              } else if (data[i].type == 2) {
+              } else if (data[i].type == 2 || data[i].type == 3) {
                 allNormalPrice += data[i].goodsSpecs.priceList[0].price * data[i].quantity;
                 allNormalCount += data[i].quantity * 1;
               }
@@ -3409,16 +3419,16 @@ App({
       success: function (res) {
         if (res.data && res.data.success) {
           obj.setData({
-            userName: res.data.obj.personInCharge,
-            userPhone: res.data.obj.phone,
-            userAddress: res.data.obj.address,
-            userContent: res.data.obj.remark,
-            province: res.data.obj.province,
-            city: res.data.obj.city,
-            county: res.data.obj.district,
-            cardImg: res.data.obj.idCardPicPath,
-            reId: res.data.obj.id,
-            'infoData.phone': res.data.obj.phone,
+            userName: obj.data.userName || (res.data.obj && res.data.obj.personInCharge),
+            userPhone: obj.data.userPhone || (res.data.obj && res.data.obj.phone),
+            userAddress: obj.data.userAddress || (res.data.obj && res.data.obj.address),
+            userContent: obj.data.userContent || (res.data.obj && res.data.obj.remark),
+            province: res.data.obj && res.data.obj.province,
+            city: res.data.obj && res.data.obj.city,
+            county: res.data.obj && res.data.obj.district,
+            cardImg: obj.data.cardImg || (res.data.obj && res.data.obj.idCardPicPath),
+            reId: res.data.obj && res.data.obj.id,
+            'infoData.phone': res.data.obj && res.data.obj.phone,
           })
         } else if (res.data && !res.data.success) {
           wx.showToast({
@@ -3586,7 +3596,8 @@ App({
       success: function (res) {
         if (res.data && res.data.success) {
           obj.setData({
-            rebateManageData: res.data.obj
+            rebateManageData: res.data.obj,
+            'rebateManageData.totalPrice': ((res.data.obj.alreadyCheck || 0) + (res.data.obj.stayToAccount || 0) * 1 + (res.data.obj.canBePresented || 0) * 1 + (res.data.obj.frozenRebate || 0) * 1 + (res.data.obj.alreadyPresented || 0)).toFixed(2)
           });
         } else if (res.data && !res.data.success) {
           wx.showToast({
@@ -3768,7 +3779,7 @@ App({
           obj.setData({
             bankListData: res.data.obj
           });
-          if (!obj.data.cardBankId){
+          if (!obj.data.cardBankId && res.data.obj.length > 0){
             obj.setData({
               cardBankId: res.data.obj[0].id
             });
@@ -4080,6 +4091,47 @@ App({
         } else {
           wx.showToast({
             title: '获取返佣记录失败，请稍后再试',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求失败，请检查网络是否畅通',
+          icon: 'none',
+          duration: 1500
+        })
+      },
+      complete: function (res) { }
+    })
+  },
+  getGoodsManageNavList: function(obj){
+    var that = this;
+    var host = that.globalData.host;
+    wx.request({
+      url: host + '/goodscenter/1.0/shop/manager/goods/search-conditions',
+      method: 'GET',
+      data: {},
+      header: {
+        'content-type': 'application/json', // 默认值
+        'authentication': that.globalData.authentication
+      },
+      success: function (res) {
+        if (res.data && res.data.success) {
+          obj.setData({
+            firstListData: res.data.obj.firstList,
+            tagListData: res.data.obj.tagList
+          });
+        } else if (res.data && !res.data.success) {
+          wx.showToast({
+            title: res.data.errorMsg,
+            icon: 'none',
+            duration: 1500
+          })
+        } else {
+          wx.showToast({
+            title: '获取筛选列表失败，请稍后再试',
             icon: 'none',
             duration: 1500
           })

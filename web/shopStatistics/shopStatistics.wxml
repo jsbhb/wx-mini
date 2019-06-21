@@ -1,3 +1,13 @@
+<view class="content-header">
+  <view class="header-item">
+    <view class="name">今日访客人数</view>
+    <view class="num">{{managerIndexData.visitView}}</view>
+  </view>
+  <view class="header-item">
+    <view class="name">今日浏览次数</view>
+    <view class="num">{{managerIndexData.pageView}}</view>
+  </view>
+</view>
 <view class="shopStatistics-content">
   <cover-view class="chooseType">
     <cover-view class="chooseItem {{activeId_1 == 1 ? 'active' : ''}}" data-id="1" bindtap="chooseType">近7天</cover-view>
@@ -41,7 +51,7 @@
     </view>
     <scroll-view class="footer-list" scroll-y>
       <block wx:for="{{staticData.goodsList}}" wx:key="">
-        <view class="list-item">
+        <view class="list-item" bindtap='locationTo' data-id="{{item.goodsId}}">
           <view class="index">{{index + 1}}</view>
           <view class="content">
             <view class="goodsName">{{item.goodsName}}</view>

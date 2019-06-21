@@ -24,38 +24,58 @@ Component({
     locationTo: function(){
       var that = this;
       var reId = that.data.reId;
+      var userId = wx.getStorageSync('userId');
       var shopId = app.globalData.shopId;
       var shopStatus = that.data.shopStatus;
-      if (shopStatus == 3){
-        if (shopId == reId) {
-          wx.navigateTo({
-            url: '/web/shopSetting/shopSetting',
-          })
-        } else {
-          wx.showModal({
-            title: '温馨提示',
-            content: '您所在的微店为他人微店，是否切换到自己微店？',
-            showCancel: true,
-            success(res) {
-              if (res.confirm) {
-                wx.setStorageSync('shopId', reId);
-                app.globalData.shopId = reId;
-                wx.navigateTo({
-                  url: '/web/shopSetting/shopSetting',
-                })
+      if(userId){
+        if (shopStatus == 3) {
+          if (shopId == reId) {
+            wx.navigateTo({
+              url: '/web/shopSetting/shopSetting',
+            })
+          } else {
+            wx.showModal({
+              title: '温馨提示',
+              content: '您所在的微店为他人微店，是否切换到自己微店？',
+              showCancel: true,
+              success(res) {
+                if (res.confirm) {
+                  wx.setStorageSync('shopId', reId);
+                  app.globalData.shopId = reId;
+                  wx.navigateTo({
+                    url: '/web/shopSetting/shopSetting',
+                  })
+                }
               }
-            }
+            })
+          }
+        } else {
+          wx.navigateTo({
+            url: '/separate/joinUs/joinUs',
           })
         }
       }else{
-        wx.navigateTo({
-          url: '/separate/joinUs/joinUs',
+        wx.showModal({
+          title: '温馨提示',
+          content: '您尚未登录，是否登录？',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/web/loginChoose/loginChoose',
+              })
+            }
+          }
         })
       }
     }
   },
-  attached: function(){
-    var that = this;
-    app.userDetailQuery(that, {});
+  pageLifetimes: {
+    show: function () {
+      var that = this;
+      var userId = wx.getStorageSync('userId');
+      if (userId) {
+        app.userDetailQuery(that, {});
+      }
+    }
   }
 });

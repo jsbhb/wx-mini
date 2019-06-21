@@ -25,7 +25,6 @@
     "web/protocol/protocol",
     "web/shopSetting/shopSetting",
     "web/storeMaintenance/storeMaintenance",
-    "web/goodsManage/goodsManage",
     "web/saleMoeny/saleMoeny",
     "web/saleMoney-1/saleMoney-1",
     "web/saleMoney-1-1/saleMoney-1-1",
@@ -34,6 +33,9 @@
     "web/saleMoney-4/saleMoney-4",
     "web/saleMoney-4-1/saleMoney-4-1",
     "web/shopStatistics/shopStatistics",
+    "web/goodsManage/goodsManage",
+    "web/goodsManage-nav/goodsManage-nav",
+    "separate/joinShow/joinShow",
     "separate/joinUs/joinUs"
   ],
   "window": {

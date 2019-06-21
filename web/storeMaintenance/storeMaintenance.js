@@ -38,7 +38,7 @@ Page({
     var that = this;
     var type = e.currentTarget.dataset.id;
     var shopId = wx.getStorageSync('shopId');
-    var imgUrl = 'https://teststatic.cncoopay.com:8080/';
+    var imgUrl = app.globalData.imgUrl;
     wx.chooseImage({
       count: 1, //最多可以选择的图片总数
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有

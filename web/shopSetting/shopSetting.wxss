@@ -1,5 +1,9 @@
 page{
   padding: 0;
+  height: 100%;
+}
+.shopSettingContent{
+  height: 100%;
 }
 .content-header{
   width: 750rpx;
@@ -61,10 +65,15 @@ page{
   top: 0;
   z-index: 9;
 }
+.scroll-footer{
+  height: calc(100% - 610rpx);
+  background: #fff;
+}
 .content-middle{
   overflow: hidden;
   background: #fff;
   padding: 20rpx 0;
+  margin-bottom: 10rpx;
 }
 .middle-item{
   float: left;
@@ -85,15 +94,27 @@ page{
   margin-top: 10rpx;
   color: #333;
 }
+.middle-item:last-child{
+  border-right: 0;
+}
 .content-footer{
   width: 100%;
   overflow: hidden;
   background: #fff;
-  height: calc(100% - 620rpx);
-  border-top: 1rpx solid #efefef;
-  position: absolute;
+  /* border-bottom: 1rpx solid #efefef; */
+  /* margin-top: 10rpx; */
+  /* height: calc(100% - 620rpx); */
+  /* border-top: 1rpx solid #efefef; */
+  /* position: absolute;
   left: 0;
-  bottom: 100rpx;
+  bottom: 100rpx; */
+}
+.content-footer .title{
+  font-size: 30rpx;
+  color: #333;
+  margin: 20rpx 40rpx;
+  box-sizing: border-box;
+  font-weight: 700;
 }
 .content-footer .footer-item{
   float: left;
@@ -101,6 +122,7 @@ page{
   text-align: center;
   padding: 30rpx 0;
   background: #fff;
+  line-height: 40rpx;
 }
 .content-footer .footer-item::after{
   border: none;

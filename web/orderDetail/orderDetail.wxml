@@ -69,6 +69,7 @@
                 <image src="{{imgHost}}/images/platform/account/default_img.jpg"></image>
                 <image class="corner_mark" wx:if="{{orderListData[0].orderFlag == 0}}" src="{{imgHost}}/images/platform/tag/icon_cross.png"></image>
                 <image class="corner_mark" wx:if="{{orderListData[0].orderFlag == 2}}" src="{{imgHost}}/images/platform/tag/icon_normal.png"></image>
+                <image class="corner_mark" wx:if="{{orderListData[0].orderFlag == 3}}" src="{{imgHost}}/images/platform/tag/icon_direct.png"></image>
               </navigator>
             </view>
             <view class="commodity-info">

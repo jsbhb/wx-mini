@@ -45,6 +45,7 @@
                     <image wx:else src="{{imgHost}}/images/platform/account/default_img.jpg"></image>
                     <image wx:if="{{item_1.orderFlag == 0}}" class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_cross.png"></image>
                     <image wx:if="{{item_1.orderFlag == 2}}" class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_normal.png"></image>
+                    <image wx:if="{{item_1.orderFlag == 3}}" class="corner_mark" src="{{imgHost}}/images/platform/tag/icon_direct.png"></image>
                   </navigator>
                 </view>
                 <view class="commodity-info">

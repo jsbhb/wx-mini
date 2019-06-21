@@ -73,10 +73,11 @@ Page({
   onShareAppMessage: function () {
     var that = this;
     var shopId = app.globalData.shopId;
-    var imageUrl = '';
+    var imgHost = that.data.imgHost;
+    var imageUrl = imgHost + '/images/platform/share/miniShopShare.png';
     return {
-      title: '微店推广',
-      path: 'separate/joinUs/joinUs?scene=shopId%3D' + shopId,
+      title: '店铺加盟',
+      path: 'separate/joinShow/joinShow?scene=shopId%3D' + shopId,
       imageUrl: imageUrl
     }
   }

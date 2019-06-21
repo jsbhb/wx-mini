@@ -149,7 +149,11 @@
   <view class="success-content">
     <image src="{{imgHost}}/images/platform/joinUs/success_icon.png"></image>
     <view class="title">申请审核中</view>
-    <view class="desc">结果预计24小时内短信通知</view>
+    <view class="desc">预计审核结果将在1-3天内以短信的形式通知到您，请保持手机通畅，如3天后未能收到短信，请登录个人中心联系官方客服，或访问该界面查看审核结果。
+</view>
+    <view class="desc">更多福利请关注中国供销海外购官方网站：</view>
+    <view class="desc">https://www.cncoopay.com</view>
+    <view class="btn" bindtap="toIndex">去逛逛商品</view>
   </view>
 </block>
 <block wx:elif="{{shopStatus == 2 && !isReSubmit}}">

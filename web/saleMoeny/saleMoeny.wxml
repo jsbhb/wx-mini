@@ -11,7 +11,7 @@
     </view>
     <view class="middle-item">
       <text class="key">累积奖励</text>
-      <text class="value">{{(rebateManageData.alreadyCheck || 0) + (rebateManageData.stayToAccount || 0)*1 + (rebateManageData.canBePresented || 0)*1 + (rebateManageData.frozenRebate || 0)*1 + (rebateManageData.alreadyPresented || 0)}}</text>
+      <text class="value">{{rebateManageData.totalPrice}}</text>
     </view>
   </view>
   <view data-url="/web/saleMoney-3/saleMoney-3" bindtap="locationTo">
